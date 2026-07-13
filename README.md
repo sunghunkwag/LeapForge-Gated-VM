@@ -178,9 +178,10 @@ The **pre-registered expectation is a null**: richer containers have
 never beaten the noise floor in this lineage, and the burden of proof is
 on the gating mechanism — a real effect must show `GATE5 − COMP5` above
 the floor *with* multi-gate deployment in the solved frontier tasks.
-The included ledger (`runs/`) is a 3-seed smoke run: machinery proof,
-deliberately **not** evidence (this project treats n < 40 as
-underpowered by construction). The scope is 20 list primitives at
+A smoke run regenerates in minutes
+(`battery --profile smoke --seeds 1-3`) and writes a replayable ledger
+under `runs/`: machinery proof, deliberately **not** evidence (this
+project treats n < 40 as underpowered by construction). The scope is 20 list primitives at
 CPU-poverty scale — not language, not perception; no claim of general
 capability is made or implied. What this repo contributes is the
 measurement discipline.
@@ -190,6 +191,6 @@ measurement discipline.
 ```
 leapforge_gated.py   the complete engine + 18-test suite + CLI (one file)
 manifold.svg         the figure above
-runs/                smoke ledger (replayable)
+runs/                created on first run (hash-chained ledgers + ladder cache)
 LICENSE              MIT
 ```

@@ -1,0 +1,73 @@
+<svg viewBox="0 0 880 470" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6feb"/>
+    </marker>
+    <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="878" height="468" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="24" y="34" font-size="17" font-weight="600" fill="#24292f">The 3D gated manifold &#8212; W[gate][prev][next]</text>
+  <text x="24" y="54" font-size="12" fill="#57606a">the sampler looks at the DATA STATE, picks the matching slice, and draws the next operation from that slice only</text>
+
+  <!-- input list -->
+  <text x="40" y="102" font-size="12" font-weight="600" fill="#24292f">intermediate list state</text>
+  <g font-size="12" fill="#24292f">
+    <rect x="40"  y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="49" y="128">3</text>
+    <rect x="72"  y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="81" y="128">1</text>
+    <rect x="104" y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="113" y="128">4</text>
+    <rect x="136" y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="145" y="128">1</text>
+    <rect x="168" y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="177" y="128">5</text>
+    <rect x="200" y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="209" y="128">9</text>
+  </g>
+  <line x1="134" y1="146" x2="134" y2="176" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)"/>
+
+  <!-- gate function box -->
+  <rect x="40" y="182" width="220" height="46" rx="8" fill="#fff8c5" stroke="#d4a72c"/>
+  <text x="52" y="202" font-size="13" font-weight="600" fill="#24292f">get_state_context(list)</text>
+  <text x="52" y="219" font-size="11.5" fill="#57606a">not sorted, max&#8722;min = 8 &#8804; 15</text>
+  <line x1="134" y1="238" x2="134" y2="266" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)"/>
+  <rect x="70" y="272" width="130" height="30" rx="15" fill="#ddf4ff" stroke="#1f6feb"/>
+  <text x="90" y="292" font-size="13" font-weight="700" fill="#1f6feb">gate = g2</text>
+
+  <!-- arrow gate -> active slice -->
+  <path d="M 205 287 C 300 287 330 262 392 240" fill="none" stroke="#1f6feb" stroke-width="2.2" marker-end="url(#arr)"/>
+
+  <!-- isometric slices, back (g3) to front (g0) -->
+  <g>
+    <path d="M 480 78  l 240 -52 l 120 34 l -240 52 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <text x="452" y="86" font-size="12.5" fill="#57606a">g3</text>
+    <text x="748" y="46" font-size="11" fill="#8b949e">mixed</text>
+
+    <path d="M 470 150 l 240 -52 l 120 34 l -240 52 z" fill="#ddf4ff" stroke="#1f6feb" stroke-width="2.6"/>
+    <!-- grid on active slice -->
+    <path d="M 530 137 l 120 34 M 590 124 l 120 34 M 650 111 l 120 34" stroke="#79b8ff" stroke-width="1"/>
+    <path d="M 510 158 l 240 -52 M 550 171 l 240 -52" stroke="#79b8ff" stroke-width="1"/>
+    <text x="440" y="158" font-size="12.5" font-weight="700" fill="#1f6feb">g2</text>
+    <text x="742" y="118" font-size="11" font-weight="600" fill="#1f6feb">ACTIVE slice</text>
+    <text x="497" y="176" font-size="10.5" fill="#1f6feb">prev &#8594;</text>
+    <text x="762" y="150" font-size="10.5" fill="#1f6feb">next &#8599;</text>
+
+    <path d="M 460 222 l 240 -52 l 120 34 l -240 52 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <text x="432" y="230" font-size="12.5" fill="#57606a">g1</text>
+    <text x="728" y="190" font-size="11" fill="#8b949e">sorted</text>
+
+    <path d="M 450 294 l 240 -52 l 120 34 l -240 52 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <text x="422" y="302" font-size="12.5" fill="#57606a">g0</text>
+    <text x="718" y="262" font-size="11" fill="#8b949e">len &#8804; 1</text>
+  </g>
+
+  <!-- pipeline strip -->
+  <text x="40" y="368" font-size="12" font-weight="600" fill="#24292f">token pipeline under construction</text>
+  <g font-size="12.5">
+    <rect x="40"  y="380" width="76" height="28" rx="6" fill="#f6f8fa" stroke="#d0d7de"/><text x="54" y="399" fill="#24292f">reverse</text>
+    <line x1="120" y1="394" x2="146" y2="394" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)"/>
+    <rect x="150" y="380" width="112" height="28" rx="6" fill="#f6f8fa" stroke="#d0d7de"/><text x="162" y="399" fill="#24292f">m01 (macro)</text>
+    <line x1="266" y1="394" x2="292" y2="394" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)"/>
+    <rect x="296" y="380" width="34" height="28" rx="6" fill="#ddf4ff" stroke="#1f6feb" stroke-width="2"/><text x="307" y="400" fill="#1f6feb" font-weight="700">?</text>
+  </g>
+  <path d="M 316 378 C 330 330 380 300 470 286" fill="none" stroke="#1f6feb" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+  <text x="40" y="432" font-size="12" fill="#57606a">the next token is drawn ONLY from the active slice &#8212; when the data changes shape mid-pipeline,</text>
+  <text x="40" y="449" font-size="12" fill="#57606a">the slice changes with it; improvement rewards (&#951;&#183;&#916;f&#183;&#958;) land on that same active cross-section</text>
+</svg>

@@ -190,7 +190,7 @@ measurement discipline.
 
 ```
 leapforge_gated.py   the complete engine + 18-test suite + CLI (one file)
-manifold.svg         the figure above
+manifold.svg         the animated figure above (SVG + SMIL, no scripts)
 runs/                created on first run (hash-chained ledgers + ladder cache)
 LICENSE              MIT
 ```

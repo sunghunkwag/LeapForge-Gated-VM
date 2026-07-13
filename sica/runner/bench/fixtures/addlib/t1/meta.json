@@ -1,0 +1,16 @@
+{
+  "repo": "addlib",
+  "task": "t1",
+  "issue": "add(a, b) returns a - b but should return the sum a + b.",
+  "difficulty": "easy",
+  "editable_files": [
+    "calc.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": []
+}

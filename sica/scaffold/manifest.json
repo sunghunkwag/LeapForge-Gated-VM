@@ -1,0 +1,6 @@
+{
+  "scaffold_version": "gen0",
+  "entry": "solve",
+  "exec_order": ["policy.py", "prompts.py", "tools.py", "agent.py"],
+  "notes": "GEN0 seed: a plan->act->verify bug-fix agent. Files are exec'd in order into one shared namespace, so they reference each other's globals directly and never import one another. The engine rewrites these files (and may add new ones to exec_order) to improve held-out capability."
+}

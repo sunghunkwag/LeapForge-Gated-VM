@@ -1,7 +1,51 @@
 <svg viewBox="0 0 880 520" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <style>
+    @keyframes phA { 0%,46% {opacity:1} 50%,97% {opacity:0} 100% {opacity:1} }
+    @keyframes phB { 0%,46% {opacity:0} 50%,97% {opacity:1} 100% {opacity:0} }
+    @keyframes chipA { 0%,6% {opacity:0} 10%,46% {opacity:1} 50%,100% {opacity:0} }
+    @keyframes chipB { 0%,54% {opacity:0} 58%,97% {opacity:1} 100% {opacity:0} }
+    @keyframes boxflash { 0%,3% {fill:#fff8c5} 6% {fill:#ffd88a} 10%,50% {fill:#fff8c5} 54% {fill:#ffd88a} 58%,100% {fill:#fff8c5} }
+    @keyframes arrA { 0%,8% {opacity:0; stroke-dashoffset:300} 11% {opacity:1} 20% {stroke-dashoffset:0} 46% {opacity:1; stroke-dashoffset:0} 50%,100% {opacity:0; stroke-dashoffset:0} }
+    @keyframes arrB { 0%,56% {opacity:0; stroke-dashoffset:300} 59% {opacity:1} 68% {stroke-dashoffset:0} 94% {opacity:1; stroke-dashoffset:0} 98%,100% {opacity:0; stroke-dashoffset:0} }
+    @keyframes g2fill { 0%,12% {fill:#f6f8fa; stroke:#d0d7de; stroke-width:1.4} 18% {fill:#ddf4ff; stroke:#1f6feb; stroke-width:2.6} 30% {fill:#b6e3ff} 44% {fill:#ddf4ff; stroke:#1f6feb; stroke-width:2.6} 52%,100% {fill:#f6f8fa; stroke:#d0d7de; stroke-width:1.4} }
+    @keyframes g2aux { 0%,13% {opacity:0} 18%,44% {opacity:1} 50%,100% {opacity:0} }
+    @keyframes g1fill { 0%,58% {fill:#f6f8fa; stroke:#d0d7de; stroke-width:1.4} 66% {fill:#dafbe1; stroke:#1a7f37; stroke-width:2.6} 80% {fill:#acf2bd} 92% {fill:#dafbe1; stroke:#1a7f37; stroke-width:2.6} 98%,100% {fill:#f6f8fa; stroke:#d0d7de; stroke-width:1.4} }
+    @keyframes g1aux { 0%,60% {opacity:0} 66%,92% {opacity:1} 97%,100% {opacity:0} }
+    @keyframes sampA { 0%,25% {opacity:0} 29%,42% {opacity:1} 46%,100% {opacity:0} }
+    @keyframes sampB { 0%,72% {opacity:0} 76%,92% {opacity:1} 96%,100% {opacity:0} }
+    @keyframes ants { to {stroke-dashoffset:-22} }
+    @keyframes tok1 { 0%,38% {opacity:0; transform:translateY(-10px)} 43%,97% {opacity:1; transform:translateY(0)} 100% {opacity:0} }
+    @keyframes tok1a { 0%,43% {opacity:0} 47%,97% {opacity:1} 100% {opacity:0} }
+    @keyframes tok2 { 0%,86% {opacity:0; transform:translateY(-10px)} 91%,97% {opacity:1; transform:translateY(0)} 100% {opacity:0} }
+    @keyframes tok2a { 0%,91% {opacity:0} 95%,97% {opacity:1} 100% {opacity:0} }
+    @keyframes qpulse { 0%,100% {stroke-width:1.2} 50% {stroke-width:2.8} }
+    @keyframes floaty { 0%,100% {transform:translateY(0)} 50% {transform:translateY(3px)} }
+    .phA  { animation: phA 12s linear infinite; }
+    .phB  { animation: phB 12s linear infinite; opacity:0; }
+    .chA  { animation: chipA 12s linear infinite; opacity:0; }
+    .chB  { animation: chipB 12s linear infinite; opacity:0; }
+    .gbox { animation: boxflash 12s linear infinite; }
+    .aA   { animation: arrA 12s linear infinite; opacity:0; stroke-dasharray:300; stroke-dashoffset:300; }
+    .aB   { animation: arrB 12s linear infinite; opacity:0; stroke-dasharray:300; stroke-dashoffset:300; }
+    .s2   { animation: g2fill 12s linear infinite; }
+    .s2x  { animation: g2aux 12s linear infinite; opacity:0; }
+    .s1   { animation: g1fill 12s linear infinite; }
+    .s1x  { animation: g1aux 12s linear infinite; opacity:0; }
+    .smA  { animation: sampA 12s linear infinite, ants 1.1s linear infinite; opacity:0; stroke-dasharray:6 5; }
+    .smB  { animation: sampB 12s linear infinite, ants 1.1s linear infinite; opacity:0; stroke-dasharray:6 5; }
+    .t1   { animation: tok1 12s linear infinite; opacity:0; }
+    .t1a  { animation: tok1a 12s linear infinite; opacity:0; }
+    .t2   { animation: tok2 12s linear infinite; opacity:0; }
+    .t2a  { animation: tok2a 12s linear infinite; opacity:0; }
+    .qq   { animation: qpulse 1.6s ease-in-out infinite; }
+    .flo  { animation: floaty 6s ease-in-out infinite; }
+  </style>
   <defs>
     <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#1f6feb"/>
+    </marker>
+    <marker id="arrgr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#1a7f37"/>
     </marker>
     <marker id="arrg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
@@ -11,10 +55,9 @@
   <text x="24" y="34" font-size="17" font-weight="600" fill="#24292f">The 3D gated manifold &#8212; W[gate][prev][next]</text>
   <text x="24" y="54" font-size="12" fill="#57606a">watch the strategy SWITCH slices the moment the data changes shape (12s loop)</text>
 
-  <!-- ================= input state (A: unsorted, B: sorted) ================= -->
+  <!-- input state A / B -->
   <text x="40" y="102" font-size="12" font-weight="600" fill="#24292f">intermediate list state</text>
-  <g font-size="12" fill="#24292f">
-    <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.46;0.5;0.97;1" dur="12s" repeatCount="indefinite"/>
+  <g class="phA" font-size="12" fill="#24292f">
     <rect x="40"  y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="49" y="128">3</text>
     <rect x="72"  y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="81" y="128">1</text>
     <rect x="104" y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="113" y="128">4</text>
@@ -22,150 +65,89 @@
     <rect x="168" y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="177" y="128">5</text>
     <rect x="200" y="112" width="28" height="24" rx="4" fill="#f6f8fa" stroke="#d0d7de"/><text x="209" y="128">9</text>
   </g>
-  <g font-size="12" fill="#0550ae" opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.46;0.5;0.97;1" dur="12s" repeatCount="indefinite"/>
-    <rect x="40"  y="112" width="28" height="24" rx="4" fill="#ddf4ff" stroke="#54aeff"/><text x="49" y="128">1</text>
-    <rect x="72"  y="112" width="28" height="24" rx="4" fill="#ddf4ff" stroke="#54aeff"/><text x="81" y="128">1</text>
-    <rect x="104" y="112" width="28" height="24" rx="4" fill="#ddf4ff" stroke="#54aeff"/><text x="113" y="128">3</text>
-    <rect x="136" y="112" width="28" height="24" rx="4" fill="#ddf4ff" stroke="#54aeff"/><text x="145" y="128">4</text>
-    <rect x="168" y="112" width="28" height="24" rx="4" fill="#ddf4ff" stroke="#54aeff"/><text x="177" y="128">5</text>
-    <rect x="200" y="112" width="28" height="24" rx="4" fill="#ddf4ff" stroke="#54aeff"/><text x="209" y="128">9</text>
+  <g class="phB" font-size="12" fill="#0550ae">
+    <rect x="40"  y="112" width="28" height="24" rx="4" fill="#dafbe1" stroke="#4ac26b"/><text x="49" y="128">1</text>
+    <rect x="72"  y="112" width="28" height="24" rx="4" fill="#dafbe1" stroke="#4ac26b"/><text x="81" y="128">1</text>
+    <rect x="104" y="112" width="28" height="24" rx="4" fill="#dafbe1" stroke="#4ac26b"/><text x="113" y="128">3</text>
+    <rect x="136" y="112" width="28" height="24" rx="4" fill="#dafbe1" stroke="#4ac26b"/><text x="145" y="128">4</text>
+    <rect x="168" y="112" width="28" height="24" rx="4" fill="#dafbe1" stroke="#4ac26b"/><text x="177" y="128">5</text>
+    <rect x="200" y="112" width="28" height="24" rx="4" fill="#dafbe1" stroke="#4ac26b"/><text x="209" y="128">9</text>
   </g>
   <line x1="134" y1="146" x2="134" y2="176" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)"/>
 
-  <!-- ================= gate function box ================= -->
-  <rect x="40" y="182" width="220" height="46" rx="8" stroke="#d4a72c" fill="#fff8c5">
-    <animate attributeName="fill" values="#fff8c5;#ffec9e;#fff8c5;#fff8c5;#ffec9e;#fff8c5;#fff8c5" keyTimes="0;0.05;0.1;0.5;0.55;0.6;1" dur="12s" repeatCount="indefinite"/>
-  </rect>
+  <!-- gate function -->
+  <rect class="gbox" x="40" y="182" width="220" height="46" rx="8" fill="#fff8c5" stroke="#d4a72c"/>
   <text x="52" y="202" font-size="13" font-weight="600" fill="#24292f">get_state_context(list)</text>
-  <g font-size="11.5" fill="#57606a">
-    <text x="52" y="219">
-      <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.46;0.5;0.97;1" dur="12s" repeatCount="indefinite"/>
-      not sorted, max&#8722;min = 8 &#8804; 15
-    </text>
-    <text x="52" y="219" opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.46;0.5;0.97;1" dur="12s" repeatCount="indefinite"/>
-      monotone non-decreasing
-    </text>
-  </g>
+  <text class="phA" x="52" y="219" font-size="11.5" fill="#57606a">not sorted, max&#8722;min = 8 &#8804; 15</text>
+  <text class="phB" x="52" y="219" font-size="11.5" fill="#57606a">monotone non-decreasing</text>
   <line x1="134" y1="238" x2="134" y2="266" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)"/>
 
-  <!-- gate result chips -->
-  <g>
-    <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.08;0.46;0.5;1" dur="12s" repeatCount="indefinite"/>
+  <g class="chA">
     <rect x="70" y="272" width="150" height="30" rx="15" fill="#ddf4ff" stroke="#1f6feb"/>
     <text x="90" y="292" font-size="13" font-weight="700" fill="#1f6feb">gate = g2</text>
-    <text x="163" y="292" font-size="11" fill="#57606a">compact</text>
+    <text x="162" y="292" font-size="11" fill="#57606a">compact</text>
   </g>
-  <g opacity="0">
-    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.52;0.58;0.97;1" dur="12s" repeatCount="indefinite"/>
+  <g class="chB">
     <rect x="70" y="272" width="150" height="30" rx="15" fill="#dafbe1" stroke="#1a7f37"/>
     <text x="90" y="292" font-size="13" font-weight="700" fill="#1a7f37">gate = g1</text>
-    <text x="163" y="292" font-size="11" fill="#57606a">sorted</text>
+    <text x="162" y="292" font-size="11" fill="#57606a">sorted</text>
   </g>
 
-  <!-- routing arrows gate -> slice -->
-  <path d="M 225 287 C 320 287 340 250 400 215" fill="none" stroke="#1f6feb" stroke-width="2.4" marker-end="url(#arr)" stroke-dasharray="300" stroke-dashoffset="300">
-    <animate attributeName="stroke-dashoffset" values="300;300;0;0" keyTimes="0;0.1;0.2;1" dur="12s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.46;0.5;1" dur="12s" repeatCount="indefinite"/>
-  </path>
-  <path d="M 225 287 C 320 292 340 275 396 262" fill="none" stroke="#1a7f37" stroke-width="2.4" marker-end="url(#arr)" stroke-dasharray="300" stroke-dashoffset="300" opacity="0">
-    <animate attributeName="stroke-dashoffset" values="300;300;0;0" keyTimes="0;0.58;0.68;1" dur="12s" repeatCount="indefinite"/>
-    <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.56;0.6;0.97;1" dur="12s" repeatCount="indefinite"/>
-  </path>
+  <!-- routing arrows -->
+  <path class="aA" d="M 225 287 C 320 287 340 250 400 215" fill="none" stroke="#1f6feb" stroke-width="2.4" marker-end="url(#arr)"/>
+  <path class="aB" d="M 225 287 C 320 292 340 275 396 262" fill="none" stroke="#1a7f37" stroke-width="2.4" marker-end="url(#arrgr)"/>
 
-  <!-- ================= isometric slices (gentle float) ================= -->
-  <g>
-    <animateTransform attributeName="transform" type="translate" values="0 0;0 3;0 0" dur="6s" repeatCount="indefinite"/>
-
+  <!-- slices -->
+  <g class="flo">
     <path d="M 480 78  l 240 -52 l 120 34 l -240 52 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
     <text x="452" y="86" font-size="12.5" fill="#57606a">g3</text>
     <text x="748" y="46" font-size="11" fill="#8b949e">mixed</text>
 
-    <!-- g2 : active in phase A -->
-    <path d="M 470 150 l 240 -52 l 120 34 l -240 52 z" stroke-width="2.6" fill="#ddf4ff" stroke="#1f6feb">
-      <animate attributeName="fill" values="#f6f8fa;#ddf4ff;#b6e3ff;#ddf4ff;#f6f8fa;#f6f8fa" keyTimes="0;0.16;0.3;0.44;0.52;1" dur="12s" repeatCount="indefinite"/>
-      <animate attributeName="stroke" values="#d0d7de;#1f6feb;#1f6feb;#d0d7de;#d0d7de" keyTimes="0;0.16;0.44;0.52;1" dur="12s" repeatCount="indefinite"/>
-    </path>
-    <g stroke="#79b8ff" stroke-width="1">
-      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.16;0.44;0.5;1" dur="12s" repeatCount="indefinite"/>
-      <path d="M 530 137 l 120 34 M 590 124 l 120 34 M 650 111 l 120 34"/>
-      <path d="M 510 158 l 240 -52 M 550 171 l 240 -52"/>
+    <path class="s2" d="M 470 150 l 240 -52 l 120 34 l -240 52 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <g class="s2x" stroke="#79b8ff" stroke-width="1">
+      <path d="M 530 137 l 120 34 M 590 124 l 120 34 M 650 111 l 120 34" fill="none"/>
+      <path d="M 510 158 l 240 -52 M 550 171 l 240 -52" fill="none"/>
     </g>
     <text x="440" y="158" font-size="12.5" font-weight="700" fill="#1f6feb">g2</text>
-    <text x="742" y="118" font-size="11" font-weight="600" fill="#1f6feb">
-      <animate attributeName="opacity" values="0;1;1;0;0" keyTimes="0;0.16;0.44;0.5;1" dur="12s" repeatCount="indefinite"/>
-      ACTIVE
-    </text>
+    <text class="s2x" x="742" y="118" font-size="11" font-weight="600" fill="#1f6feb">ACTIVE</text>
 
-    <!-- g1 : active in phase B -->
-    <path d="M 460 222 l 240 -52 l 120 34 l -240 52 z" stroke-width="1.4" fill="#f6f8fa" stroke="#d0d7de">
-      <animate attributeName="fill" values="#f6f8fa;#f6f8fa;#dafbe1;#acf2bd;#dafbe1;#f6f8fa" keyTimes="0;0.6;0.68;0.8;0.94;1" dur="12s" repeatCount="indefinite"/>
-      <animate attributeName="stroke" values="#d0d7de;#d0d7de;#1a7f37;#1a7f37;#d0d7de" keyTimes="0;0.6;0.68;0.94;1" dur="12s" repeatCount="indefinite"/>
-      <animate attributeName="stroke-width" values="1.4;1.4;2.6;2.6;1.4" keyTimes="0;0.6;0.68;0.94;1" dur="12s" repeatCount="indefinite"/>
-    </path>
-    <g stroke="#4ac26b" stroke-width="1" opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.62;0.7;0.92;1" dur="12s" repeatCount="indefinite"/>
-      <path d="M 520 209 l 120 34 M 580 196 l 120 34 M 640 183 l 120 34"/>
-      <path d="M 500 230 l 240 -52 M 540 243 l 240 -52"/>
+    <path class="s1" d="M 460 222 l 240 -52 l 120 34 l -240 52 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <g class="s1x" stroke="#4ac26b" stroke-width="1">
+      <path d="M 520 209 l 120 34 M 580 196 l 120 34 M 640 183 l 120 34" fill="none"/>
+      <path d="M 500 230 l 240 -52 M 540 243 l 240 -52" fill="none"/>
     </g>
     <text x="432" y="230" font-size="12.5" font-weight="700" fill="#1a7f37">g1</text>
-    <text x="728" y="190" font-size="11" font-weight="600" fill="#1a7f37" opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.62;0.7;0.92;1" dur="12s" repeatCount="indefinite"/>
-      ACTIVE
-    </text>
+    <text class="s1x" x="728" y="190" font-size="11" font-weight="600" fill="#1a7f37">ACTIVE</text>
 
     <path d="M 450 294 l 240 -52 l 120 34 l -240 52 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
     <text x="422" y="302" font-size="12.5" fill="#57606a">g0</text>
     <text x="718" y="262" font-size="11" fill="#8b949e">len &#8804; 1</text>
   </g>
 
-  <!-- ================= sampling arrows slice -> pipeline ================= -->
-  <path d="M 520 190 C 420 300 240 350 120 382" fill="none" stroke="#1f6feb" stroke-width="2" stroke-dasharray="6 5" opacity="0" marker-end="url(#arr)">
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.26;0.3;0.42;0.46;1" dur="12s" repeatCount="indefinite"/>
-    <animate attributeName="stroke-dashoffset" values="66;0" dur="1.2s" repeatCount="indefinite"/>
-  </path>
-  <path d="M 510 258 C 430 330 300 360 220 384" fill="none" stroke="#1a7f37" stroke-width="2" stroke-dasharray="6 5" opacity="0" marker-end="url(#arr)">
-    <animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;0.74;0.78;0.9;0.94;1" dur="12s" repeatCount="indefinite"/>
-    <animate attributeName="stroke-dashoffset" values="66;0" dur="1.2s" repeatCount="indefinite"/>
-  </path>
+  <!-- sampling arrows -->
+  <path class="smA" d="M 520 190 C 420 300 240 350 120 382" fill="none" stroke="#1f6feb" stroke-width="2" marker-end="url(#arr)"/>
+  <path class="smB" d="M 510 258 C 430 330 300 360 220 384" fill="none" stroke="#1a7f37" stroke-width="2" marker-end="url(#arrgr)"/>
 
-  <!-- ================= pipeline strip ================= -->
+  <!-- pipeline -->
   <text x="40" y="368" font-size="12" font-weight="600" fill="#24292f">token pipeline under construction</text>
   <g font-size="12.5">
-    <g opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.4;0.44;0.97;1" dur="12s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" type="translate" values="0 -10;0 -10;0 0;0 0" keyTimes="0;0.4;0.44;1" dur="12s" repeatCount="indefinite"/>
-      <rect x="40" y="380" width="58" height="28" rx="6" fill="#ddf4ff" stroke="#1f6feb"/><text x="52" y="399" fill="#0550ae" font-weight="600">sort</text>
+    <g class="t1">
+      <rect x="40" y="380" width="58" height="28" rx="6" fill="#ddf4ff" stroke="#1f6feb"/>
+      <text x="52" y="399" fill="#0550ae" font-weight="600">sort</text>
     </g>
-    <line x1="102" y1="394" x2="126" y2="394" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)" opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.44;0.48;0.97;1" dur="12s" repeatCount="indefinite"/>
-    </line>
-    <g opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.88;0.92;0.97;1" dur="12s" repeatCount="indefinite"/>
-      <animateTransform attributeName="transform" type="translate" values="0 -10;0 -10;0 0;0 0" keyTimes="0;0.88;0.92;1" dur="12s" repeatCount="indefinite"/>
-      <rect x="130" y="380" width="84" height="28" rx="6" fill="#dafbe1" stroke="#1a7f37"/><text x="142" y="399" fill="#1a7f37" font-weight="600">cumsum</text>
+    <line class="t1a" x1="102" y1="394" x2="126" y2="394" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)"/>
+    <g class="t2">
+      <rect x="130" y="380" width="84" height="28" rx="6" fill="#dafbe1" stroke="#1a7f37"/>
+      <text x="142" y="399" fill="#1a7f37" font-weight="600">cumsum</text>
     </g>
-    <line x1="218" y1="394" x2="242" y2="394" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)" opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.92;0.96;0.97;1" dur="12s" repeatCount="indefinite"/>
-    </line>
-    <rect x="246" y="380" width="34" height="28" rx="6" fill="#fff8c5" stroke="#d4a72c" stroke-width="2">
-      <animate attributeName="stroke-width" values="1.2;2.6;1.2" dur="1.6s" repeatCount="indefinite"/>
-    </rect>
+    <line class="t2a" x1="218" y1="394" x2="242" y2="394" stroke="#57606a" stroke-width="1.6" marker-end="url(#arrg)"/>
+    <rect class="qq" x="246" y="380" width="34" height="28" rx="6" fill="#fff8c5" stroke="#d4a72c"/>
     <text x="257" y="400" fill="#9a6700" font-weight="700">?</text>
   </g>
 
-  <!-- ================= captions ================= -->
-  <g font-size="12.5" font-weight="600">
-    <text x="40" y="448" fill="#0550ae">
-      <animate attributeName="opacity" values="1;1;0;0;1" keyTimes="0;0.46;0.5;0.97;1" dur="12s" repeatCount="indefinite"/>
-      state is unsorted but compact &#8594; slice g2 is active &#8594; it favours "sort"
-    </text>
-    <text x="40" y="448" fill="#1a7f37" opacity="0">
-      <animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;0.5;0.56;0.97;1" dur="12s" repeatCount="indefinite"/>
-      the data just became SORTED &#8594; the strategy SWITCHES to slice g1 mid-pipeline
-    </text>
-  </g>
+  <!-- captions -->
+  <text class="phA" x="40" y="448" font-size="12.5" font-weight="600" fill="#0550ae">state is unsorted but compact &#8594; slice g2 is active &#8594; it favours "sort"</text>
+  <text class="phB" x="40" y="448" font-size="12.5" font-weight="600" fill="#1a7f37">the data just became SORTED &#8594; the strategy SWITCHES to slice g1 mid-pipeline</text>
   <text x="40" y="472" font-size="12" fill="#57606a">the next token is drawn ONLY from the active slice; improvement rewards (&#951;&#183;&#916;f&#183;&#958;)</text>
   <text x="40" y="489" font-size="12" fill="#57606a">land on the same active cross-section &#8212; a condition-gated policy, not a fixed habit</text>
 </svg>

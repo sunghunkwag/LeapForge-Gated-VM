@@ -1,0 +1,329 @@
+====================================================================
+SICA SESSION APPROVAL BLOCK  (directive section 5)
+====================================================================
+  profile           : smoke
+  base model        : claude-haiku-4-5-20251001  (pinned, no mid-run swap)
+  temperature (req) : 0.0
+  benchmark         : localsuite
+  benchmark pin     : 26 tasks / 13 repos  sha=bb943d2e535f4560
+  split             : 15 train / 10 heldout (repo-disjoint)
+  tournament K      : 4
+  max generations   : 3
+  per-task caps     : {'max_model_calls': 40, 'max_model_tokens': 120000, 'max_output_tokens_per_call': 8192, 'max_tool_calls': 25, 'max_steps': 12, 'max_io_ops': 2000, 'max_write_bytes': 8000000, 'wall_seconds': 240}
+  network isolation : OK (net+mount namespaces, tmpfs hiding OK)
+  guardrails        : G-isolate G-heldout G-sandbox G-budget
+  ---- estimated API cost (rough) ----
+  task attempts     : ~265
+  model calls       : ~795 agent + 12 proposer
+  cost estimate     : $2.13 expected  (band $1.07 - $4.26)
+  auto-halts        : budget exhaustion, >3x-baseline gen spend, 3-gen heldout regression, scope-escape
+====================================================================
+  BENCHMARK SET    : tasks_hard (harder)
+
+validating the 25 split tasks...
+all split tasks valid; session cost cap = $10.00
+
+T8 adoption policy: HALT for approval on any gate adoption
+
+split: 15 train (8 repos) / 10 heldout (5 repos), repo-disjoint
+T1 containment: reachability OK (26 tasks scanned); hash-lock verified
+
+=== GEN 0 (baseline) ===
+    [gen0-heldout] penalty/t1             solved
+    [gen0-heldout] conversion/t2          solved
+    [gen0-heldout] bonus/t2               solved
+    [gen0-heldout] pricing/t1             solved
+    [gen0-heldout] conversion/t1          solved
+    [gen0-heldout] bonus/t1               solved
+    [gen0-heldout] scoring/t2             solved
+    [gen0-heldout] penalty/t2             solved
+    [gen0-heldout] pricing/t2             done
+    [gen0-heldout] scoring/t1             solved
+  HELD-OUT CURVE: g0:0.90
+
+=== GEN 1 ===
+    [gen1-incumbent] discount/t2            solved
+    [gen1-incumbent] fees/t2                solved
+    [gen1-incumbent] discount/t1            solved
+    [gen1-incumbent] grading/t2             solved
+    [gen1-incumbent] fees/t1                solved
+    [gen1-incumbent] palette/t2             solved
+    [gen1-incumbent] grading/t1             solved
+    [gen1-incumbent] palette/t1             solved
+    [gen1-incumbent] permissions/t1         solved
+    [gen1-incumbent] ratelimit/t1           solved
+    [gen1-incumbent] ratelimit/t2           solved
+    [gen1-incumbent] permissions/t2         solved
+    [gen1-incumbent] shipping/t1            solved
+    [gen1-incumbent] shipping/t2            solved
+    [gen1-incumbent] tax/t1                 solved
+  incumbent TRAIN solved 15/15
+  proposing K=4 candidates...
+    [gen1-cand:enhanced-context-gathering] palette/t1             solved
+    [gen1-cand:enhanced-context-gathering] fees/t1                solved
+    [gen1-cand:enhanced-context-gathering] palette/t2             solved
+    [gen1-cand:enhanced-context-gathering] grading/t1             solved
+    [gen1-cand:enhanced-context-gathering] fees/t2                solved
+    [gen1-cand:enhanced-context-gathering] discount/t2            solved
+    [gen1-cand:enhanced-context-gathering] discount/t1            solved
+    [gen1-cand:enhanced-context-gathering] permissions/t1         solved
+    [gen1-cand:enhanced-context-gathering] permissions/t2         solved
+    [gen1-cand:enhanced-context-gathering] grading/t2             solved
+    [gen1-cand:enhanced-context-gathering] ratelimit/t2           solved
+    [gen1-cand:enhanced-context-gathering] ratelimit/t1           solved
+    [gen1-cand:enhanced-context-gathering] shipping/t2            solved
+    [gen1-cand:enhanced-context-gathering] shipping/t1            solved
+    [gen1-cand:enhanced-context-gathering] tax/t1                 solved
+    candidate enhanced-context-gathering TRAIN solved 15/15
+    [gen1-cand:inspect-tests-deeply] discount/t2            solved
+    [gen1-cand:inspect-tests-deeply] grading/t2             solved
+    [gen1-cand:inspect-tests-deeply] discount/t1            solved
+    [gen1-cand:inspect-tests-deeply] fees/t2                solved
+    [gen1-cand:inspect-tests-deeply] fees/t1                solved
+    [gen1-cand:inspect-tests-deeply] palette/t2             solved
+    [gen1-cand:inspect-tests-deeply] grading/t1             solved
+    [gen1-cand:inspect-tests-deeply] palette/t1             solved
+    [gen1-cand:inspect-tests-deeply] permissions/t1         solved
+    [gen1-cand:inspect-tests-deeply] permissions/t2         solved
+    [gen1-cand:inspect-tests-deeply] ratelimit/t2           solved
+    [gen1-cand:inspect-tests-deeply] ratelimit/t1           solved
+    [gen1-cand:inspect-tests-deeply] shipping/t1            solved
+    [gen1-cand:inspect-tests-deeply] tax/t1                 solved
+    [gen1-cand:inspect-tests-deeply] shipping/t2            solved
+    candidate inspect-tests-deeply TRAIN solved 15/15
+    [gen1-cand:test-traceback-function-localization] discount/t2            solved
+    [gen1-cand:test-traceback-function-localization] discount/t1            solved
+    [gen1-cand:test-traceback-function-localization] palette/t1             solved
+    [gen1-cand:test-traceback-function-localization] fees/t2                solved
+    [gen1-cand:test-traceback-function-localization] grading/t2             solved
+    [gen1-cand:test-traceback-function-localization] grading/t1             solved
+    [gen1-cand:test-traceback-function-localization] fees/t1                solved
+    [gen1-cand:test-traceback-function-localization] palette/t2             solved
+    [gen1-cand:test-traceback-function-localization] permissions/t2         solved
+    [gen1-cand:test-traceback-function-localization] permissions/t1         solved
+    [gen1-cand:test-traceback-function-localization] ratelimit/t2           solved
+    [gen1-cand:test-traceback-function-localization] ratelimit/t1           solved
+    [gen1-cand:test-traceback-function-localization] shipping/t1            solved
+    [gen1-cand:test-traceback-function-localization] tax/t1                 solved
+    [gen1-cand:test-traceback-function-localization] shipping/t2            solved
+    candidate test-traceback-function-localization TRAIN solved 15/15
+    [gen1-cand:backtrack-after-first-failure] discount/t2            solved
+    [gen1-cand:backtrack-after-first-failure] fees/t2                solved
+    [gen1-cand:backtrack-after-first-failure] discount/t1            solved
+    [gen1-cand:backtrack-after-first-failure] grading/t2             solved
+    [gen1-cand:backtrack-after-first-failure] palette/t1             solved
+    [gen1-cand:backtrack-after-first-failure] fees/t1                solved
+    [gen1-cand:backtrack-after-first-failure] grading/t1             solved
+    [gen1-cand:backtrack-after-first-failure] palette/t2             solved
+    [gen1-cand:backtrack-after-first-failure] permissions/t2         solved
+    [gen1-cand:backtrack-after-first-failure] permissions/t1         solved
+    [gen1-cand:backtrack-after-first-failure] ratelimit/t2           solved
+    [gen1-cand:backtrack-after-first-failure] ratelimit/t1           solved
+    [gen1-cand:backtrack-after-first-failure] shipping/t2            solved
+    [gen1-cand:backtrack-after-first-failure] shipping/t1            solved
+    [gen1-cand:backtrack-after-first-failure] tax/t1                 solved
+    candidate backtrack-after-first-failure TRAIN solved 15/15
+  gate: 0/4 candidates beat incumbent -> keep incumbent
+    [gen1-heldout] penalty/t1             solved
+    [gen1-heldout] bonus/t2               solved
+    [gen1-heldout] conversion/t2          solved
+    [gen1-heldout] bonus/t1               solved
+    [gen1-heldout] pricing/t1             solved
+    [gen1-heldout] penalty/t2             solved
+    [gen1-heldout] conversion/t1          solved
+    [gen1-heldout] pricing/t2             solved
+    [gen1-heldout] scoring/t1             solved
+    [gen1-heldout] scoring/t2             solved
+  HELD-OUT CURVE: g0:0.90  g1:1.00
+
+=== GEN 2 ===
+    [gen2-incumbent] grading/t2             solved
+    [gen2-incumbent] fees/t2                solved
+    [gen2-incumbent] discount/t2            solved
+    [gen2-incumbent] discount/t1            solved
+    [gen2-incumbent] fees/t1                solved
+    [gen2-incumbent] grading/t1             solved
+    [gen2-incumbent] palette/t1             solved
+    [gen2-incumbent] palette/t2             solved
+    [gen2-incumbent] permissions/t1         solved
+    [gen2-incumbent] permissions/t2         solved
+    [gen2-incumbent] ratelimit/t2           solved
+    [gen2-incumbent] shipping/t2            solved
+    [gen2-incumbent] ratelimit/t1           solved
+    [gen2-incumbent] shipping/t1            solved
+    [gen2-incumbent] tax/t1                 solved
+  incumbent TRAIN solved 15/15
+  proposing K=4 candidates...
+    [gen2-cand:explicit-function-localization-v1] fees/t2                solved
+    [gen2-cand:explicit-function-localization-v1] discount/t2            solved
+    [gen2-cand:explicit-function-localization-v1] discount/t1            solved
+    [gen2-cand:explicit-function-localization-v1] fees/t1                solved
+    [gen2-cand:explicit-function-localization-v1] grading/t2             solved
+    [gen2-cand:explicit-function-localization-v1] palette/t1             solved
+    [gen2-cand:explicit-function-localization-v1] grading/t1             solved
+    [gen2-cand:explicit-function-localization-v1] palette/t2             solved
+    [gen2-cand:explicit-function-localization-v1] permissions/t1         solved
+    [gen2-cand:explicit-function-localization-v1] ratelimit/t2           solved
+    [gen2-cand:explicit-function-localization-v1] ratelimit/t1           solved
+    [gen2-cand:explicit-function-localization-v1] permissions/t2         solved
+    [gen2-cand:explicit-function-localization-v1] shipping/t2            solved
+    [gen2-cand:explicit-function-localization-v1] tax/t1                 solved
+    [gen2-cand:explicit-function-localization-v1] shipping/t1            solved
+    candidate explicit-function-localization-v1 TRAIN solved 15/15
+    [gen2-cand:backtrack-to-best-state] discount/t2            solved
+    [gen2-cand:backtrack-to-best-state] grading/t2             solved
+    [gen2-cand:backtrack-to-best-state] fees/t2                solved
+    [gen2-cand:backtrack-to-best-state] grading/t1             solved
+    [gen2-cand:backtrack-to-best-state] palette/t2             solved
+    [gen2-cand:backtrack-to-best-state] palette/t1             solved
+    [gen2-cand:backtrack-to-best-state] fees/t1                solved
+    [gen2-cand:backtrack-to-best-state] discount/t1            solved
+    [gen2-cand:backtrack-to-best-state] permissions/t2         solved
+    [gen2-cand:backtrack-to-best-state] ratelimit/t1           solved
+    [gen2-cand:backtrack-to-best-state] permissions/t1         solved
+    [gen2-cand:backtrack-to-best-state] ratelimit/t2           solved
+    [gen2-cand:backtrack-to-best-state] shipping/t1            solved
+    [gen2-cand:backtrack-to-best-state] shipping/t2            solved
+    [gen2-cand:backtrack-to-best-state] tax/t1                 solved
+    candidate backtrack-to-best-state TRAIN solved 15/15
+    [gen2-cand:file-outline-tool-for-retries] discount/t1            solved
+    [gen2-cand:file-outline-tool-for-retries] discount/t2            solved
+    [gen2-cand:file-outline-tool-for-retries] grading/t2             solved
+    [gen2-cand:file-outline-tool-for-retries] fees/t2                solved
+    [gen2-cand:file-outline-tool-for-retries] grading/t1             solved
+    [gen2-cand:file-outline-tool-for-retries] palette/t1             solved
+    [gen2-cand:file-outline-tool-for-retries] fees/t1                solved
+    [gen2-cand:file-outline-tool-for-retries] palette/t2             solved
+    [gen2-cand:file-outline-tool-for-retries] permissions/t1         solved
+    [gen2-cand:file-outline-tool-for-retries] ratelimit/t1           solved
+    [gen2-cand:file-outline-tool-for-retries] ratelimit/t2           solved
+    [gen2-cand:file-outline-tool-for-retries] permissions/t2         solved
+    [gen2-cand:file-outline-tool-for-retries] shipping/t1            solved
+    [gen2-cand:file-outline-tool-for-retries] shipping/t2            solved
+    [gen2-cand:file-outline-tool-for-retries] tax/t1                 solved
+    candidate file-outline-tool-for-retries TRAIN solved 15/15
+    [gen2-cand:always-inspect-tests-first] discount/t2            solved
+    [gen2-cand:always-inspect-tests-first] fees/t2                solved
+    [gen2-cand:always-inspect-tests-first] fees/t1                solved
+    [gen2-cand:always-inspect-tests-first] grading/t2             solved
+    [gen2-cand:always-inspect-tests-first] discount/t1            solved
+    [gen2-cand:always-inspect-tests-first] palette/t1             solved
+    [gen2-cand:always-inspect-tests-first] grading/t1             solved
+    [gen2-cand:always-inspect-tests-first] palette/t2             solved
+    [gen2-cand:always-inspect-tests-first] permissions/t2         solved
+    [gen2-cand:always-inspect-tests-first] permissions/t1         solved
+    [gen2-cand:always-inspect-tests-first] ratelimit/t1           solved
+    [gen2-cand:always-inspect-tests-first] ratelimit/t2           solved
+    [gen2-cand:always-inspect-tests-first] shipping/t1            solved
+    [gen2-cand:always-inspect-tests-first] shipping/t2            solved
+    [gen2-cand:always-inspect-tests-first] tax/t1                 solved
+    candidate always-inspect-tests-first TRAIN solved 15/15
+  gate: 0/4 candidates beat incumbent -> keep incumbent
+    [gen2-heldout] conversion/t2          solved
+    [gen2-heldout] bonus/t2               solved
+    [gen2-heldout] bonus/t1               solved
+    [gen2-heldout] conversion/t1          solved
+    [gen2-heldout] penalty/t1             solved
+    [gen2-heldout] pricing/t1             solved
+    [gen2-heldout] penalty/t2             solved
+    [gen2-heldout] scoring/t1             solved
+    [gen2-heldout] pricing/t2             done
+    [gen2-heldout] scoring/t2             solved
+  HELD-OUT CURVE: g0:0.90  g1:1.00  g2:0.90
+
+=== GEN 3 ===
+    [gen3-incumbent] discount/t2            solved
+    [gen3-incumbent] fees/t2                solved
+    [gen3-incumbent] grading/t2             solved
+    [gen3-incumbent] fees/t1                solved
+    [gen3-incumbent] discount/t1            solved
+    [gen3-incumbent] palette/t1             solved
+    [gen3-incumbent] palette/t2             solved
+    [gen3-incumbent] permissions/t1         solved
+    [gen3-incumbent] permissions/t2         solved
+    [gen3-incumbent] grading/t1             solved
+    [gen3-incumbent] ratelimit/t2           solved
+    [gen3-incumbent] shipping/t1            solved
+    [gen3-incumbent] ratelimit/t1           solved
+    [gen3-incumbent] shipping/t2            solved
+    [gen3-incumbent] tax/t1                 solved
+  incumbent TRAIN solved 15/15
+  proposing K=4 candidates...
+    [gen3-cand:minimal-edits-token-constraint] discount/t2            solved
+    [gen3-cand:minimal-edits-token-constraint] discount/t1            solved
+    [gen3-cand:minimal-edits-token-constraint] palette/t1             solved
+    [gen3-cand:minimal-edits-token-constraint] grading/t2             solved
+    [gen3-cand:minimal-edits-token-constraint] fees/t2                solved
+    [gen3-cand:minimal-edits-token-constraint] fees/t1                solved
+    [gen3-cand:minimal-edits-token-constraint] palette/t2             solved
+    [gen3-cand:minimal-edits-token-constraint] grading/t1             solved
+    [gen3-cand:minimal-edits-token-constraint] permissions/t2         solved
+    [gen3-cand:minimal-edits-token-constraint] permissions/t1         solved
+    [gen3-cand:minimal-edits-token-constraint] ratelimit/t1           solved
+    [gen3-cand:minimal-edits-token-constraint] ratelimit/t2           solved
+    [gen3-cand:minimal-edits-token-constraint] shipping/t1            solved
+    [gen3-cand:minimal-edits-token-constraint] tax/t1                 solved
+    [gen3-cand:minimal-edits-token-constraint] shipping/t2            solved
+    candidate minimal-edits-token-constraint TRAIN solved 15/15
+    [gen3-cand:mandatory-baseline-test-analysis] fees/t2                solved
+    [gen3-cand:mandatory-baseline-test-analysis] grading/t2             solved
+    [gen3-cand:mandatory-baseline-test-analysis] discount/t2            solved
+    [gen3-cand:mandatory-baseline-test-analysis] grading/t1             solved
+    [gen3-cand:mandatory-baseline-test-analysis] palette/t1             solved
+    [gen3-cand:mandatory-baseline-test-analysis] discount/t1            solved
+    [gen3-cand:mandatory-baseline-test-analysis] fees/t1                solved
+    [gen3-cand:mandatory-baseline-test-analysis] permissions/t1         solved
+    [gen3-cand:mandatory-baseline-test-analysis] palette/t2             solved
+    [gen3-cand:mandatory-baseline-test-analysis] permissions/t2         solved
+    [gen3-cand:mandatory-baseline-test-analysis] ratelimit/t2           solved
+    [gen3-cand:mandatory-baseline-test-analysis] ratelimit/t1           solved
+    [gen3-cand:mandatory-baseline-test-analysis] shipping/t2            solved
+    [gen3-cand:mandatory-baseline-test-analysis] shipping/t1            solved
+    [gen3-cand:mandatory-baseline-test-analysis] tax/t1                 solved
+    candidate mandatory-baseline-test-analysis TRAIN solved 15/15
+    [gen3-cand:lenient-block-whitespace] grading/t2             solved
+    [gen3-cand:lenient-block-whitespace] discount/t2            solved
+    [gen3-cand:lenient-block-whitespace] discount/t1            solved
+    [gen3-cand:lenient-block-whitespace] palette/t1             solved
+    [gen3-cand:lenient-block-whitespace] fees/t2                solved
+    [gen3-cand:lenient-block-whitespace] fees/t1                solved
+    [gen3-cand:lenient-block-whitespace] grading/t1             solved
+    [gen3-cand:lenient-block-whitespace] palette/t2             solved
+    [gen3-cand:lenient-block-whitespace] permissions/t1         solved
+    [gen3-cand:lenient-block-whitespace] permissions/t2         solved
+    [gen3-cand:lenient-block-whitespace] ratelimit/t1           solved
+    [gen3-cand:lenient-block-whitespace] ratelimit/t2           solved
+    [gen3-cand:lenient-block-whitespace] shipping/t1            solved
+    [gen3-cand:lenient-block-whitespace] shipping/t2            solved
+    [gen3-cand:lenient-block-whitespace] tax/t1                 solved
+    candidate lenient-block-whitespace TRAIN solved 15/15
+    [gen3-cand:enhance-function-name-extraction] discount/t2            solved
+    [gen3-cand:enhance-function-name-extraction] grading/t2             solved
+    [gen3-cand:enhance-function-name-extraction] palette/t2             solved
+    [gen3-cand:enhance-function-name-extraction] grading/t1             solved
+    [gen3-cand:enhance-function-name-extraction] discount/t1            solved
+    [gen3-cand:enhance-function-name-extraction] palette/t1             solved
+    [gen3-cand:enhance-function-name-extraction] fees/t2                solved
+    [gen3-cand:enhance-function-name-extraction] permissions/t2         solved
+    [gen3-cand:enhance-function-name-extraction] fees/t1                solved
+    [gen3-cand:enhance-function-name-extraction] ratelimit/t1           solved
+    [gen3-cand:enhance-function-name-extraction] ratelimit/t2           solved
+    [gen3-cand:enhance-function-name-extraction] shipping/t1            solved
+    [gen3-cand:enhance-function-name-extraction] shipping/t2            solved
+    [gen3-cand:enhance-function-name-extraction] tax/t1                 solved
+    [gen3-cand:enhance-function-name-extraction] permissions/t1         solved
+    candidate enhance-function-name-extraction TRAIN solved 15/15
+  gate: 0/4 candidates beat incumbent -> keep incumbent
+    [gen3-heldout] conversion/t2          solved
+    [gen3-heldout] conversion/t1          solved
+    [gen3-heldout] bonus/t2               solved
+    [gen3-heldout] bonus/t1               solved
+    [gen3-heldout] pricing/t2             solved
+    [gen3-heldout] pricing/t1             solved
+    [gen3-heldout] penalty/t2             solved
+    [gen3-heldout] penalty/t1             solved
+    [gen3-heldout] scoring/t2             solved
+    [gen3-heldout] scoring/t1             solved
+  HELD-OUT CURVE: g0:0.90  g1:1.00  g2:0.90  g3:1.00
+
+RUN SUMMARY (run_id=c5a044): {'curve': [0.9, 1.0, 0.9, 1.0], 'gen0_heldout': 0.9, 'best_heldout': 1.0, 'gen0_vs_best_delta': 0.1, 'generations_run': 3, 'halted': False, 'halt_reason': None, 'best_sha': 'ce08542ee4d5dfde', 'session_totals': {'calls': 277, 'input_tokens': 169635, 'output_tokens': 289103, 'cost_usd': 1.878776}, 'config_sha': 'af5f3ad364bb'}

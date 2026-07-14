@@ -197,8 +197,24 @@ class Broker(object):
                 hard = self.meter.caps.get("max_output_tokens_per_call", 8192)
                 out_cap = max(1, min(int(req.get("max_tokens", 2048)),
                                      hard, remaining - est_in))
-                text, usage = self.model.complete(system, prompt,
-                                                  max_tokens=out_cap)
+                # Infrastructure resilience belongs in the trusted runner, NOT
+                # as a capability the scaffold must "discover": retry transient
+                # model-backend errors here so a flaky nested-CLI call cannot
+                # crash an attempt (and cannot become a spurious gate-winning
+                # lever). The model backend already retries internally; this is
+                # a second, broker-level guard.
+                text = usage = None
+                last_err = None
+                for _attempt in range(3):
+                    try:
+                        text, usage = self.model.complete(
+                            system, prompt, max_tokens=out_cap)
+                        last_err = None
+                        break
+                    except Exception as _e:  # noqa
+                        last_err = _e
+                if last_err is not None:
+                    raise last_err
                 self.meter.record_model(usage["input_tokens"],
                                         usage["output_tokens"],
                                         usage["cost_usd"])

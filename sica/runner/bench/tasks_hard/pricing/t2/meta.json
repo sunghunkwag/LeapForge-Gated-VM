@@ -1,0 +1,18 @@
+{
+  "repo": "pricing",
+  "task": "t2",
+  "issue": "apply_coupon(total, pct) subtracts the raw percent number instead of that percent OF the total.",
+  "difficulty": "easy",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

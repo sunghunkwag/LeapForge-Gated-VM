@@ -29,6 +29,14 @@ RUNS_DIR = os.path.join(REPO_ROOT, "runs")
 # Committed hash-lock over the self-authored benchmark's grading assets (T1).
 GRADING_LOCK = os.path.join(RUNNER_DIR, "bench", "GRADING_ASSETS.lock.json")
 
+
+def grading_lock_for(subdir):
+    """Per-benchmark-root grading-asset lock path."""
+    if subdir in (None, "tasks"):
+        return GRADING_LOCK
+    return os.path.join(RUNNER_DIR, "bench",
+                        "GRADING_ASSETS_%s.lock.json" % subdir)
+
 # --- per-task hard caps (G-budget) -------------------------------------------
 # A "tool call" is one brokered ctx.run (test execution). "steps" is one
 # plan->act->verify iteration of the agent loop. Model tokens are summed from

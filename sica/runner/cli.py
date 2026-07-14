@@ -31,13 +31,18 @@ def _dirs():
             "archive": config.ARCHIVE_DIR, "runs": config.RUNS_DIR}
 
 
-def _benchmark(cfg, verify=False):
+_BENCH_DIR = os.path.join(_HERE, "bench")
+
+
+def _benchmark(cfg, verify=False, subdir=None):
     if verify:
         return LocalSuite(tasks_root=FIXTURES_ROOT)
     if cfg["benchmark"] == "swebench":
         swebench.require_runnable()
         raise SystemExit("swebench execution wiring is host-gated; use "
                          "localsuite for the engine loop (see swebench.py).")
+    if subdir and subdir != "tasks":
+        return LocalSuite(tasks_root=os.path.join(_BENCH_DIR, subdir))
     return LocalSuite()
 
 
@@ -134,11 +139,14 @@ def main(argv=None):
     p = sub.add_parser("validate-bench")
     p.add_argument("--profile", default="smoke")
     p.add_argument("--fixtures", action="store_true")
+    p.add_argument("--hard", action="store_true", help="use the tasks_hard set")
 
     p = sub.add_parser("lock-grading",
                        help="write the committed grading-asset hash-lock (T1)")
+    p.add_argument("--hard", action="store_true", help="use the tasks_hard set")
     p = sub.add_parser("leakscan",
                        help="verify grading-asset containment (T1)")
+    p.add_argument("--hard", action="store_true", help="use the tasks_hard set")
 
     p = sub.add_parser("estimate")
     p.add_argument("--profile", default="smoke")
@@ -169,8 +177,12 @@ def main(argv=None):
     p.add_argument("--no-halt-on-adopt", dest="halt_on_adopt",
                    action="store_false",
                    help="run adoptions unattended (directive default)")
+    p.add_argument("--hard", action="store_true",
+                   help="run on the harder tasks_hard benchmark")
 
     args = ap.parse_args(argv)
+    subdir = "tasks_hard" if getattr(args, "hard", False) else None
+    lock_path = config.grading_lock_for(subdir)
 
     if args.cmd == "pin":
         cfg = config.make_config(args.profile, "claude_cli", "pin")
@@ -184,7 +196,7 @@ def main(argv=None):
     if args.cmd == "validate-bench":
         cfg = config.make_config(args.profile, "stub", "val")
         bench = (LocalSuite(tasks_root=FIXTURES_ROOT) if args.fixtures
-                 else _benchmark(cfg))
+                 else _benchmark(cfg, subdir=subdir))
         tasks = bench.all_tasks()
         print("validating %d tasks (%d repos)..."
               % (len(tasks), len({t.repo for t in tasks})))
@@ -195,19 +207,18 @@ def main(argv=None):
     if args.cmd == "lock-grading":
         from . import leakscan
         cfg = config.make_config("smoke", "stub", "lock")
-        bench = _benchmark(cfg)
-        lock = leakscan.write_lock(bench, config.GRADING_LOCK)
+        bench = _benchmark(cfg, subdir=subdir)
+        lock = leakscan.write_lock(bench, lock_path)
         print("wrote grading-asset lock: %d tasks, combined_sha=%s\n  -> %s"
-              % (lock["n_tasks"], lock["combined_sha256"][:16],
-                 config.GRADING_LOCK))
+              % (lock["n_tasks"], lock["combined_sha256"][:16], lock_path))
         return 0
 
     if args.cmd == "leakscan":
         from . import leakscan
         cfg = config.make_config("smoke", "stub", "scan")
-        bench = _benchmark(cfg)
+        bench = _benchmark(cfg, subdir=subdir)
         reach = leakscan.reachability_scan(bench)
-        ok, reasons = leakscan.verify_lock(bench, config.GRADING_LOCK)
+        ok, reasons = leakscan.verify_lock(bench, lock_path)
         print("reachability scan: %s (%d tasks)"
               % ("OK" if reach["ok"] else "FAIL", reach["checked"]))
         for r in reach["reasons"]:
@@ -248,8 +259,12 @@ def main(argv=None):
             overrides = json.loads(args.overrides)
         cfg = config.make_config(args.profile, args.backend, args.seed,
                                  overrides)
-        bench = _benchmark(cfg)
+        if subdir:
+            cfg["benchmark_subdir"] = subdir
+        bench = _benchmark(cfg, subdir=subdir)
         est = print_approval_block(args.profile, cfg, bench)
+        if subdir:
+            print("  BENCHMARK SET    : %s (harder)" % subdir)
         if args.backend != "stub" and not args.yes:
             raise SystemExit(
                 "\nREFUSED: real-backend run needs session approval. Re-run "
@@ -281,7 +296,7 @@ def main(argv=None):
         run_id = binascii.hexlify(os.urandom(3)).decode()
         eng = Engine(cfg, bench, model, _dirs(), session_cost_cap=cap,
                      run_id=run_id, halt_on_adopt=halt_on_adopt,
-                     grading_lock_path=config.GRADING_LOCK)
+                     grading_lock_path=lock_path)
         print("T8 adoption policy: %s\n"
               % ("HALT for approval on any gate adoption"
                  if halt_on_adopt else "adopt unattended"))

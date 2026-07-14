@@ -1,0 +1,143 @@
+{
+  "assets_per_task": {
+    "bonus/t1": {
+      "gold/core.py": "9532c0e67698e47d3ea20e10b5b6c1aa8a178b6312a7bf94925e2ddef4a2f85e",
+      "hidden/test_hidden.py": "fe23f3411312dabb7ca64da29c3eeaaeae6918dc0b8d370c4d71dba67ae4795a",
+      "meta.json": "bf0a8228c512edbc1b8e85ec3244b2db00af68f547d7f213299b668bd754350e"
+    },
+    "bonus/t2": {
+      "gold/core.py": "0036a350ec2993ad24fd992db3755fe6ab770eb088ceea2b7a9169c192a1d90b",
+      "hidden/test_hidden.py": "0708fc76606a16f2ff936c3af257386f62474d33e94951bbb0cf68c66c36cd24",
+      "meta.json": "92bd158d47f2d36280ee5774d0b30d5d231dcf68aa5d6f34e14b987b429099e5"
+    },
+    "conversion/t1": {
+      "gold/core.py": "668195f21fc28e633615804ddea328e48c7dc6ed88dddbf6c4bfabe35b5f42ec",
+      "hidden/test_hidden.py": "d8757b296c856b7d3ae1c23a8a79684af64d664fda4c939801cfa6430a80ea73",
+      "meta.json": "174a7c1d642fefdd122fa5143186009c05459696c1c8497ef9a84d1a0408f265"
+    },
+    "conversion/t2": {
+      "gold/core.py": "4b61e908042491ef12f65d68b57b682ff71cf4b3e9029817b1c8bced7defee30",
+      "hidden/test_hidden.py": "95f8c8caf1189af6610a26511a9cd1da4a381dac1b3f38084bdc9d30076d04ab",
+      "meta.json": "f699763cf89d42c5b99f2c2f3818a7788b2ce86c921241b31660f776b6dee286"
+    },
+    "discount/t1": {
+      "gold/core.py": "a56bbdd8ea6914d73741861f034489712954ed595a7718b2d4a9a658a5627dab",
+      "hidden/test_hidden.py": "86be6a0b2c16ad5882b071bd4a662021ac2c2c0139aa264290b53ebbd0faaad6",
+      "meta.json": "9909c2eddd0689a7188a6fd7cefa60d9b606fd0bfc14e3c74b49c24bf77d8588"
+    },
+    "discount/t2": {
+      "gold/core.py": "bd0cfe9f8bffe670e5d80f171f46f07c95e5bc8dcb49c7874c99595fbf3d610a",
+      "hidden/test_hidden.py": "941d6fafd633b7a8f05917d1db6d661cb50c2542de4c71ddae599026ea03abf1",
+      "meta.json": "cdd96a1cd8792f74d23aa6e93acb7f41614f7746f547c155493b53946f0c82a5"
+    },
+    "fees/t1": {
+      "gold/core.py": "ab6dbac8d010455fdd7f9dad2ce5caba2692a1c3dedea4efcee6d2d91cd8814f",
+      "hidden/test_hidden.py": "19a0b87a3108c27dafff767dfa1fb82e5da62723ff4812d6d625a84270b6818e",
+      "meta.json": "d93e1e96a3f665b343a8d5486f33654bb9c2e9da91d226e042277555675a272e"
+    },
+    "fees/t2": {
+      "gold/core.py": "fc09cf7bc622e9032d690830200a0b9920a7454d79741990772a4e9b23043ba1",
+      "hidden/test_hidden.py": "8df0913cb346699f4d66e630eee0e1ec81886c0dd66d7bf7f2b13a405dc02bbe",
+      "meta.json": "5ef3328f29015ff39a50cbf1385aac0750a8d6d71115cd7ae01d03725fecaff7"
+    },
+    "grading/t1": {
+      "gold/core.py": "1282a4aeecb6e0a6b01f1268865a2209977d487e53679b6d01f53d1a09a16742",
+      "hidden/test_hidden.py": "6ad81b2193613af9c9c643436bba952bd4fad913f723900cf22d0f310c43a326",
+      "meta.json": "4ec52614888718b14abb7b029bf28b514a350bb77f6c21508f99d46742298dc5"
+    },
+    "grading/t2": {
+      "gold/core.py": "ab3a9200cfdd4f753474131bce2c2addda66c995aa405032554abdaef0900177",
+      "hidden/test_hidden.py": "0e366dbfaf4330aff8b8f69aef471c8101bd3ebfd4e8525f4262e3760b86f280",
+      "meta.json": "c7f37b04635d852e4ffdb441e3ef7e4c4b9a468cf9f42731e6156df996e1f950"
+    },
+    "palette/t1": {
+      "gold/core.py": "c232699d363bae1d6a9718560787dd9789e4e0181aef5b8b920eb310d8608539",
+      "hidden/test_hidden.py": "00a1ba2be7c5371b1f8a673078aee372ecf3314fd09a9bca16200e59aeecdc17",
+      "meta.json": "fb5b14c2fc870fce3e544cf68a7da5228a86d0a7936312ef6bd9398cc5792807"
+    },
+    "palette/t2": {
+      "gold/core.py": "b9899c9b73a1d4f0f92ff589f69a932cb8ce682616bf80039f4fdee4cba6f097",
+      "hidden/test_hidden.py": "62471a64f51e7826a08e7c4cef5e1d3d6fb89a342d6bbce55f5fce980c153def",
+      "meta.json": "c176bade0f867f673cb679a84e59b677045f1dcfe531d2fb99b8c1042dbca6ce"
+    },
+    "penalty/t1": {
+      "gold/core.py": "e0dc6db3ae415ec631262f3459664ca7b6a2ea569b36fd3eb1aef6bf331895a7",
+      "hidden/test_hidden.py": "fc3c53641a2cf352b344100ea1545b479cadab99baafb20c249ec937e7620515",
+      "meta.json": "c5ce31ad7a0d7b9ec146c4d430972451e1ef2c2b5bef2c09cb0cd6fba871929d"
+    },
+    "penalty/t2": {
+      "gold/core.py": "d2eeac529fc13c5b56d35ab72b8f24b2fc8e25a5f109c68b04332516b92a9351",
+      "hidden/test_hidden.py": "0b66b6815cbbb1c2217ded4d13dcbf48919acaaca585b275332c49b3d42b3a8a",
+      "meta.json": "0f406e5b840db2b18558ab55cb9b621dd43f879661e8fd06d01dc23cbdd5b45d"
+    },
+    "permissions/t1": {
+      "gold/core.py": "11fd84b00d5984d105581a540d5f3003ce777d902766ac4083e6e149eb5a3d46",
+      "hidden/test_hidden.py": "08c2adff2767b83b9192297688dd6c155b3ba00305957bdd3c5b19ea21118190",
+      "meta.json": "83709fbb8794af38e6b70c62c783909f3524b8950f994810dbde1291658cbd74"
+    },
+    "permissions/t2": {
+      "gold/core.py": "e424b8729234fe4f4ba9a0b27b55ccfcea2ed819ac6b19f8af6a808f57989c4e",
+      "hidden/test_hidden.py": "b62b4bb05f6554be1356026b56555cab65d129b37b250460cff6387213a2445e",
+      "meta.json": "441f009dbf209604ee2a4c0e278a2b1faeee3a68be99ab8c8c6cbbc3c73cd6d6"
+    },
+    "pricing/t1": {
+      "gold/core.py": "d7f57f417e9533d571ab31f51e0d13d3a66d6daf57d65e7da3cf4b0035dfa6bf",
+      "hidden/test_hidden.py": "bae85cb8c8cf4128305310161e370bd5b5bb227746e4f407dcf967ec5d1d9ec5",
+      "meta.json": "4eac5b1617b9e00714fb325629d75a3b9d2ad5e4a3d3e335677f69367a3b0bb4"
+    },
+    "pricing/t2": {
+      "gold/core.py": "fef061948bd85b60cb9c4441178c3ae8c1b9b08f034efa5920ed9416e8f7a2cc",
+      "hidden/test_hidden.py": "0a5500f0e330e403c56f01409f56ec220ccd51f0d97c47d248b034947055d340",
+      "meta.json": "a5db287fe47e67412f14bb7947680c81c891409a4ccdc697636465fa1edcc0a8"
+    },
+    "ratelimit/t1": {
+      "gold/core.py": "b5c8ec3029a6208ccd68478b543325cdb4232858a59e4358db3d285f4ceaf85d",
+      "hidden/test_hidden.py": "080e75d7ac7ed4d6bf58d3ca3fe7ec6f87ebd34289f69798f4b00bc1105d2744",
+      "meta.json": "cd569eb7607e68c247833b2cbce6cdc1197f8b694f6973babc3bc7a4c284d86b"
+    },
+    "ratelimit/t2": {
+      "gold/core.py": "b9975c247207da675a505cddd113001c488f52d6f0bbfaee96b96f2dbf5116e6",
+      "hidden/test_hidden.py": "8755403b38c6bfdc1e351ed608086af906b9a84eb0d65041435a0a55afda8aba",
+      "meta.json": "082518a14cca14187787436b7a35524c5f968433582f12843c856e6335790afa"
+    },
+    "scoring/t1": {
+      "gold/core.py": "88921be60c137d84bb4dfbb29cc79e794f3a93a17a6e15bbe87236ffe046e6da",
+      "hidden/test_hidden.py": "eee80885542bbeaefda91006305d99311bdd547de42104eabb7a8cc017a636dc",
+      "meta.json": "2de8cd058888d22831ae209f53cdaf6366ab98bec103e6c8e8ffd9a9dd85e33d"
+    },
+    "scoring/t2": {
+      "gold/core.py": "b8f78635b72b14e878da3a71bda90b46d2b22b6a6ae8a470d3f4f8477a51a134",
+      "hidden/test_hidden.py": "2b5dcb5f901fa2b95002c2938df5539cf2168cba3430ee2ac55d11218363864a",
+      "meta.json": "c7649e39c7d773f24df5dbaebd7997067508a224d8a5274d8918b2d9e31fb8b0"
+    },
+    "shipping/t1": {
+      "gold/core.py": "d7b63aad209a194e2debd7b3ff2c8a8eeb97cef17cc0d40dcc4021cda063fd1d",
+      "hidden/test_hidden.py": "9e8f160e4a005e1abd72c988fbe3ca695455e05921164941d7a663c334a8a331",
+      "meta.json": "0794d6e042dfd2e9d5d17f7ac78a9400ec680f11604c619e5604ce6ee61084c3"
+    },
+    "shipping/t2": {
+      "gold/core.py": "c45d503d17e56cd0c1fd6ea2eae1648c34bdeec3080cfc3257686b514641d080",
+      "hidden/test_hidden.py": "9715d794c1aed95e8170ff890a92c4b8ce33e45ff2d823768ae7584bf75a1987",
+      "meta.json": "952aba23b066f477e6f1939e9c18e8ef27e1dd16f7ffaa084b2cbd4c3a8f4739"
+    },
+    "tax/t1": {
+      "gold/core.py": "879c19324b6f3c879dee55ffe890f495a568b8c05daba72fb437016a6453ad82",
+      "hidden/test_hidden.py": "109ac455bbea9d4a691f3e9d3c76eaf5a9a1ed1d4853a3f5444620e1a288671e",
+      "meta.json": "338d49c1c67af81a5035d56ea56afcbf03fc4b615d23f1d8b93608f178c246e4"
+    },
+    "tax/t2": {
+      "gold/core.py": "b431aba3830b096ca1e113ab4c559d920f1cc70194cbe3a1c4fbad694a6a8d84",
+      "hidden/test_hidden.py": "7ac48a0340b5bcbd11e3d64dda6e6cd19f0dd23f4683b14cbbcddbde40c53de9",
+      "meta.json": "e9a9447cff0e9bb19adc4232dd831b7559438f1b7a24c5c05d8c2ec82347544c"
+    }
+  },
+  "benchmark": "localsuite",
+  "combined_sha256": "d5b5e2d58572a844401e10705803a240af69bee439fbe78f5012ef5628c534f8",
+  "n_repos": 13,
+  "n_tasks": 26,
+  "provenance": {
+    "authored_by_model": "claude-fable-5 (session model at authoring)",
+    "note": "Authoring transcripts live outside the repo tree (~/.claude/.../subagents/workflows) and never inside any task dir or workdir; grading assets (hidden/, gold/, meta.json) are siblings of repo/ and never materialised into the agent workdir.",
+    "solving_agent_model": "claude-haiku-4-5-20251001"
+  }
+}

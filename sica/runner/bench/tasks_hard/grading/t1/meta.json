@@ -1,0 +1,18 @@
+{
+  "repo": "grading",
+  "task": "t1",
+  "issue": "grade() uses the wrong score cutoffs. The correct grade bands are defined elsewhere in this project; find and use them.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

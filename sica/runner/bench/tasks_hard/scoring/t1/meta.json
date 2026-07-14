@@ -1,0 +1,18 @@
+{
+  "repo": "scoring",
+  "task": "t1",
+  "issue": "score() uses the wrong point weights. The real weights for correct/partial/wrong answers are defined as named constants elsewhere in this project.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

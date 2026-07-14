@@ -1,7 +1,51 @@
 # SICA smoke — results (§7 report)
 
+## LEAP 2 (pending T8 keypress): a second, distinct capability — replicated
+
+After leap 1 saturated its axis, a new benchmark axis (`tasks_axis4`) was built
+with confirmed headroom: the load-bearing value lives ONLY in a non-editable
+helper's docstring/comment (un-importable, un-greppable by leap-1's patterns,
+un-inferable — arbitrary values like `"QZ7F"`, `0.0007`, `"MARIGOLD"`). Direct
+eval: GEN0 **0/5** and the leap-1 scaffold **0/5** on these `t1` tasks.
+
+First engine run on this axis exposed a real selection hazard: a spurious
+robustness candidate (`try/except` around `ctx.model`) won a noisy gate (+3)
+over the true capability candidates. It was **rejected at T8**, and the root
+cause fixed in the trusted runner (broker-level model-call retry, de-noising
+the gate for all scaffolds equally). On the de-noised re-run the capability
+candidate won decisively:
+
+- `include-helpers-context` — reads the full body/prose of `helpers.py` into
+  the prompt — **12/12 train vs incumbent 6/12 (+6)**; the three non-axis
+  candidates all tied at 6/12. T8 halted for the PI keypress (not yet adopted).
+
+Paired held-out replication (T8-pending candidate vs the current leap-1
+incumbent, both FIXED, on 3 fresh repo-disjoint splits of `tasks_axis4`):
+
+| seed | incumbent held-out | candidate held-out | delta |
+|------|--------------------|--------------------|-------|
+| s1   | 4/8 = 50%          | 8/8 = 100%         | +4 |
+| s2   | 4/8 = 50%          | 8/8 = 100%         | +4 |
+| s3   | 4/8 = 50%          | 8/8 = 100%         | +4 |
+| **pooled** | **12/24 = 50%** | **24/24 = 100%** | **+12** |
+
+Candidate wins 3/3 seeds, **zero regressions**; every newly-solved task is a
+`t1` prose-value case (the axis). This is a **second, distinct** capability —
+reading non-editable referenced files — orthogonal to leap 1 (grep ALL_CAPS
+constants). Evidence under `results/leap2_*` (ledger, replication json/log, the
+candidate scaffold). **Not adopted**: the scaffold on disk is still leap 1,
+awaiting the PI's T8 keypress.
+
+The lesson from the rejected first fire is itself a result: a strict
+train-count gate under stochastic-model noise can be won by a spurious
+robustness fix; the cure was to move infrastructure resilience into the trusted
+runner (so it is not a scaffold-winnable lever), after which the genuine
+capability candidate won cleanly by a capability-scale margin (+6, not +1..3).
+
+---
+
 Pinned `claude-haiku-4-5-20251001`, T8 keypress-on-adoption ON, all runs after
-`PREREG.md` was committed. Total metered spend across all runs: **$9.62** (of a
+`PREREG.md` was committed. Total metered spend across all runs: **~$15.2** (of a
 $20 cap). Every held-out result was kept out of proposals and the gate
 (G-heldout); grading used hidden tests the agent never saw (G-isolate); the
 self-editing scaffold ran net+mount-namespaced with grading assets tmpfs-hidden

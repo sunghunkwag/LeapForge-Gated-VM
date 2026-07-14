@@ -1,0 +1,10 @@
+{
+  "repo": "scaler",
+  "task": "t2",
+  "issue": "scaled_sum(values, factor) should multiply each value in values by factor and return the total of those products. Instead it adds factor to each value before summing, so it returns the wrong total. For example, scaled_sum([1, 2, 3], 10) returns 36 but should return 60. The bug is a wrong operator in main.py; fix it there.",
+  "difficulty": "easy",
+  "editable_files": ["main.py"],
+  "public_test_paths": ["test_public.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

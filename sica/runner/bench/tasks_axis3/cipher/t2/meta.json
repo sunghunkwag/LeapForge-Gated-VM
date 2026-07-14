@@ -1,0 +1,18 @@
+{
+  "repo": "cipher",
+  "task": "t2",
+  "issue": "rotate(text, k) is supposed to shift each lowercase letter FORWARD by k places through the alphabet (wrapping z -> a), but it shifts them BACKWARD instead. rotate('abc', 1) returns 'zab' when it should return 'bcd', and rotate('xyz', 3) returns 'uvw' when it should return 'abc'. Non-letter characters and a shift of zero happen to come out right, which hides the problem. The bug is entirely in main.py -- the alphabet-position arithmetic moves letters the wrong way.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

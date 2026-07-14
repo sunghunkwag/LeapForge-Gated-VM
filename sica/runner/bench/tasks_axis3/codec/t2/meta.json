@@ -1,0 +1,10 @@
+{
+  "repo": "codec",
+  "task": "t2",
+  "issue": "checksum(data) should return the sum of the byte values in data, reduced modulo 256. Instead it subtracts each byte from the running total, so it returns the wrong value. For example, checksum([1, 2, 3]) returns 250 but should return 6. The bug is a wrong operator in main.py; fix it there.",
+  "difficulty": "easy",
+  "editable_files": ["main.py"],
+  "public_test_paths": ["test_public.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

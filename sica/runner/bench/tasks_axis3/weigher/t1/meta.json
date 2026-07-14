@@ -1,0 +1,10 @@
+{
+  "repo": "weigher",
+  "task": "t1",
+  "issue": "check(word) is meant to report exactly the weight the project assigns to a word: for every word, check(word) should equal the weight produced by the project's weighing routine, score() in helpers.py. It does not. check reports the wrong weight for words -- for single letters, for the empty string, and for longer words alike. One symptom stands out: rearranging the letters of a word does not change what check returns, so check('ab') and check('ba') come back equal, and check('stop') and check('tops') come back equal, even though the project weighs those words differently from one another. score() in helpers.py is correct and must not be edited; the bug is in main.py's check -- fix it so that check(word) equals the project's weight for every word.",
+  "difficulty": "hard",
+  "editable_files": ["main.py"],
+  "public_test_paths": ["test_public.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

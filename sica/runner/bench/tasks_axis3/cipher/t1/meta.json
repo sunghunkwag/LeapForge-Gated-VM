@@ -1,0 +1,18 @@
+{
+  "repo": "cipher",
+  "task": "t1",
+  "issue": "decode(text) is meant to be the exact inverse of encode(text): for any lowercase word, decode(encode(word)) should return the original word. It does not. Words run through encode and then decode come back changed -- decode(encode(word)) is not equal to the word you started with, and longer words come back more badly garbled than short ones, so the round-trip is clearly not undoing what encode did. encode is correct and must not change; each letter's transformation is defined by a helper this module imports from helpers.py, and that helper is also correct and must not be edited. The bug is in main.py, in the way decode reverses what encode did -- fix it there so that decode(encode(word)) == word for every lowercase word.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

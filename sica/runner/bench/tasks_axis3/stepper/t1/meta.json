@@ -1,0 +1,10 @@
+{
+  "repo": "stepper",
+  "task": "t1",
+  "issue": "back() is meant to be the exact inverse of the project's forward step: for every position x in the documented domain, back(fwd(x)) should return the original x. It does not. Stepping a position forward and then back does not recover the original position -- for example, stepping 5 forward and then back returns 6 instead of 5, and stepping 9 forward and then back returns 8 instead of 9; many other positions round-trip incorrectly too. The forward step is defined in helpers.py, which is correct and must not be modified; the bug is in main.py's back and must be fixed there so that back(fwd(x)) == x for every position in the domain.",
+  "difficulty": "hard",
+  "editable_files": ["main.py"],
+  "public_test_paths": ["test_public.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

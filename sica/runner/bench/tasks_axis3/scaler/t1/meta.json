@@ -1,0 +1,10 @@
+{
+  "repo": "scaler",
+  "task": "t1",
+  "issue": "unpack() is meant to be the exact inverse of the project's pack() routine: for any value v, unpack(pack(v)) should return the original v. It does not. Packing a value and then unpacking the result does not recover the original value -- for example, round-tripping 3, 42, or 250 through pack and then unpack never gives back the number you started with. The bug is in main.py and must be fixed there; helpers.py is correct and must not be modified.",
+  "difficulty": "hard",
+  "editable_files": ["main.py"],
+  "public_test_paths": ["test_public.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

@@ -1,0 +1,10 @@
+{
+  "repo": "codec",
+  "task": "t1",
+  "issue": "decode() is meant to be the exact inverse of the project's encode() routine: decode(encode(x)) should return the original value x for every input, but it doesn't. For example, encoding the value 100 and then decoding the result gives 60 instead of 100, and many other inputs round-trip incorrectly. The bug is in main.py and should be fixed there; helpers.py is correct and must not be modified.",
+  "difficulty": "hard",
+  "editable_files": ["main.py"],
+  "public_test_paths": ["test_public.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

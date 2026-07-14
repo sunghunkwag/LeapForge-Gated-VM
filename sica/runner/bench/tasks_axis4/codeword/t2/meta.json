@@ -1,0 +1,18 @@
+{
+  "repo": "codeword",
+  "task": "t2",
+  "issue": "shout(s) should uppercase s but returns it unchanged.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "repo": "seedval",
+  "task": "t1",
+  "issue": "initial_seed() returns the wrong value. The mandated initial seed for this module is written in a comment in helpers.py. Fix main.py only.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

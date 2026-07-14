@@ -1,0 +1,18 @@
+{
+  "repo": "feig",
+  "task": "t1",
+  "issue": "growth_factor() returns the wrong constant. The project growth factor is stated in a comment in helpers.py. Fix main.py only; helpers is correct.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

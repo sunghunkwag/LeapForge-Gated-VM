@@ -1,5 +1,35 @@
 {
   "assets_per_task": {
+    "codeword/t1": {
+      "gold/main.py": "d6507314f6c4d05ecccbe1c50851f02cdb54bd65d6abda36a2cfc5a520f00504",
+      "hidden/test_hidden.py": "0960209c6b96d5fc03f829a377f318a4539f7e1e71ba4cfe9831d9d52ddd3b0f",
+      "meta.json": "e0d3087867ffc1c0c11a337bb0bd48dd88090dc8da6d79612ef32879d2060292"
+    },
+    "codeword/t2": {
+      "gold/main.py": "5fd603d2000303866bbf51e8743a29db70fbbb5c1e123c6e9a427bf88a2130aa",
+      "hidden/test_hidden.py": "2c965f49db1cf897b626a6e129d00acc1358b098516ab6260bc8e691547f7c04",
+      "meta.json": "81613d44810f12feb1622e4c696511063a83eee095ff2b76fc385e9b0a5ca592"
+    },
+    "delim/t1": {
+      "gold/main.py": "2898c5234061e028afbcc6f3d2bedc90a6f9744df9b399ca11113cd1cd1c896d",
+      "hidden/test_hidden.py": "1e52e51b0598f5fafd4aaed53682a00a9d882a653e92a989abbcfb432cc7a344",
+      "meta.json": "238eb13eca474e235a713c16d4187a2986ad691c02ca52ff1e35bbe51b0cfe8d"
+    },
+    "delim/t2": {
+      "gold/main.py": "c2522defefea23b89d56e45334a8be30adbaaae97b45e5c45f71d2343ef336a6",
+      "hidden/test_hidden.py": "c7a7971c2cbe05881a6d32050edb2875ba184341106c529599b1dafce12a9e94",
+      "meta.json": "5912d249555ea24ae6bccf5778aeb73db7b7b00ee235688fb22b0a6d31dd2ca4"
+    },
+    "feig/t1": {
+      "gold/main.py": "7fa1b850524417953ae5c1592fccef36c464af396264dbc41a66cacf7e911a21",
+      "hidden/test_hidden.py": "e832ab04d3135588d7262d9dfcbab3df438e13788c89b5ae28d70a2fa2d93aad",
+      "meta.json": "376367791b4ab80800eb908102e0dbffcbcefb8f944e0ebd9031c42e7f2a49d5"
+    },
+    "feig/t2": {
+      "gold/main.py": "17855fe5fdfa5217c651052a3e53e08e9f75c5c11aab15d19c7988683714a49a",
+      "hidden/test_hidden.py": "8459c17882f7fdb09cbc87d3cd4fbee2fa0d2f0f53a73ce39b925484011ee353",
+      "meta.json": "c66b4eedfaf3a0f3a0d0f8279cbdfd10cacee4f0abdab5d84a2b6ae23b02dcfc"
+    },
     "header/t1": {
       "gold/main.py": "b1eba16c4769ca791e491e41966080a4846fcc1adf25d9f8f6903e0b4364c21b",
       "hidden/test_hidden.py": "61d34d9988225118e381ac1e1cc3935e7f807aabf986b4305be9b454265f02a6",
@@ -40,6 +70,26 @@
       "hidden/test_hidden.py": "f3f47cac3b699b6dd12e6ba703e716b194ff598abbdac13c802043898d8189dc",
       "meta.json": "e70039b138a5cf5ae52352c3273957f8ce13eace65d268e698509201aa6bd991"
     },
+    "seedval/t1": {
+      "gold/main.py": "8dccfbb60fbbd2fdeed88cb6392c2e11c4dff96460740e57db4c807a9409aade",
+      "hidden/test_hidden.py": "7e9357e2bc097ccc6a292b9d7ff9a5d2c60161bdbbed69c166f0c5906549a0e1",
+      "meta.json": "ab3a08348d5013f2c6344353948ce8dbcedf187c6c1fc0b4441ef649126ae7f4"
+    },
+    "seedval/t2": {
+      "gold/main.py": "a2be3517f586e7b46f224b266ef9ae6c5e22aa70b6c661782aa85f7923493950",
+      "hidden/test_hidden.py": "a5e6ef7cf40a8b20b585ff62fde19cbba9b4a71959dd4bca0f1e9f334954461b",
+      "meta.json": "3b72773819cc3cebc46853e1043aae830bd60df3444c35c77de2afe38006dc73"
+    },
+    "token/t1": {
+      "gold/main.py": "7c215c9efc74874fc0e728725bd36f95c5db736dae4b0339cae9ba6be508328c",
+      "hidden/test_hidden.py": "fa53357afb86cb0340b63de9bbf246f653dfcf7d9a3847ab7e661050a9d57e8e",
+      "meta.json": "5b9f45feb4fafb71ca2f31d0f043fdb3997c64d22ddcd26936475652cd82f767"
+    },
+    "token/t2": {
+      "gold/main.py": "46c84af255d693abb75c9f94e66ce0a3987907e7012b024a03b4262594642d72",
+      "hidden/test_hidden.py": "5b6e43cbae27bcc8a0083e9c4ab9baa7aba1393416f8470e08a1c4291be46a44",
+      "meta.json": "936bf3a1384b477ad64ef470c4e4441b49293547c5a322add8490290ad355b49"
+    },
     "tolerance/t1": {
       "gold/main.py": "8904433fe6050d8b7008ea90681370c02c62e1650546ff84aef6d11f6b3742b5",
       "hidden/test_hidden.py": "77afc1988e57a9683c7836f5b116802b2c3e2df66b5abcbce1efc6260aed6272",
@@ -52,9 +102,9 @@
     }
   },
   "benchmark": "localsuite",
-  "combined_sha256": "7791b3ce905fb42c367f335f1d0e2d626d9535061b5170eb079af03bdfd5089f",
-  "n_repos": 5,
-  "n_tasks": 10,
+  "combined_sha256": "2b37f5de47e7183703e8113ad9903dc6095702eac14ec2ca8602c9b3e70c9f51",
+  "n_repos": 10,
+  "n_tasks": 20,
   "provenance": {
     "authored_by_model": "claude-fable-5 (session model at authoring)",
     "note": "Authoring transcripts live outside the repo tree (~/.claude/.../subagents/workflows) and never inside any task dir or workdir; grading assets (hidden/, gold/, meta.json) are siblings of repo/ and never materialised into the agent workdir.",

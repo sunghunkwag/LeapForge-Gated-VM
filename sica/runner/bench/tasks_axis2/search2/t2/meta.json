@@ -1,0 +1,18 @@
+{
+  "repo": "search2",
+  "task": "t2",
+  "issue": "count_in_range(nums, lo, hi) is supposed to count values within the INCLUSIVE range [lo, hi], but values exactly equal to the upper bound hi are never counted. For example count_in_range([1, 2, 3, 4, 5], 2, 4) returns 2 instead of 3, and count_in_range([10], 0, 10) returns 0 instead of 1. The lower bound is handled correctly; only the upper bound is off.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

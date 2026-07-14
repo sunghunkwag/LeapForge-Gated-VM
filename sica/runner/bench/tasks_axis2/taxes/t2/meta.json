@@ -1,0 +1,18 @@
+{
+  "repo": "taxes",
+  "task": "t2",
+  "issue": "tax_due(income) returns a NEGATIVE tax for low incomes instead of zero. Income up to a 1000-cent standard allowance is meant to be tax-free, with only the portion above 1000 taxed at 20%. But for incomes below the allowance the function subtracts 1000 and taxes the negative remainder, so it reports money owed BACK -- for example tax_due(500) returns -100 and tax_due(0) returns -200, when both should be 0. Incomes at or above 1000 are taxed correctly; only the below-allowance case is wrong. The tax due must never drop below zero.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

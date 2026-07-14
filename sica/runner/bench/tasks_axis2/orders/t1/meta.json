@@ -1,0 +1,18 @@
+{
+  "repo": "orders",
+  "task": "t1",
+  "issue": "order_total(items) returns amounts that are far too large. A cart of a couple of items that should ring up to a few dollars comes back as several hundred instead. Each line's total is computed by a helper this module imports from another file; the summing and final conversion happen here in main.py.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

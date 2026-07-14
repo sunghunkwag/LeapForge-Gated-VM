@@ -1,0 +1,18 @@
+{
+  "repo": "taxes",
+  "task": "t1",
+  "issue": "receipt_net(price) returns a net amount that is far too low for taxable items: the sales tax appears to come off twice. For a gross price that includes tax, the returned 'net' lands well below the true pre-tax figure -- for instance a gross of 110 cents (which is 100 net plus 10 tax) comes back as 90 instead of 100, and 550 comes back as 450 instead of 500. Tax-exempt small purchases (100 cents or less) still come back correct; only taxable items are wrong. The tax stripping is performed by a helper this module imports from another file (helpers.py); main.py combines that helper's result with its own arithmetic. The loop of arithmetic that produces the final net lives here in main.py.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

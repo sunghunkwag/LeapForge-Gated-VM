@@ -1,0 +1,18 @@
+{
+  "repo": "wordcount",
+  "task": "t2",
+  "issue": "count_long_words(text, min_len) is documented to count the words that are at least min_len characters long, so a word whose length is exactly min_len should be included. It isn't: words sitting exactly on the boundary are dropped. For example count_long_words('cat dog', 3) returns 0 instead of 2, and count_long_words('a bb ccc dddd', 2) returns 2 instead of 3. Words strictly longer than min_len are counted correctly and words shorter than min_len are correctly excluded; only the exactly-equal-to-min_len case is handled wrong.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

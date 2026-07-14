@@ -1,0 +1,18 @@
+{
+  "repo": "scheduling",
+  "task": "t1",
+  "issue": "capacity_at(minute, capacities) returns the wrong slot's capacity. With hourly slots and a schedule of capacities [10, 20, 30, 40], a minute that falls in the first hour of the day comes back with the second slot's number: capacity_at(0, [10, 20, 30, 40]) returns 20 when the first slot's capacity is 10, and capacity_at(59, [10, 20, 30, 40]) does the same. Every lookup is reading the wrong entry. Worse, a minute that lands in the final slot of the day raises IndexError instead of returning a capacity -- capacity_at(180, [10, 20, 30, 40]) blows up rather than returning 40. The minute-to-slot mapping is delegated to a helper this module imports from helpers.py; the read into the capacities list happens here in main.py.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

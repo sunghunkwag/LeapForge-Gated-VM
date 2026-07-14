@@ -1,0 +1,18 @@
+{
+  "repo": "search2",
+  "task": "t1",
+  "issue": "index_of() and contains() misbehave whenever the target is NOT present in the sequence. index_of() is documented to return the caller's `default` for an absent element, but instead it leaks a stray -1; and contains() reports True for elements that are not in the sequence at all. Lookups that DO find the element return the right position, so only the absent/miss path is wrong. main.py finds positions via the find_index() helper in helpers.py.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

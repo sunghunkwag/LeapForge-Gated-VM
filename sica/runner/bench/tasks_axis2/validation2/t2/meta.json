@@ -1,0 +1,18 @@
+{
+  "repo": "validation2",
+  "task": "t2",
+  "issue": "passing_scores(scores, threshold) should return every score that meets OR EXCEEDS the threshold, but a score exactly equal to the threshold is being dropped. For example with threshold 60, a score of 60 is a pass yet the function leaves it out; passing_scores([60], 60) returns [] instead of [60]. Scores strictly above the threshold are kept correctly and scores below it are correctly dropped -- only the equal-to-threshold boundary is handled wrong.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "repo": "accounts",
+  "task": "t2",
+  "issue": "can_withdraw(balance, amount) wrongly rejects a withdrawal of the entire balance. Withdrawing exactly the full balance (amount == balance) should be allowed, since it simply leaves a balance of zero, but the function returns False for it -- for example can_withdraw(100, 100) returns False instead of True, and can_withdraw(0, 0) returns False instead of True. Withdrawals strictly below the balance work, and over-balance withdrawals are correctly rejected; only the equal-to-balance boundary is handled wrong.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

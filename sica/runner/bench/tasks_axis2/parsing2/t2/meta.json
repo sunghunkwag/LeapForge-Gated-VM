@@ -1,0 +1,18 @@
+{
+  "repo": "parsing2",
+  "task": "t2",
+  "issue": "parse_setting(s) is meant to split a 'key:value' string on the FIRST colon, keeping everything after it as the value. But when the value itself contains a colon -- for example 'host:localhost:8080' -- it truncates the value at the first colon and returns ('host', 'localhost'), dropping the ':8080'. Settings whose value has no colon (like 'timeout:30') are parsed correctly; only values that themselves contain one or more colons come back truncated. It should treat only the first colon as the separator and keep the rest of the string, colons and all, as the value.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

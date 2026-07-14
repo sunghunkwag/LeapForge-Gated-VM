@@ -157,11 +157,23 @@ def report(profile="smoke", seed="s1", ledger_path=None):
 
         # --- honest verdict ---
         delta = f.get("gen0_vs_best_delta") or 0.0
+        gen0 = f.get("gen0_heldout") or 0.0
         print("\nVERDICT:")
-        if abs(delta) < 1e-9:
+        if gen0 >= 0.999 and abs(delta) < 1e-9:
+            print("  CEILING (benchmark saturated): GEN0 already solved 100%% "
+                  "of held-out, so there was NO HEADROOM for the curve to rise "
+                  "-- this is a benchmark-difficulty result, NOT evidence about "
+                  "self-modification. The engine machinery (proposals, gate, "
+                  "memory, archive, QD escape, T8, meters, isolation) ran "
+                  "end-to-end and the gate correctly kept the incumbent (a "
+                  "candidate cannot strictly beat a perfect score). To test the "
+                  "curve, the held-out slice must be hard enough that GEN0 "
+                  "fails a meaningful fraction.")
+        elif abs(delta) < 1e-9:
             print("  FLAT: self-modification did not improve held-out "
-                  "capability at this scale. This is a legitimate result and "
-                  "is reported as one (directive section 7/9).")
+                  "capability at this scale (GEN0 left headroom but no adopted "
+                  "change lifted the number). A legitimate result, reported as "
+                  "one (directive section 7/9).")
         elif delta > 0:
             print("  Held-out capability ROSE by %+.1f pts across %d "
                   "generations. Small-n; read as a machinery-and-direction "

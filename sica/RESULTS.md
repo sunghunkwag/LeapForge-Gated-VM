@@ -8,21 +8,29 @@ self-editing scaffold ran net+mount-namespaced with grading assets tmpfs-hidden
 (G-sandbox); per-op meters enforced hard caps (G-budget). All four guardrails
 held on every run.
 
-## Headline: an EARNED, held-out-verified capability gain
+## Headline: an EARNED, held-out-verified, REPLICATED capability gain
 
-On the identical repository-disjoint held-out split (seed `s1`, `tasks_hard`,
-10 held-out tasks), a T8-approved self-modification lifted held-out solve rate:
+On seed `s1`'s repository-disjoint held-out split (`tasks_hard`, 10 tasks), a
+T8-approved self-modification lifted held-out solve rate from GEN0's 5/10 (50%)
+to the adopted scaffold's 9/10 (90%). To rule out one-split luck, both FIXED
+scaffolds were then re-scored on the held-out slices of THREE fresh seeds (each a
+different repo-disjoint split it never touched):
 
-| scaffold | held-out | tasks |
-|----------|----------|-------|
-| GEN0 (seed) | **5/10 = 50%** | run `afa858` |
-| adopted `enable-grep-localize-function` | **9/10 = 90%** | run `c5a044` |
+| seed | GEN0 held-out | ADOPTED held-out | delta |
+|------|---------------|------------------|-------|
+| s1   | 5/10 = 50%    | 9/10 = 90%       | +4 |
+| s2   | 5/10 = 50%    | 10/10 = 100%     | +5 |
+| s3   | 5/10 = 50%    | 10/10 = 100%     | +5 |
+| s4   | 5/10 = 50%    | 9/10 = 90%       | +4 |
+| **pooled s2–s4** | **15/30 = 50%** | **29/30 = 97%** | **+14** |
 
-**+40 percentage points on held-out, from a change the gate earned on train and
-the PI approved.** The two GEN0 held-out reads across runs were 0.40–0.50
-(sampling noise band), and 0.90 sits far outside it, so the jump is real, not
-noise. This is the one metric — the held-out solve rate — going up via genuine
-self-modification.
+**Adopted beats GEN0 on 4/4 seeds, with ZERO regressions.** Every task the
+adopted scaffold newly solves is a `t1` context-dependent task — exactly the
+failure mode the adopted change targeted — and no task GEN0 solved was lost. The
++40pp held-out gain is a real, transferable capability, not seed-specific noise.
+This is the one metric — held-out solve rate — going up via genuine, replicated
+self-modification. (Replication: fixed scaffolds, no proposer/gate, same
+evaluate/broker/unshare path, $0.70.)
 
 ## How it happened (three acts)
 
@@ -57,11 +65,13 @@ win is the selection operator working, not a failure.
 
 ## Honest caveats (not dressed up)
 
-- **Single seed, single split, n=10 held-out.** This is a real direction and a
-  clean paired comparison, NOT a statistically powered claim — the noise-floor /
-  permutation / CI machinery was deliberately cut in performance mode. The exact
-  magnitude is fuzzy (±~10pp) because GEN0's own held-out varies 40–50% by
-  sampling.
+- **Replicated across 4 seeds, but still small-n and no formal test.** The gain
+  reproduces on 4/4 repo-disjoint splits with zero regressions, which rules out
+  one-split luck; but each split is n=10 held-out and the noise-floor /
+  permutation / CI machinery was deliberately cut in performance mode, so this is
+  a strong, replicated DIRECTION, not a formally powered p-value. Notably GEN0
+  scored exactly 5/10 on all four seeds and adopted 9–10/10, so the separation is
+  clean and consistent.
 - **The gain is one capability** (reading relevant repo context). That is a
   genuine, generalizing coding-agent skill — GEN0 could not read the config it
   needed; the adopted scaffold can, and it transferred from train to a

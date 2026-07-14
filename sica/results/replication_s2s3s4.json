@@ -1,0 +1,116 @@
+{
+  "seeds": [
+    "s2",
+    "s3",
+    "s4"
+  ],
+  "rows": [
+    {
+      "seed": "s2",
+      "held_ids": [
+        "bonus/t1",
+        "bonus/t2",
+        "conversion/t1",
+        "conversion/t2",
+        "discount/t1",
+        "discount/t2",
+        "palette/t1",
+        "palette/t2",
+        "scoring/t1",
+        "scoring/t2"
+      ],
+      "gen0_solved": 5,
+      "adopted_solved": 10,
+      "n": 10,
+      "delta": 5,
+      "newly_solved": [
+        "bonus/t1",
+        "conversion/t1",
+        "discount/t1",
+        "palette/t1",
+        "scoring/t1"
+      ],
+      "regressed": [],
+      "gen0_score": 0.5,
+      "adopted_score": 1.0
+    },
+    {
+      "seed": "s3",
+      "held_ids": [
+        "palette/t1",
+        "palette/t2",
+        "permissions/t1",
+        "permissions/t2",
+        "pricing/t1",
+        "pricing/t2",
+        "ratelimit/t1",
+        "ratelimit/t2",
+        "shipping/t1",
+        "shipping/t2"
+      ],
+      "gen0_solved": 5,
+      "adopted_solved": 10,
+      "n": 10,
+      "delta": 5,
+      "newly_solved": [
+        "palette/t1",
+        "permissions/t1",
+        "pricing/t1",
+        "ratelimit/t1",
+        "shipping/t1"
+      ],
+      "regressed": [],
+      "gen0_score": 0.5,
+      "adopted_score": 1.0
+    },
+    {
+      "seed": "s4",
+      "held_ids": [
+        "conversion/t1",
+        "conversion/t2",
+        "fees/t1",
+        "fees/t2",
+        "grading/t1",
+        "grading/t2",
+        "pricing/t1",
+        "pricing/t2",
+        "ratelimit/t1",
+        "ratelimit/t2"
+      ],
+      "gen0_solved": 5,
+      "adopted_solved": 9,
+      "n": 10,
+      "delta": 4,
+      "newly_solved": [
+        "conversion/t1",
+        "fees/t1",
+        "pricing/t1",
+        "ratelimit/t1"
+      ],
+      "regressed": [],
+      "gen0_score": 0.5,
+      "adopted_score": 0.9
+    }
+  ],
+  "pooled": {
+    "gen0": 15,
+    "adopted": 29,
+    "n": 30,
+    "wins": 3,
+    "n_seeds": 3
+  },
+  "session_totals": {
+    "calls": 67,
+    "input_tokens": 33876,
+    "output_tokens": 121281,
+    "cost_usd": 0.69862
+  },
+  "gen0_sha": "beba47153812e099",
+  "adopted_sha": "ce08542ee4d5dfde",
+  "benchmark_pin": {
+    "benchmark": "localsuite",
+    "n_tasks": 26,
+    "n_repos": 13,
+    "content_sha256": "bb943d2e535f45609690ad59ee13513028f147253d551783265310d96a28fddf"
+  }
+}

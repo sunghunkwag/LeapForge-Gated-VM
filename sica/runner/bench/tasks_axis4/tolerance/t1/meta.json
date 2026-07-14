@@ -1,0 +1,18 @@
+{
+  "repo": "tolerance",
+  "task": "t1",
+  "issue": "settings()['tol'] is wrong. It must equal this project's canonical comparison tolerance, which is documented in the helpers module's docstring. The current value is incorrect. Fix main.py only; do not change helpers.py.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

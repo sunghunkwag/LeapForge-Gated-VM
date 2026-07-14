@@ -140,13 +140,19 @@ def main(argv=None):
     p.add_argument("--profile", default="smoke")
     p.add_argument("--fixtures", action="store_true")
     p.add_argument("--hard", action="store_true", help="use the tasks_hard set")
+    p.add_argument("--tasks", default=None,
+                   help="benchmark subdir under bench/ (e.g. tasks_axis2)")
 
     p = sub.add_parser("lock-grading",
                        help="write the committed grading-asset hash-lock (T1)")
     p.add_argument("--hard", action="store_true", help="use the tasks_hard set")
+    p.add_argument("--tasks", default=None,
+                   help="benchmark subdir under bench/ (e.g. tasks_axis2)")
     p = sub.add_parser("leakscan",
                        help="verify grading-asset containment (T1)")
     p.add_argument("--hard", action="store_true", help="use the tasks_hard set")
+    p.add_argument("--tasks", default=None,
+                   help="benchmark subdir under bench/ (e.g. tasks_axis2)")
 
     p = sub.add_parser("estimate")
     p.add_argument("--profile", default="smoke")
@@ -179,9 +185,12 @@ def main(argv=None):
                    help="run adoptions unattended (directive default)")
     p.add_argument("--hard", action="store_true",
                    help="run on the harder tasks_hard benchmark")
+    p.add_argument("--tasks", default=None,
+                   help="benchmark subdir under bench/ (e.g. tasks_axis2)")
 
     args = ap.parse_args(argv)
-    subdir = "tasks_hard" if getattr(args, "hard", False) else None
+    subdir = (getattr(args, "tasks", None)
+              or ("tasks_hard" if getattr(args, "hard", False) else None))
     lock_path = config.grading_lock_for(subdir)
 
     if args.cmd == "pin":

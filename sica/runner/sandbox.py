@@ -32,6 +32,7 @@ _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # sica
 _HIDE_DIRS = [
     os.path.join(_REPO_ROOT, "runner", "bench", "tasks"),
     os.path.join(_REPO_ROOT, "runner", "bench", "tasks_hard"),
+    os.path.join(_REPO_ROOT, "runner", "bench", "tasks_axis2"),
     os.path.join(_REPO_ROOT, "runner", "bench", "fixtures"),
     os.path.join(_REPO_ROOT, "ledger"),
     os.path.join(_REPO_ROOT, "memory"),

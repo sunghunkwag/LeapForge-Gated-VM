@@ -1,0 +1,113 @@
+====================================================================
+SICA SESSION APPROVAL BLOCK  (directive section 5)
+====================================================================
+  profile           : smoke
+  base model        : claude-haiku-4-5-20251001  (pinned, no mid-run swap)
+  temperature (req) : 0.0
+  benchmark         : localsuite
+  benchmark pin     : 26 tasks / 13 repos  sha=bb943d2e535f4560
+  split             : 15 train / 10 heldout (repo-disjoint)
+  tournament K      : 4
+  max generations   : 4
+  per-task caps     : {'max_model_calls': 40, 'max_model_tokens': 120000, 'max_output_tokens_per_call': 8192, 'max_tool_calls': 25, 'max_steps': 12, 'max_io_ops': 2000, 'max_write_bytes': 8000000, 'wall_seconds': 240}
+  network isolation : OK (net+mount namespaces, tmpfs hiding OK)
+  guardrails        : G-isolate G-heldout G-sandbox G-budget
+  ---- estimated API cost (rough) ----
+  task attempts     : ~350
+  model calls       : ~1050 agent + 16 proposer
+  cost estimate     : $2.82 expected  (band $1.41 - $5.63)
+  auto-halts        : budget exhaustion, >3x-baseline gen spend, 3-gen heldout regression, scope-escape
+====================================================================
+  BENCHMARK SET    : tasks_hard (harder)
+
+validating the 25 split tasks...
+all split tasks valid; session cost cap = $13.00
+
+T8 adoption policy: HALT for approval on any gate adoption
+
+split: 15 train (8 repos) / 10 heldout (5 repos), repo-disjoint
+T1 containment: reachability OK (26 tasks scanned); hash-lock verified
+
+=== GEN 0 (baseline) ===
+    [gen0-heldout] bonus/t2               solved
+    [gen0-heldout] conversion/t2          solved
+    [gen0-heldout] penalty/t2             solved
+    [gen0-heldout] pricing/t2             solved
+    [gen0-heldout] scoring/t2             solved
+    [gen0-heldout] conversion/t1          done
+    [gen0-heldout] bonus/t1               done
+    [gen0-heldout] penalty/t1             done
+    [gen0-heldout] pricing/t1             done
+    [gen0-heldout] scoring/t1             done
+  HELD-OUT CURVE: g0:0.50
+
+=== GEN 1 ===
+    [gen1-incumbent] discount/t2            solved
+    [gen1-incumbent] fees/t2                solved
+    [gen1-incumbent] grading/t2             solved
+    [gen1-incumbent] palette/t2             solved
+    [gen1-incumbent] permissions/t2         solved
+    [gen1-incumbent] ratelimit/t2           solved
+    [gen1-incumbent] shipping/t2            solved
+    [gen1-incumbent] discount/t1            done
+    [gen1-incumbent] grading/t1             solved
+    [gen1-incumbent] fees/t1                done
+    [gen1-incumbent] permissions/t1         done
+    [gen1-incumbent] ratelimit/t1           done
+    [gen1-incumbent] tax/t1                 done
+    [gen1-incumbent] palette/t1             done
+    [gen1-incumbent] shipping/t1            done
+  incumbent TRAIN solved 8/15
+  proposing K=4 candidates...
+    candidate dropped: audit rejected: tools.py: syntax error: invalid syntax (tools.py, line 14)
+    [gen1-cand:enable-grep-localize-function] discount/t2            solved
+    [gen1-cand:enable-grep-localize-function] grading/t2             solved
+    [gen1-cand:enable-grep-localize-function] palette/t2             solved
+    [gen1-cand:enable-grep-localize-function] grading/t1             solved
+    [gen1-cand:enable-grep-localize-function] fees/t2                solved
+    [gen1-cand:enable-grep-localize-function] palette/t1             solved
+    [gen1-cand:enable-grep-localize-function] discount/t1            solved
+    [gen1-cand:enable-grep-localize-function] fees/t1                solved
+    [gen1-cand:enable-grep-localize-function] permissions/t1         solved
+    [gen1-cand:enable-grep-localize-function] ratelimit/t2           solved
+    [gen1-cand:enable-grep-localize-function] permissions/t2         solved
+    [gen1-cand:enable-grep-localize-function] shipping/t2            solved
+    [gen1-cand:enable-grep-localize-function] tax/t1                 solved
+    [gen1-cand:enable-grep-localize-function] ratelimit/t1           solved
+    [gen1-cand:enable-grep-localize-function] shipping/t1            solved
+    candidate enable-grep-localize-function TRAIN solved 15/15
+    [gen1-cand:include-other-files-context] discount/t1            scaffold_error
+    [gen1-cand:include-other-files-context] fees/t2                scaffold_error
+    [gen1-cand:include-other-files-context] grading/t1             scaffold_error
+    [gen1-cand:include-other-files-context] discount/t2            scaffold_error
+    [gen1-cand:include-other-files-context] fees/t1                scaffold_error
+    [gen1-cand:include-other-files-context] grading/t2             scaffold_error
+    [gen1-cand:include-other-files-context] palette/t2             scaffold_error
+    [gen1-cand:include-other-files-context] palette/t1             scaffold_error
+    [gen1-cand:include-other-files-context] permissions/t2         scaffold_error
+    [gen1-cand:include-other-files-context] ratelimit/t1           scaffold_error
+    [gen1-cand:include-other-files-context] permissions/t1         scaffold_error
+    [gen1-cand:include-other-files-context] shipping/t1            scaffold_error
+    [gen1-cand:include-other-files-context] tax/t1                 scaffold_error
+    [gen1-cand:include-other-files-context] shipping/t2            scaffold_error
+    [gen1-cand:include-other-files-context] ratelimit/t2           scaffold_error
+    candidate include-other-files-context TRAIN solved 0/15
+    [gen1-cand:parse-test-failures] discount/t2            solved
+    [gen1-cand:parse-test-failures] grading/t2             solved
+    [gen1-cand:parse-test-failures] palette/t2             solved
+    [gen1-cand:parse-test-failures] fees/t2                solved
+    [gen1-cand:parse-test-failures] fees/t1                done
+    [gen1-cand:parse-test-failures] grading/t1             solved
+    [gen1-cand:parse-test-failures] permissions/t2         solved
+    [gen1-cand:parse-test-failures] ratelimit/t2           solved
+    [gen1-cand:parse-test-failures] shipping/t2            solved
+    [gen1-cand:parse-test-failures] discount/t1            done
+    [gen1-cand:parse-test-failures] tax/t1                 done
+    [gen1-cand:parse-test-failures] ratelimit/t1           done
+    [gen1-cand:parse-test-failures] permissions/t1         scaffold_error
+    [gen1-cand:parse-test-failures] shipping/t1            scaffold_error
+    [gen1-cand:parse-test-failures] palette/t1             done
+    candidate parse-test-failures TRAIN solved 8/15
+  GATE FIRED -> HALT for approval (T8): 'enable-grep-localize-function' beat the incumbent on TRAIN (+7). Not scored on held-out; awaiting PI keypress before self-modifying.
+
+RUN SUMMARY (run_id=afa858): {'curve': [0.5], 'gen0_heldout': 0.5, 'best_heldout': 0.5, 'gen0_vs_best_delta': 0.0, 'generations_run': 0, 'halted': True, 'halt_reason': 'adoption_requires_approval (T8)', 'best_sha': 'beba47153812e099', 'session_totals': {'calls': 64, 'input_tokens': 43859, 'output_tokens': 194701, 'cost_usd': 1.085343}, 'config_sha': 'a4d1fe5ee554'}

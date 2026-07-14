@@ -1,0 +1,111 @@
+====================================================================
+SICA SESSION APPROVAL BLOCK  (directive section 5)
+====================================================================
+  profile           : smoke
+  base model        : claude-haiku-4-5-20251001  (pinned, no mid-run swap)
+  temperature (req) : 0.0
+  benchmark         : localsuite
+  benchmark pin     : 20 tasks / 10 repos  sha=03f136fec480e999
+  split             : 12 train / 8 heldout (repo-disjoint)
+  tournament K      : 4
+  max generations   : 3
+  per-task caps     : {'max_model_calls': 40, 'max_model_tokens': 120000, 'max_output_tokens_per_call': 8192, 'max_tool_calls': 25, 'max_steps': 12, 'max_io_ops': 2000, 'max_write_bytes': 8000000, 'wall_seconds': 240}
+  network isolation : OK (net+mount namespaces, tmpfs hiding OK)
+  guardrails        : G-isolate G-heldout G-sandbox G-budget
+  ---- estimated API cost (rough) ----
+  task attempts     : ~212
+  model calls       : ~636 agent + 12 proposer
+  cost estimate     : $1.73 expected  (band $0.87 - $3.47)
+  auto-halts        : budget exhaustion, >3x-baseline gen spend, 3-gen heldout regression, scope-escape
+====================================================================
+  BENCHMARK SET    : tasks_axis4 (harder)
+
+validating the 20 split tasks...
+all split tasks valid; session cost cap = $5.00
+
+T8 adoption policy: HALT for approval on any gate adoption
+
+split: 12 train (6 repos) / 8 heldout (4 repos), repo-disjoint
+T1 containment: reachability OK (20 tasks scanned); hash-lock verified
+
+=== GEN 0 (baseline) ===
+    [gen0-heldout] header/t2              solved
+    [gen0-heldout] retries/t2             solved
+    [gen0-heldout] token/t2               solved
+    [gen0-heldout] retries/t1             done
+    [gen0-heldout] tolerance/t2           solved
+    [gen0-heldout] tolerance/t1           done
+    [gen0-heldout] header/t1              done
+    [gen0-heldout] token/t1               done
+  HELD-OUT CURVE: g0:0.50
+
+=== GEN 1 ===
+    [gen1-incumbent] delim/t2               solved
+    [gen1-incumbent] codeword/t2            solved
+    [gen1-incumbent] delim/t1               done
+    [gen1-incumbent] feig/t2                solved
+    [gen1-incumbent] precision/t2           solved
+    [gen1-incumbent] codeword/t1            done
+    [gen1-incumbent] seasonal/t2            solved
+    [gen1-incumbent] feig/t1                done
+    [gen1-incumbent] seedval/t2             solved
+    [gen1-incumbent] precision/t1           done
+    [gen1-incumbent] seedval/t1             done
+    [gen1-incumbent] seasonal/t1            done
+  incumbent TRAIN solved 6/12
+  proposing K=4 candidates...
+    [gen1-cand:include-helpers-context] delim/t1               solved
+    [gen1-cand:include-helpers-context] codeword/t2            solved
+    [gen1-cand:include-helpers-context] delim/t2               solved
+    [gen1-cand:include-helpers-context] codeword/t1            solved
+    [gen1-cand:include-helpers-context] feig/t1                solved
+    [gen1-cand:include-helpers-context] feig/t2                solved
+    [gen1-cand:include-helpers-context] precision/t1           solved
+    [gen1-cand:include-helpers-context] precision/t2           solved
+    [gen1-cand:include-helpers-context] seasonal/t1            solved
+    [gen1-cand:include-helpers-context] seedval/t1             solved
+    [gen1-cand:include-helpers-context] seasonal/t2            solved
+    [gen1-cand:include-helpers-context] seedval/t2             solved
+    candidate include-helpers-context TRAIN solved 12/12
+    [gen1-cand:smart-retry-backtrack] codeword/t2            solved
+    [gen1-cand:smart-retry-backtrack] delim/t2               solved
+    [gen1-cand:smart-retry-backtrack] delim/t1               done
+    [gen1-cand:smart-retry-backtrack] feig/t2                solved
+    [gen1-cand:smart-retry-backtrack] precision/t2           solved
+    [gen1-cand:smart-retry-backtrack] codeword/t1            done
+    [gen1-cand:smart-retry-backtrack] seasonal/t2            solved
+    [gen1-cand:smart-retry-backtrack] seasonal/t1            done
+    [gen1-cand:smart-retry-backtrack] seedval/t2             solved
+    [gen1-cand:smart-retry-backtrack] precision/t1           done
+    [gen1-cand:smart-retry-backtrack] feig/t1                done
+    [gen1-cand:smart-retry-backtrack] seedval/t1             done
+    candidate smart-retry-backtrack TRAIN solved 6/12
+    [gen1-cand:format-with-concrete-example] delim/t2               solved
+    [gen1-cand:format-with-concrete-example] codeword/t2            solved
+    [gen1-cand:format-with-concrete-example] feig/t2                solved
+    [gen1-cand:format-with-concrete-example] delim/t1               done
+    [gen1-cand:format-with-concrete-example] precision/t2           solved
+    [gen1-cand:format-with-concrete-example] codeword/t1            done
+    [gen1-cand:format-with-concrete-example] feig/t1                done
+    [gen1-cand:format-with-concrete-example] seasonal/t2            solved
+    [gen1-cand:format-with-concrete-example] seedval/t2             solved
+    [gen1-cand:format-with-concrete-example] precision/t1           done
+    [gen1-cand:format-with-concrete-example] seasonal/t1            done
+    [gen1-cand:format-with-concrete-example] seedval/t1             done
+    candidate format-with-concrete-example TRAIN solved 6/12
+    [gen1-cand:include-test-source-in-context] codeword/t2            solved
+    [gen1-cand:include-test-source-in-context] delim/t2               solved
+    [gen1-cand:include-test-source-in-context] feig/t2                solved
+    [gen1-cand:include-test-source-in-context] delim/t1               done
+    [gen1-cand:include-test-source-in-context] precision/t2           solved
+    [gen1-cand:include-test-source-in-context] codeword/t1            done
+    [gen1-cand:include-test-source-in-context] seasonal/t2            solved
+    [gen1-cand:include-test-source-in-context] feig/t1                done
+    [gen1-cand:include-test-source-in-context] seedval/t2             solved
+    [gen1-cand:include-test-source-in-context] seasonal/t1            done
+    [gen1-cand:include-test-source-in-context] seedval/t1             done
+    [gen1-cand:include-test-source-in-context] precision/t1           done
+    candidate include-test-source-in-context TRAIN solved 6/12
+  GATE FIRED -> HALT for approval (T8): 'include-helpers-context' beat the incumbent on TRAIN (+6). Not scored on held-out; awaiting PI keypress before self-modifying.
+
+RUN SUMMARY (run_id=06f699): {'curve': [0.5], 'gen0_heldout': 0.5, 'best_heldout': 0.5, 'gen0_vs_best_delta': 0.0, 'generations_run': 0, 'halted': True, 'halt_reason': 'adoption_requires_approval (T8)', 'best_sha': 'ce08542ee4d5dfde', 'session_totals': {'calls': 75, 'input_tokens': 51889, 'output_tokens': 212960, 'cost_usd': 1.215366}, 'config_sha': '29dd979ad4b0'}

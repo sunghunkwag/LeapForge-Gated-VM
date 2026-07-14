@@ -1,0 +1,84 @@
+{
+  "rows": [
+    {
+      "seed": "s1",
+      "n": 8,
+      "inc": 4,
+      "cand": 8,
+      "held": [
+        "header/t1",
+        "header/t2",
+        "retries/t1",
+        "retries/t2",
+        "token/t1",
+        "token/t2",
+        "tolerance/t1",
+        "tolerance/t2"
+      ],
+      "newly": [
+        "header/t1",
+        "retries/t1",
+        "token/t1",
+        "tolerance/t1"
+      ],
+      "regressed": []
+    },
+    {
+      "seed": "s2",
+      "n": 8,
+      "inc": 4,
+      "cand": 8,
+      "held": [
+        "precision/t1",
+        "precision/t2",
+        "seasonal/t1",
+        "seasonal/t2",
+        "token/t1",
+        "token/t2",
+        "tolerance/t1",
+        "tolerance/t2"
+      ],
+      "newly": [
+        "precision/t1",
+        "seasonal/t1",
+        "token/t1",
+        "tolerance/t1"
+      ],
+      "regressed": []
+    },
+    {
+      "seed": "s3",
+      "n": 8,
+      "inc": 4,
+      "cand": 8,
+      "held": [
+        "codeword/t1",
+        "codeword/t2",
+        "delim/t1",
+        "delim/t2",
+        "token/t1",
+        "token/t2",
+        "tolerance/t1",
+        "tolerance/t2"
+      ],
+      "newly": [
+        "codeword/t1",
+        "delim/t1",
+        "token/t1",
+        "tolerance/t1"
+      ],
+      "regressed": []
+    }
+  ],
+  "pooled": {
+    "inc": 12,
+    "cand": 24,
+    "n": 24
+  },
+  "cost": {
+    "calls": 49,
+    "input_tokens": 22589,
+    "output_tokens": 79357,
+    "cost_usd": 0.460228
+  }
+}

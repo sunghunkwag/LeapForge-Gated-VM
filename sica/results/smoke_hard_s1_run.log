@@ -1,0 +1,233 @@
+====================================================================
+SICA SESSION APPROVAL BLOCK  (directive section 5)
+====================================================================
+  profile           : smoke
+  base model        : claude-haiku-4-5-20251001  (pinned, no mid-run swap)
+  temperature (req) : 0.0
+  benchmark         : localsuite
+  benchmark pin     : 26 tasks / 13 repos  sha=bb943d2e535f4560
+  split             : 15 train / 10 heldout (repo-disjoint)
+  tournament K      : 2
+  max generations   : 3
+  per-task caps     : {'max_model_calls': 40, 'max_model_tokens': 120000, 'max_output_tokens_per_call': 8192, 'max_tool_calls': 25, 'max_steps': 12, 'max_io_ops': 2000, 'max_write_bytes': 8000000, 'wall_seconds': 240}
+  network isolation : OK (net+mount namespaces, tmpfs hiding OK)
+  guardrails        : G-isolate G-heldout G-sandbox G-budget
+  ---- estimated API cost (rough) ----
+  task attempts     : ~175
+  model calls       : ~525 agent + 6 proposer
+  cost estimate     : $1.38 expected  (band $0.69 - $2.77)
+  auto-halts        : budget exhaustion, >3x-baseline gen spend, 3-gen heldout regression, scope-escape
+====================================================================
+  BENCHMARK SET    : tasks_hard (harder)
+
+validating the 25 split tasks...
+all split tasks valid; session cost cap = $17.00
+
+T8 adoption policy: HALT for approval on any gate adoption
+
+split: 15 train (8 repos) / 10 heldout (5 repos), repo-disjoint
+T1 containment: reachability OK (26 tasks scanned); hash-lock verified
+
+=== GEN 0 (baseline) ===
+    [gen0-heldout] conversion/t2          solved
+    [gen0-heldout] bonus/t2               solved
+    [gen0-heldout] penalty/t2             solved
+    [gen0-heldout] conversion/t1          done
+    [gen0-heldout] scoring/t2             solved
+    [gen0-heldout] pricing/t2             done
+    [gen0-heldout] penalty/t1             done
+    [gen0-heldout] scoring/t1             done
+    [gen0-heldout] bonus/t1               done
+    [gen0-heldout] pricing/t1             done
+  HELD-OUT CURVE: g0:0.40
+
+=== GEN 1 ===
+    [gen1-incumbent] fees/t2                solved
+    [gen1-incumbent] grading/t2             solved
+    [gen1-incumbent] discount/t2            solved
+    [gen1-incumbent] palette/t2             solved
+    [gen1-incumbent] permissions/t2         solved
+    [gen1-incumbent] ratelimit/t2           solved
+    [gen1-incumbent] shipping/t2            solved
+    [gen1-incumbent] grading/t1             solved
+    [gen1-incumbent] fees/t1                done
+    [gen1-incumbent] ratelimit/t1           done
+    [gen1-incumbent] discount/t1            done
+    [gen1-incumbent] shipping/t1            done
+    [gen1-incumbent] permissions/t1         done
+    [gen1-incumbent] tax/t1                 done
+    [gen1-incumbent] palette/t1             done
+  incumbent TRAIN solved 8/15
+  proposing K=2 candidates...
+    [gen1-cand:enable-grep-context] palette/t2             solved
+    [gen1-cand:enable-grep-context] discount/t2            solved
+    [gen1-cand:enable-grep-context] grading/t2             solved
+    [gen1-cand:enable-grep-context] fees/t2                solved
+    [gen1-cand:enable-grep-context] permissions/t2         solved
+    [gen1-cand:enable-grep-context] ratelimit/t2           solved
+    [gen1-cand:enable-grep-context] grading/t1             solved
+    [gen1-cand:enable-grep-context] shipping/t2            solved
+    [gen1-cand:enable-grep-context] discount/t1            done
+    [gen1-cand:enable-grep-context] palette/t1             done
+    [gen1-cand:enable-grep-context] permissions/t1         done
+    [gen1-cand:enable-grep-context] ratelimit/t1           done
+    [gen1-cand:enable-grep-context] tax/t1                 done
+    [gen1-cand:enable-grep-context] fees/t1                done
+    [gen1-cand:enable-grep-context] shipping/t1            done
+    candidate enable-grep-context TRAIN solved 8/15
+    [gen1-cand:expand-test-output-visibility] discount/t2            solved
+    [gen1-cand:expand-test-output-visibility] grading/t2             solved
+    [gen1-cand:expand-test-output-visibility] fees/t2                solved
+    [gen1-cand:expand-test-output-visibility] palette/t2             solved
+    [gen1-cand:expand-test-output-visibility] permissions/t2         solved
+    [gen1-cand:expand-test-output-visibility] fees/t1                done
+    [gen1-cand:expand-test-output-visibility] ratelimit/t2           solved
+    [gen1-cand:expand-test-output-visibility] grading/t1             solved
+    [gen1-cand:expand-test-output-visibility] shipping/t2            solved
+    [gen1-cand:expand-test-output-visibility] palette/t1             done
+    [gen1-cand:expand-test-output-visibility] discount/t1            done
+    [gen1-cand:expand-test-output-visibility] ratelimit/t1           done
+    [gen1-cand:expand-test-output-visibility] tax/t1                 done
+    [gen1-cand:expand-test-output-visibility] shipping/t1            done
+    [gen1-cand:expand-test-output-visibility] permissions/t1         done
+    candidate expand-test-output-visibility TRAIN solved 8/15
+  gate: 0/2 candidates beat incumbent -> keep incumbent
+    [gen1-heldout] conversion/t2          solved
+    [gen1-heldout] bonus/t2               solved
+    [gen1-heldout] penalty/t2             solved
+    [gen1-heldout] scoring/t2             solved
+    [gen1-heldout] conversion/t1          done
+    [gen1-heldout] pricing/t2             done
+    [gen1-heldout] pricing/t1             done
+    [gen1-heldout] penalty/t1             done
+    [gen1-heldout] scoring/t1             done
+    [gen1-heldout] bonus/t1               done
+  HELD-OUT CURVE: g0:0.40  g1:0.40
+
+=== GEN 2 ===
+    [gen2-incumbent] discount/t2            solved
+    [gen2-incumbent] grading/t2             solved
+    [gen2-incumbent] fees/t2                solved
+    [gen2-incumbent] palette/t2             solved
+    [gen2-incumbent] grading/t1             solved
+    [gen2-incumbent] ratelimit/t2           solved
+    [gen2-incumbent] permissions/t2         solved
+    [gen2-incumbent] shipping/t2            solved
+    [gen2-incumbent] fees/t1                done
+    [gen2-incumbent] ratelimit/t1           done
+    [gen2-incumbent] discount/t1            done
+    [gen2-incumbent] palette/t1             done
+    [gen2-incumbent] shipping/t1            done
+    [gen2-incumbent] tax/t1                 done
+    [gen2-incumbent] permissions/t1         done
+  incumbent TRAIN solved 8/15
+  proposing K=2 candidates...
+    [gen2-cand:robust-parse-with-feedback] fees/t2                solved
+    [gen2-cand:robust-parse-with-feedback] discount/t2            solved
+    [gen2-cand:robust-parse-with-feedback] grading/t2             solved
+    [gen2-cand:robust-parse-with-feedback] palette/t2             solved
+    [gen2-cand:robust-parse-with-feedback] permissions/t2         solved
+    [gen2-cand:robust-parse-with-feedback] ratelimit/t2           solved
+    [gen2-cand:robust-parse-with-feedback] shipping/t2            solved
+    [gen2-cand:robust-parse-with-feedback] grading/t1             solved
+    [gen2-cand:robust-parse-with-feedback] permissions/t1         done
+    [gen2-cand:robust-parse-with-feedback] ratelimit/t1           done
+    [gen2-cand:robust-parse-with-feedback] discount/t1            done
+    [gen2-cand:robust-parse-with-feedback] tax/t1                 done
+    [gen2-cand:robust-parse-with-feedback] shipping/t1            done
+    [gen2-cand:robust-parse-with-feedback] fees/t1                done
+    [gen2-cand:robust-parse-with-feedback] palette/t1             done
+    candidate robust-parse-with-feedback TRAIN solved 8/15
+    [gen2-cand:analyze-then-fix] discount/t2            solved
+    [gen2-cand:analyze-then-fix] grading/t2             solved
+    [gen2-cand:analyze-then-fix] fees/t2                solved
+    [gen2-cand:analyze-then-fix] palette/t2             solved
+    [gen2-cand:analyze-then-fix] permissions/t2         solved
+    [gen2-cand:analyze-then-fix] ratelimit/t2           solved
+    [gen2-cand:analyze-then-fix] grading/t1             solved
+    [gen2-cand:analyze-then-fix] shipping/t2            solved
+    [gen2-cand:analyze-then-fix] permissions/t1         done
+    [gen2-cand:analyze-then-fix] ratelimit/t1           done
+    [gen2-cand:analyze-then-fix] discount/t1            done
+    [gen2-cand:analyze-then-fix] tax/t1                 done
+    [gen2-cand:analyze-then-fix] fees/t1                done
+    [gen2-cand:analyze-then-fix] palette/t1             done
+    [gen2-cand:analyze-then-fix] shipping/t1            done
+    candidate analyze-then-fix TRAIN solved 8/15
+  gate: 0/2 candidates beat incumbent -> keep incumbent
+    [gen2-heldout] conversion/t2          solved
+    [gen2-heldout] penalty/t2             solved
+    [gen2-heldout] pricing/t2             solved
+    [gen2-heldout] conversion/t1          done
+    [gen2-heldout] bonus/t2               solved
+    [gen2-heldout] scoring/t2             solved
+    [gen2-heldout] penalty/t1             done
+    [gen2-heldout] scoring/t1             done
+    [gen2-heldout] bonus/t1               done
+    [gen2-heldout] pricing/t1             done
+  HELD-OUT CURVE: g0:0.40  g1:0.40  g2:0.50
+
+=== GEN 3 ===
+    [gen3-incumbent] grading/t2             solved
+    [gen3-incumbent] fees/t2                solved
+    [gen3-incumbent] discount/t2            solved
+    [gen3-incumbent] palette/t2             solved
+    [gen3-incumbent] grading/t1             solved
+    [gen3-incumbent] permissions/t2         solved
+    [gen3-incumbent] ratelimit/t2           solved
+    [gen3-incumbent] shipping/t2            solved
+    [gen3-incumbent] discount/t1            done
+    [gen3-incumbent] permissions/t1         done
+    [gen3-incumbent] palette/t1             done
+    [gen3-incumbent] ratelimit/t1           done
+    [gen3-incumbent] tax/t1                 done
+    [gen3-incumbent] fees/t1                done
+    [gen3-incumbent] shipping/t1            done
+  incumbent TRAIN solved 8/15
+  proposing K=2 candidates...
+    [gen3-cand:backtracking-on-test-failure] grading/t2             scaffold_error
+    [gen3-cand:backtracking-on-test-failure] grading/t1             scaffold_error
+    [gen3-cand:backtracking-on-test-failure] fees/t2                solved
+    [gen3-cand:backtracking-on-test-failure] discount/t2            solved
+    [gen3-cand:backtracking-on-test-failure] palette/t2             solved
+    [gen3-cand:backtracking-on-test-failure] permissions/t2         solved
+    [gen3-cand:backtracking-on-test-failure] ratelimit/t2           solved
+    [gen3-cand:backtracking-on-test-failure] shipping/t2            solved
+    [gen3-cand:backtracking-on-test-failure] ratelimit/t1           done
+    [gen3-cand:backtracking-on-test-failure] discount/t1            done
+    [gen3-cand:backtracking-on-test-failure] shipping/t1            done
+    [gen3-cand:backtracking-on-test-failure] fees/t1                done
+    [gen3-cand:backtracking-on-test-failure] palette/t1             done
+    [gen3-cand:backtracking-on-test-failure] permissions/t1         done
+    [gen3-cand:backtracking-on-test-failure] tax/t1                 done
+    candidate backtracking-on-test-failure TRAIN solved 6/15
+    [gen3-cand:enable-grep-context] discount/t2            solved
+    [gen3-cand:enable-grep-context] grading/t2             solved
+    [gen3-cand:enable-grep-context] fees/t2                solved
+    [gen3-cand:enable-grep-context] palette/t2             solved
+    [gen3-cand:enable-grep-context] permissions/t2         solved
+    [gen3-cand:enable-grep-context] ratelimit/t2           solved
+    [gen3-cand:enable-grep-context] grading/t1             solved
+    [gen3-cand:enable-grep-context] permissions/t1         done
+    [gen3-cand:enable-grep-context] shipping/t2            solved
+    [gen3-cand:enable-grep-context] palette/t1             done
+    [gen3-cand:enable-grep-context] fees/t1                done
+    [gen3-cand:enable-grep-context] discount/t1            done
+    [gen3-cand:enable-grep-context] ratelimit/t1           done
+    [gen3-cand:enable-grep-context] tax/t1                 done
+    [gen3-cand:enable-grep-context] shipping/t1            done
+    candidate enable-grep-context TRAIN solved 8/15
+  gate: 0/2 candidates beat incumbent -> keep incumbent
+    [gen3-heldout] conversion/t2          solved
+    [gen3-heldout] bonus/t2               solved
+    [gen3-heldout] pricing/t2             done
+    [gen3-heldout] conversion/t1          done
+    [gen3-heldout] penalty/t2             solved
+    [gen3-heldout] scoring/t2             solved
+    [gen3-heldout] pricing/t1             done
+    [gen3-heldout] bonus/t1               done
+    [gen3-heldout] penalty/t1             done
+    [gen3-heldout] scoring/t1             done
+  HELD-OUT CURVE: g0:0.40  g1:0.40  g2:0.50  g3:0.40
+
+RUN SUMMARY (run_id=0afc91): {'curve': [0.4, 0.4, 0.5, 0.4], 'gen0_heldout': 0.4, 'best_heldout': 0.5, 'gen0_vs_best_delta': 0.1, 'generations_run': 3, 'halted': False, 'halt_reason': None, 'best_sha': 'beba47153812e099', 'session_totals': {'calls': 215, 'input_tokens': 131583, 'output_tokens': 747472, 'cost_usd': 4.080622}, 'config_sha': 'bd64f432a676'}

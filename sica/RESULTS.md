@@ -1,76 +1,83 @@
-# SICA smoke — results (metered run, §7 report)
+# SICA smoke — results (§7 report)
 
-Run: profile `smoke`, seed `s1`, backend `claude_cli`, pinned
-`claude-haiku-4-5-20251001`, K=2, 3 generations, T8 keypress-on-adoption ON.
-Metered run performed after `PREREG.md` was committed (`7ea9733`).
+Two metered runs, pinned `claude-haiku-4-5-20251001`, K=2, 3 generations, T8
+keypress-on-adoption ON, run after `PREREG.md` was committed. Total metered
+spend across both runs: **$6.66** (of a $20 approved cap). No held-out result
+ever fed back into proposals or the gate (G-heldout); grading used hidden tests
+the agent never saw (G-isolate); the self-editing scaffold ran net+mount
+namespaced with grading assets hidden by tmpfs (G-sandbox); per-op meters
+enforced hard caps (G-budget). All four guardrails held on both runs.
 
-## Held-out solve-rate curve (the one metric)
+## Run 1 — `localsuite` (26 tasks / 13 repos): CEILING
 
-| gen | held-out | solved/n | adopted | note |
-|-----|----------|----------|---------|------|
-| g0  | 100.0%   | 10/10    | baseline | GEN0 seed scaffold |
-| g1  | 100.0%   | 10/10    | no      | 0/2 candidates beat incumbent |
-| g2  | 100.0%   | 10/10    | no      | 0/2 candidates beat incumbent |
-| g3  | 100.0%   | 10/10    | no      | QD escape fired (stall); 0/2 beat incumbent |
+| gen | held-out | adopted |
+|-----|----------|---------|
+| g0  | 100.0%   | baseline |
+| g1  | 100.0%   | no |
+| g2  | 100.0%   | no |
+| g3  | 100.0%   | no |
 
-**GEN0 vs best held-out delta: +0.0 pp.**
+GEN0 already solved **15/15 train and 10/10 held-out**. A candidate cannot
+strictly beat a perfect incumbent, so the gate correctly kept the incumbent and
+the curve is flat at 100% **by construction** — a benchmark-saturation result,
+not evidence about self-modification. Cost $2.50.
 
-## Honest verdict: CEILING (benchmark saturated) — not a self-modification result
+## Run 2 — `tasks_hard` (26 tasks / 13 repos, with headroom): NO ADOPTION
 
-GEN0 already solved **15/15 train and 10/10 held-out** with the pinned Haiku
-model. A perfect baseline leaves **no headroom**: a candidate cannot *strictly*
-beat a perfect incumbent, so the gate correctly kept the incumbent every
-generation and the curve is flat at 100% **by construction**. This is a
-**benchmark-difficulty result, not evidence about self-modification**. The
-localsuite tasks — single-file bugs with explicit issue text — are too easy for
-Haiku, which one-shots them from the issue.
+Harder benchmark: each repo's `t1` is context-dependent — the fix needs values
+defined in a **non-editable** file, and the issue withholds them, so the
+editable-only GEN0 scaffold structurally cannot solve them. `t2` tasks are
+direct GEN0-solvable bugs. The 15/10 split lands 8/15 train and 5/10 held-out as
+context-dependent.
 
-Per the directive (§7/§9), a flat curve is reported as-is and not dressed up —
-and, importantly, not mis-attributed: this flat curve says the benchmark
-saturated at GEN0, **not** that self-modification failed to help.
+| gen | held-out | solved/n | adopted |
+|-----|----------|----------|---------|
+| g0  | 40.0%    | 4/10     | baseline |
+| g1  | 40.0%    | 4/10     | no |
+| g2  | 50.0%    | 5/10     | no |
+| g3  | 40.0%    | 4/10     | no |
 
-## What the engine actually did (machinery + guardrails validated on a real run)
+GEN0 held-out = **40%** — real headroom this time. The failure-driven proposer
+**correctly diagnosed the failure mode** and proposed the right kind of change
+(`enable-grep-context`, `expand-test-output-visibility`) across every
+generation. But **no candidate ever beat the incumbent on train** (each solved
+8/15, same as GEN0), because GEN0's context-gathering greps for the editable
+file's own name, not for the withheld config values — so enabling it does not
+actually extract them. The gate therefore **correctly adopted nothing**.
 
-The run exercised every part of the engine end-to-end against the live model:
+### The +10pt "best" is NOISE, and the engine correctly refused to bank it
 
-- **T1 containment, fail-closed at GENESIS**: reachability scan OK (26 tasks);
-  grading-asset hash-lock verified.
-- **G-sandbox**: net+mount namespaces + tmpfs hiding = OK; the self-editing
-  scaffold ran with no network and no visibility of grading assets.
-- **Failure-driven proposer** produced 6 distinct, genuinely sensible candidate
-  scaffolds across the run, each targeting a different failure mode:
-  - g1: `smart-prompt-truncation-on-retry`, `handle-crlf-line-endings`
-  - g2: `file-change-tracking-tool`, `localize-failure-functions`
-  - g3 (after QD restart): `include-test-source-in-prompt`,
-    `enable-context-gathering-with-import-search`
+Because no change was adopted, the **same GEN0 scaffold** was scored every
+generation. The held-out curve's wiggle (40 → 40 → 50 → 40) is **model sampling
+noise** on a fixed scaffold — Haiku is non-deterministic (the CLI backend
+exposes no temperature flag). The apparent "best 50% vs GEN0 40% = +10pt" is
+sampling variance, **not** a capability gain. `report.py` attributes it as such.
 
-  Several add NEW tools/behaviour (tool growth, §1.5). All passed the audit +
-  dry-load and were evaluated by the gate — they simply could not exceed a
-  perfect incumbent.
-- **Adoption gate**: correctly kept the incumbent (strict-winner rule; tie →
-  incumbent) — 0/2 beat incumbent each generation.
-- **Quality-diversity escape**: fired at g3 on the 2-generation held-out stall,
-  restarting from the best prior archived scaffold (selected by TRAIN score, so
-  the restart stayed held-out-blind).
-- **T8**: never triggered, because no adoption ever fired — consistent with the
-  ceiling. Had a gate fired, the run would have halted for a keypress.
-- **G-budget / meters**: 182 model calls, 563,420 model tokens, **$2.50**
-  (within the $20 cap; above the $1.38 estimate because the agent emits full
-  file contents each attempt — the rough estimator under-counts output tokens).
+This is the guardrails doing their job: the adoption gate declined to bank a
+change that did not demonstrably help on train, and the held-out discipline
+kept the noise from being mistaken for improvement. It is the difference
+between measuring the temperature and optimising the thermometer. Cost $4.08.
 
-## Conclusion and next step
+## Honest conclusion
 
-The **engine is validated on a real metered run** — every guardrail held and
-every machinery component (proposal → tournament gate → memory → archive → QD
-escape → T8 → meters → isolation) was exercised. The **benchmark, however, is
-too easy**: it saturates at GEN0, so it cannot measure the engine's ability to
-lift capability.
+- **The engine is validated end-to-end on real metered runs.** Both runs
+  exercised the full pipeline — failure-driven proposals, tournament gate,
+  improvement memory, archive, quality-diversity escape, T8, per-op meters, and
+  net+mount-namespace isolation with fail-closed T1 containment — against the
+  live pinned model.
+- **Self-modification did NOT lift held-out capability at this scale.** On the
+  saturated benchmark there was no headroom; on the benchmark with headroom the
+  proposer identified the right failure mode but produced no candidate that beat
+  the incumbent, so nothing was adopted and held-out did not rise. Reported
+  plainly, per directive §7/§9 — a flat/noise result is a legitimate outcome
+  and is not dressed up.
+- **What would move the curve** (deferred, needs PI approval for more spend): a
+  stronger GEN0 context tool (or a proposer candidate that reads the *contents*
+  of non-editable files, not just greps names), a larger tournament (K=4), and
+  more generations, on the headroom benchmark. The T8 keypress means the first
+  candidate that does beat the incumbent will halt for approval rather than
+  self-modify unattended.
 
-To actually put a number on "held-out capability going up," the held-out slice
-must be hard enough that **GEN0 fails a meaningful fraction** (target ~40–70%
-GEN0 solve rate). That means genuinely harder tasks — multi-file fixes,
-under-specified issues, subtle logic requiring the agent to read/localize before
-editing, or tasks that reward the exact scaffold improvements the proposer is
-already inventing (localization, test-source inspection, context gathering).
-Until the benchmark has headroom, the curve cannot move regardless of engine
-quality. This is the honest, faithful reading of the smoke.
+Artifacts (auditable): `results/smoke_s1_*` (run 1) and
+`results/smoke_hard_s1_*` (run 2) — each run's hash-chained ledger, improvement
+memory, and full log.

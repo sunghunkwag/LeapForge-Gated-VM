@@ -22,6 +22,22 @@ import subprocess
 # Test commands may only invoke these (basename of argv[0]).
 ALLOWED_TEST_EXE = {"python", "python3"}
 
+_REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # sica/
+
+# Directories that must be INVISIBLE to any sandboxed child, so that even a
+# Python-sandbox escape (e.g. reaching os via an allowed module's re-exported
+# `sys`/`builtins` attribute) cannot read grading assets or held-out scores.
+# A tmpfs is mounted over each inside the child's mount namespace; the parent
+# (which does the trusted grading) is unaffected.
+_HIDE_DIRS = [
+    os.path.join(_REPO_ROOT, "runner", "bench", "tasks"),
+    os.path.join(_REPO_ROOT, "runner", "bench", "fixtures"),
+    os.path.join(_REPO_ROOT, "ledger"),
+    os.path.join(_REPO_ROOT, "memory"),
+    os.path.join(_REPO_ROOT, "archive"),
+    os.path.join(_REPO_ROOT, "runs"),
+]
+
 # Minimal environment handed to sandboxed children. Deliberately excludes
 # HTTPS_PROXY/HTTP_PROXY/*_TOKEN/ANTHROPIC_API_KEY/GH_TOKEN/... everything.
 _SAFE_ENV_KEYS = ("PATH", "LANG", "LC_ALL", "TZ", "HOME")
@@ -46,19 +62,36 @@ def _safe_env(extra=None):
 _UNSHARE = shutil.which("unshare")
 
 
+def _mount_script(inner):
+    """Shell that, inside the child's mount namespace, hides the sensitive
+    dirs with a tmpfs then execs the real argv (passed as "$@")."""
+    lines = []
+    for d in _HIDE_DIRS:
+        # only mount over dirs that exist; failures are non-fatal (|| true)
+        lines.append('[ -d "%s" ] && mount -t tmpfs none "%s" 2>/dev/null || true'
+                     % (d, d))
+    lines.append('exec "$@"')
+    return "; ".join(lines) if inner else "\n".join(lines)
+
+
 def _probe():
     if _UNSHARE is None:
         return False, "unshare not found"
+    # Require BOTH network (-n) and mount (-m) namespaces, and that a tmpfs
+    # mount actually works, since filesystem hiding is load-bearing for
+    # G-isolate against a Python-sandbox escape.
     try:
-        r = subprocess.run([_UNSHARE, "-n", "true"],
-                           stdout=subprocess.DEVNULL,
-                           stderr=subprocess.PIPE, timeout=15)
+        script = ('d=$(mktemp -d) && mount -t tmpfs none "$d" && '
+                  'test -z "$(ls -A "$d")" && echo ok')
+        r = subprocess.run([_UNSHARE, "-n", "-m", "--", "sh", "-c", script],
+                           stdout=subprocess.PIPE,
+                           stderr=subprocess.PIPE, timeout=20)
     except Exception as e:  # noqa
         return False, "unshare probe raised: %s" % e
-    if r.returncode != 0:
-        return False, "unshare -n rc=%d: %s" % (
+    if r.returncode != 0 or b"ok" not in r.stdout:
+        return False, "unshare -n -m + tmpfs rc=%d: %s" % (
             r.returncode, r.stderr.decode("utf-8", "replace")[:200])
-    return True, "ok"
+    return True, "net+mount namespaces, tmpfs hiding OK"
 
 
 _ISOLATION = None
@@ -75,15 +108,18 @@ def require_isolation():
     ok, why = probe_isolation()
     if not ok:
         raise RuntimeError(
-            "G-sandbox: network isolation unavailable (%s); refusing to run a "
-            "self-editing agent without it" % why)
+            "G-sandbox: network+mount isolation unavailable (%s); refusing to "
+            "run a self-editing agent without it" % why)
 
 
 def wrap_no_network(argv):
-    """Prefix argv so the child runs with no network namespace."""
+    """Prefix argv so the child runs with NO network namespace AND a mount
+    namespace in which the grading-asset / held-out directories are hidden by a
+    tmpfs. Even a Python escape to os cannot then read those files."""
     ok, _why = probe_isolation()
     if ok:
-        return [_UNSHARE, "-n", "--"] + list(argv)
+        return ([_UNSHARE, "-n", "-m", "--", "sh", "-c",
+                 _mount_script(inner=True), "sh"] + list(argv))
     return list(argv)  # caller must have gated on require_isolation()
 
 

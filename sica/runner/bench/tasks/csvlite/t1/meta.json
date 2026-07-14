@@ -1,0 +1,19 @@
+{
+  "repo": "csvlite",
+  "task": "t1",
+  "issue": "parse_line() parses a CSV record into fields and supports fields wrapped in double quotes. Inside a quoted field a doubled quote (two double-quote characters in a row, \"\") is meant to be an escape for a single literal double-quote character, so the record \"a\"\"b\" should parse to the single field a\"b. Instead the escaped quote disappears entirely: the parser treats the first quote as the end of the quoted region and the second as the start of a new one, so \"a\"\"b\" comes out as ab. Records without doubled quotes are parsed correctly. Fix the quoted-field handling so a doubled quote decodes to one literal quote character.",
+  "difficulty": "easy",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py",
+    "test_repro.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

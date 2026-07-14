@@ -1,0 +1,18 @@
+{
+  "repo": "gridpath",
+  "task": "t2",
+  "issue": "reachable(grid) treats 1 as walkable and 0 as a wall -- it has the cell meaning inverted. 0 is open, 1 is a wall.",
+  "difficulty": "hard",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

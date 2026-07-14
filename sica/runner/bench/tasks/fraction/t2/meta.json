@@ -1,0 +1,18 @@
+{
+  "repo": "fraction",
+  "task": "t2",
+  "issue": "add(a, b) returns the wrong sum whenever the two fractions have different denominators; sums of fractions that already share a denominator still come out right. For example add(Fraction(1, 2), Fraction(1, 3)) should be Fraction(5, 6) but is not. Something in how the numerators are scaled onto the common denominator is off. Fix add so unlike denominators are combined correctly.",
+  "difficulty": "hard",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

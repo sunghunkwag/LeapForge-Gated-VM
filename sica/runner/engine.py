@@ -22,6 +22,7 @@ from concurrent.futures import ThreadPoolExecutor
 
 from . import archive as archive_mod
 from . import gate as gate_mod
+from . import leakscan
 from . import proposer as proposer_mod
 from . import sandbox, scaffold_io
 from .config import config_sha
@@ -34,7 +35,8 @@ from .prng import XorShift64Star
 
 class Engine(object):
     def __init__(self, cfg, benchmark, model_client, dirs, logger=None,
-                 session_cost_cap=None, run_id="run"):
+                 session_cost_cap=None, run_id="run", halt_on_adopt=False,
+                 grading_lock_path=None):
         self.cfg = cfg
         self.bench = benchmark
         self.model = model_client
@@ -42,6 +44,12 @@ class Engine(object):
         self.log = logger or (lambda *a: print(*a))
         self.session_cost_cap = session_cost_cap
         self.run_id = run_id
+        self.grading_lock_path = grading_lock_path
+        # T8 (PI override for the smoke): if a gate adoption fires, do NOT
+        # self-modify unattended -- halt and preserve state for a human
+        # keypress. When True the loop runs unattended only up to the first
+        # adoption; if no gate ever fires it completes unattended.
+        self.halt_on_adopt = halt_on_adopt
         self.csha = config_sha(cfg)
         self.prng = XorShift64Star("engine|%s|%s" % (cfg["seed"], self.csha))
         # Each invocation gets its own ledger/memory/archive so separate runs
@@ -71,6 +79,27 @@ class Engine(object):
 
         scaffold_io.audit_scaffold(incumbent)
         gen0_sha = scaffold_io.scaffold_sha(incumbent)
+
+        # T1: grading-asset containment control, fail-closed BEFORE any metered
+        # work. Reachability scan proves no hidden test / gold patch / meta is
+        # within the agent's read scope; the hash-lock (if committed) proves the
+        # grading assets have not drifted since they were locked.
+        reach = leakscan.reachability_scan(self.bench)
+        if not reach["ok"]:
+            raise RuntimeError("T1 reachability scan FAILED (a grading asset is "
+                               "reachable by the agent): %s" % reach["reasons"])
+        lock_report = {"checked": False, "ok": None, "reasons": []}
+        if self.grading_lock_path:
+            ok, reasons = leakscan.verify_lock(self.bench, self.grading_lock_path)
+            lock_report = {"checked": True, "ok": ok, "reasons": reasons}
+            if not ok:
+                raise RuntimeError("T1 grading-asset hash-lock FAILED "
+                                   "(assets drifted since lock): %s" % reasons)
+        self.log("T1 containment: reachability OK (%d tasks scanned); "
+                 "hash-lock %s" % (reach["checked"],
+                 "verified" if lock_report["ok"] else
+                 ("MISSING" if not self.grading_lock_path else "FAILED")))
+
         self.ledger.append("GENESIS", {
             "engine_version": cfg["engine_version"],
             "run_id": self.run_id,
@@ -80,6 +109,9 @@ class Engine(object):
             "model_temperature_requested": cfg["model_temperature"],
             "benchmark_pin": self.bench.pin(),
             "isolation": {"ok": iso_ok, "detail": iso_why},
+            "grading_containment": {"reachability": reach,
+                                    "hash_lock": lock_report},
+            "halt_on_adopt": self.halt_on_adopt,
             "guardrails": ["G-isolate", "G-heldout", "G-sandbox", "G-budget"],
             "train_ids": [t.id for t in train],
             "heldout_ids": [t.id for t in heldout],
@@ -156,6 +188,36 @@ class Engine(object):
                                           best_sha=best_sha)
             winner, decision = gate_mod.select_winner(inc_eval, cand_evals)
             adopted = decision["adopted"]
+
+            # T8: a gate that fires during a keypress-gated run halts for
+            # human approval instead of self-modifying unattended.
+            if adopted and self.halt_on_adopt:
+                self.archive.add(
+                    winner["scaffold"], gen, winner["score"], None,
+                    decision.get("winner_targeted_failure_mode") or "none",
+                    "PENDING approval: " + (winner["info"].get("label") or ""),
+                    adopted=False)
+                self.ledger.append("PENDING_ADOPTION", {
+                    "generation": gen,
+                    "winner_sha": decision["winner_sha"],
+                    "winner_label": decision.get("winner_label"),
+                    "targeted_failure_mode":
+                        decision.get("winner_targeted_failure_mode"),
+                    "train_delta": decision.get("train_delta"),
+                    "gate": decision,
+                    "note": "smoke gate fired; adoption requires a PI keypress "
+                            "(T8). Held-out was NOT scored on the candidate.",
+                })
+                self.log("  GATE FIRED -> HALT for approval (T8): '%s' beat "
+                         "the incumbent on TRAIN (+%s). Not scored on held-out; "
+                         "awaiting PI keypress before self-modifying."
+                         % (decision.get("winner_label"),
+                            decision.get("train_delta")))
+                return self._finalize(
+                    curve, gen0_sha, halted=True,
+                    halt_reason="adoption_requires_approval (T8)",
+                    best_sha=best_sha)
+
             adopted_scaffold = winner["scaffold"] if adopted else incumbent
             adopted_sha = scaffold_io.scaffold_sha(adopted_scaffold)
             self.log("  gate: %d/%d candidates beat incumbent -> %s"

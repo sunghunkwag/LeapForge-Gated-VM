@@ -135,6 +135,11 @@ def main(argv=None):
     p.add_argument("--profile", default="smoke")
     p.add_argument("--fixtures", action="store_true")
 
+    p = sub.add_parser("lock-grading",
+                       help="write the committed grading-asset hash-lock (T1)")
+    p = sub.add_parser("leakscan",
+                       help="verify grading-asset containment (T1)")
+
     p = sub.add_parser("estimate")
     p.add_argument("--profile", default="smoke")
 
@@ -157,6 +162,13 @@ def main(argv=None):
                    help="hard session cost cap in USD (budget-exhaustion halt)")
     p.add_argument("--overrides", default=None,
                    help="JSON of profile overrides (sizes, K, generations)")
+    p.add_argument("--halt-on-adopt", dest="halt_on_adopt",
+                   action="store_true", default=None,
+                   help="halt for approval if a gate adoption fires (T8); "
+                        "default ON for smoke/micro")
+    p.add_argument("--no-halt-on-adopt", dest="halt_on_adopt",
+                   action="store_false",
+                   help="run adoptions unattended (directive default)")
 
     args = ap.parse_args(argv)
 
@@ -179,6 +191,31 @@ def main(argv=None):
         bad = validate_tasks(tasks)
         print("\n%d/%d tasks valid" % (len(tasks) - len(bad), len(tasks)))
         return 1 if bad else 0
+
+    if args.cmd == "lock-grading":
+        from . import leakscan
+        cfg = config.make_config("smoke", "stub", "lock")
+        bench = _benchmark(cfg)
+        lock = leakscan.write_lock(bench, config.GRADING_LOCK)
+        print("wrote grading-asset lock: %d tasks, combined_sha=%s\n  -> %s"
+              % (lock["n_tasks"], lock["combined_sha256"][:16],
+                 config.GRADING_LOCK))
+        return 0
+
+    if args.cmd == "leakscan":
+        from . import leakscan
+        cfg = config.make_config("smoke", "stub", "scan")
+        bench = _benchmark(cfg)
+        reach = leakscan.reachability_scan(bench)
+        ok, reasons = leakscan.verify_lock(bench, config.GRADING_LOCK)
+        print("reachability scan: %s (%d tasks)"
+              % ("OK" if reach["ok"] else "FAIL", reach["checked"]))
+        for r in reach["reasons"]:
+            print("  - %s" % r)
+        print("hash-lock verify : %s" % ("OK" if ok else "FAIL"))
+        for r in reasons:
+            print("  - %s" % r)
+        return 0 if (reach["ok"] and ok) else 1
 
     if args.cmd == "estimate":
         cfg = config.make_config(args.profile, "claude_cli", "est")
@@ -236,9 +273,18 @@ def main(argv=None):
             raise SystemExit("split contains invalid tasks: %s" % bad)
         print("all split tasks valid; session cost cap = %s\n"
               % ("$%.2f" % cap if cap else "none"))
+        # T8: default to halting on any gate adoption for smoke/micro; the PI
+        # must keypress to accept a self-modification. Overridable explicitly.
+        halt_on_adopt = args.halt_on_adopt
+        if halt_on_adopt is None:
+            halt_on_adopt = args.profile in ("smoke", "micro")
         run_id = binascii.hexlify(os.urandom(3)).decode()
         eng = Engine(cfg, bench, model, _dirs(), session_cost_cap=cap,
-                     run_id=run_id)
+                     run_id=run_id, halt_on_adopt=halt_on_adopt,
+                     grading_lock_path=config.GRADING_LOCK)
+        print("T8 adoption policy: %s\n"
+              % ("HALT for approval on any gate adoption"
+                 if halt_on_adopt else "adopt unattended"))
         summary = eng.run(_load_incumbent())
         print("\nRUN SUMMARY (run_id=%s):" % run_id, summary)
         return 0

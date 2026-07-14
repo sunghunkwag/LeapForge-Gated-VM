@@ -1,0 +1,143 @@
+{
+  "assets_per_task": {
+    "bank/t1": {
+      "gold/core.py": "a98739aa5456bf4166d5cb09ac6fd498627f0ed2f62ad6838a5850f24b72d6d1",
+      "hidden/test_hidden.py": "b83a8069633105b00193360cb8d7ad10360d2b8b2e904ae75d1a7270862ef4ac",
+      "meta.json": "3d0a96bda2d03f493805aa0623819dcbf1e43935c50b6b3964f251dd54f05baa"
+    },
+    "bank/t2": {
+      "gold/core.py": "6f3c1e8efdee1ffdf9992af2a4685febcbbac99a5284e9a80a9f08af735a33c3",
+      "hidden/test_hidden.py": "12083b99fa0ca698aab4ddd156677c4d6cb85d0bf1096e8a17c9327f94199ecb",
+      "meta.json": "b0b5a1b4b806896210526d2763c118d51f3e6bf02b8fb1dcbe160557429fa2ce"
+    },
+    "csvlite/t1": {
+      "gold/core.py": "417ef0302218c3cde84fdd8fa529d2d6ceeee9f9bb1edddc165ae159bf94d6fb",
+      "hidden/test_hidden.py": "d9797ec04129e422487714053be5f157afe9d1ded5d3aec3643ab931207f66b4",
+      "meta.json": "ee9e9ec7d585e4dd8964fefc53aa8caad1f87a55c556ad01ec70706910f4a4d4"
+    },
+    "csvlite/t2": {
+      "gold/core.py": "9d86baae34e61c8444669fe73e585c13c5c05b44353f7777d318a86915667586",
+      "hidden/test_hidden.py": "08f73534c188a44233f6b44e799feebb3fb9145500b382244502bf656cd58d6b",
+      "meta.json": "463560736441499e6f53d03432e939ca4f5cf7d340d332e1387517db3988af93"
+    },
+    "fraction/t1": {
+      "gold/core.py": "6b1dbea6ea516be19d63e1a37e6eebaea7f696fe06b8e94c27cb638b784aede1",
+      "hidden/test_hidden.py": "6507d115ddb611aeb4f4a8552c693757808ec08807a63732f607617cb0b342b8",
+      "meta.json": "f80a07b5a42e3f10cb60fe2512c95d2854a5731ef5ed8052d6fbe84a589d2cd0"
+    },
+    "fraction/t2": {
+      "gold/core.py": "3b3aa57890edaf3f82b07968aa0154ddf38de94a2f039350250de0036b2e647a",
+      "hidden/test_hidden.py": "ea31900c10e5aadbedce1dbad770eca8a6a7cee1d7f013917e400cb9d3c2458e",
+      "meta.json": "99e2b6841805e866517e9bdce475d18dfc6001190299561b860a42f6ed272072"
+    },
+    "gridpath/t1": {
+      "gold/core.py": "faeda217dde6613d171f70693cf7483cf9f5f32ee83fb1fde59341af054c4fba",
+      "hidden/test_hidden.py": "060a7e551c29728e722f5e4ba743566c548745d2473bc3b22221f6144ead2196",
+      "meta.json": "5c8d13ebcead86742eab04f1b6f7d00859852316beafcaa4e517587e28b418c9"
+    },
+    "gridpath/t2": {
+      "gold/core.py": "cff5dd985ab6dc3cbb16d477ba63c2d2f12dabb1aaef5891e3f81de1618c5a17",
+      "hidden/test_hidden.py": "1c0787b7c51fa783a94561f1921b4b9202677e6ef7426cc5b31478ed37d6c287",
+      "meta.json": "ea5c6685490293bbc314eff852b54b5021b0421f7af5634cbbc60435ee3c767d"
+    },
+    "histogram/t1": {
+      "gold/core.py": "4880ab1173453c5198a37a2a97dc66699031f3b5c125c6b951fd78d550063f76",
+      "hidden/test_hidden.py": "451f0b5aca9495aa4f914d746e738f4cce11640487f0333bf8a9254a31cd3f4c",
+      "meta.json": "a0837399eb0b35cbbf5dd505cbc0fb2e227e1e4dd74b850efae5e2b218d42a44"
+    },
+    "histogram/t2": {
+      "gold/core.py": "5fadd5e96179bff007466fb1c0995886a1828479b257c0841f68c74f4f8568d6",
+      "hidden/test_hidden.py": "755f8b44c90f17b00f93036baadb9bf523a1b7d76c1c49c8014210690da635d5",
+      "meta.json": "8fd1b0a5134b86518c126b1ec48fa054c969959526160149b4e56bb63b4810d9"
+    },
+    "intervals/t1": {
+      "gold/core.py": "a1db3e1449e594c3e02b12cb621e82603a5791d3f3c65d8743593a5cd8c88205",
+      "hidden/test_hidden.py": "b6b73970bf959a366954f0596c73f99d6f8fa835bbb0fd604f48560614eacef8",
+      "meta.json": "2ae1a73d5730eb99e722de00d34e27efe9feea3f01cffe3b9afae215a8601640"
+    },
+    "intervals/t2": {
+      "gold/core.py": "febccddc918d1dc4fce412dddf9feeb0bc80cf3cceb058612487f37e76ea58a1",
+      "hidden/test_hidden.py": "80ad6f41112b25b524f3647eeaa05d779581137d4dae4415fe16a8ca42488334",
+      "meta.json": "20851a33a0d0a1cca58fecba38a8fcfc0e0c4d63deaf6c2087df8b5559a3289f"
+    },
+    "listalgo/t1": {
+      "gold/core.py": "2e522dec42e10b8d9d15f3ee86f033e77799cce5f1c8b623587a465c2631d80d",
+      "hidden/test_hidden.py": "c4cb0f497d44377ca14791eea4b30776c7c27c544ad4afae0d0855476f596441",
+      "meta.json": "a629a51b268a8bc019f23c2fb1ee5a1629a45d7d2904f7424cdf2ce63b07fcce"
+    },
+    "listalgo/t2": {
+      "gold/core.py": "2e522dec42e10b8d9d15f3ee86f033e77799cce5f1c8b623587a465c2631d80d",
+      "hidden/test_hidden.py": "9f215d6026562f026bbe3203d221ac18fdc5b63a19441a646010b3d0e77ffa6a",
+      "meta.json": "76fcdd9ace799ccbdfd8baad447682a229dfd4f9744398dedbb1fcc3c98900ea"
+    },
+    "romans/t1": {
+      "gold/core.py": "6c5e73ca546a20794f80fee88e1bd9f29b9561c60f73d0fb4487481ef157bba8",
+      "hidden/test_hidden.py": "c446e536ae1658df1565d5ef163f75d43b21dccd89b7026cd19f130e5b81ba2f",
+      "meta.json": "26a888d7ffd70c86c0857b254135bd48b7e7045de984c79bdda7fd1f1d06b517"
+    },
+    "romans/t2": {
+      "gold/core.py": "a83e2a5be9f4991a173303b7751e40a99ce2436f9f88082901f6ab5aa9c1d40f",
+      "hidden/test_hidden.py": "0196844dda949916eddf0a3e5952c1791e5465740e98f71bc8ff7e849029f87e",
+      "meta.json": "d21a615ad3604a4cd44f1f7344143e75dfa494643d0f157fa38098770e3e91e7"
+    },
+    "rpncalc/t1": {
+      "gold/core.py": "3e8468bae3a4add1f654364b7833633d80a0d4b08cc075de9bc73cbd875eb4f3",
+      "hidden/test_hidden.py": "ed4368769ed34bbc7e701a585d770da8f66b615f0af3348f2270f4bf4c78f10a",
+      "meta.json": "70d7641739191101f86003f7057adf05e2b8d9eac90b88fb2cd742f3fe6dab16"
+    },
+    "rpncalc/t2": {
+      "gold/core.py": "3b516a5acf5b3254187075ae854c440221c7f21253fd8789cca1112f9bd7cbb1",
+      "hidden/test_hidden.py": "82c21af50fc59620fc23b05330f585a544fc5a90f5865a7c47f64476d493b184",
+      "meta.json": "913f86a31e67bfcb4b95f943c4560c3ed13d431c3e1c779b13c687be911beca4"
+    },
+    "semver/t1": {
+      "gold/core.py": "70e56dde31ac06c43bc67ea99d4a5415128ffc9faf10160843924fb949c2f9b2",
+      "hidden/test_hidden.py": "f04f02d1c68aa5c9ab7b9f52b5e74393d5b4b4c514ccf0ab0b06cb02d9d48951",
+      "meta.json": "ecdb6744bab777e7ca066eca0adaf9bef5520c43323e310cacea923c18a9be22"
+    },
+    "semver/t2": {
+      "gold/core.py": "58cd2fb08caac7b8f70fb58d0331bd1acf87c7d09dbca44fd757954de3d966e7",
+      "hidden/test_hidden.py": "80e8171d17265081435e6227f339f27af4921c41a91a13ad6cfdbffd7bf6f1e8",
+      "meta.json": "412b771b372d5ad459727a0e32f22d278150042606d89514b27a05bd8c639746"
+    },
+    "stringcase/t1": {
+      "gold/core.py": "b3d7975f22fe44f7e65c0ff18df59b156e1c43d16d393f5468927f71c3473763",
+      "hidden/test_hidden.py": "4fac5cb4f8e82d3abedb46a00270973d4ec0955c9f913c1a9f71e9e6231bb456",
+      "meta.json": "cdbccab6f001a95e34c9235fec0ed483c0216c04b22be9e5a4624341da8d82cd"
+    },
+    "stringcase/t2": {
+      "gold/core.py": "5807f57e931ae16c45b4cff672601c0e9f895a4d75244694b346fffd6272e95c",
+      "hidden/test_hidden.py": "8d4f2668f2a751b529031795d45e791a8c535987da083fc20150d92cc906d12c",
+      "meta.json": "e46a9864740aa7103c3e774efe27de445ac5a6125bf05a653b44223938ff2e76"
+    },
+    "templater/t1": {
+      "gold/core.py": "50c0ee08eaacd21e1c6f733312c393f3d8305f50e4ea071dff37f2f60e808152",
+      "hidden/test_hidden.py": "5ac9f4fba1eb6417e1a5193029f7a78b9d71e4b61e8e35451755c0445bf77533",
+      "meta.json": "dd6bceb512c27f65ca3af7c00a2cddf15ce28596e0b6d8ad4e2ee8dadfe7f1b5"
+    },
+    "templater/t2": {
+      "gold/core.py": "0ed21f696510fd581459ad81c3e6c5fca957e7987c87d53ca963288cc5b678ee",
+      "hidden/test_hidden.py": "527890cf0969beb3b04e33fd1dae4d40f79ce2265c73bb774281173986cba22f",
+      "meta.json": "c2516795cd475d1f7e1724713c20b587da8529958fa61661af732398348deeea"
+    },
+    "units/t1": {
+      "gold/core.py": "f14085e9e3541e0d6d5e7a1bd6a6e7e013946103bd7b2ec194bd7d44529dbfc9",
+      "hidden/test_hidden.py": "5776c27b0910151742aec32a49504398e15e63051d3fbda6d62c3192114b4d53",
+      "meta.json": "8564995535530e57a31e856de47f48e5e01acbd8077a32a2ddb554caf809e2bc"
+    },
+    "units/t2": {
+      "gold/core.py": "6215212433ea2729ac962f9626b360541c6dd5f77b91aabb96152f805c8b9dd1",
+      "hidden/test_hidden.py": "65092f99950225f5378dd3fe2a0ccb23be23a3f422c47279cdfcc446ef3e059b",
+      "meta.json": "ea2c73c4e8d6575201833164550f517e4d3d558f1c4201011e333bdbb647ec44"
+    }
+  },
+  "benchmark": "localsuite",
+  "combined_sha256": "a74c9fd04dc213e436cc84fc72295091c831a143466a0fc82b69220f09c6c910",
+  "n_repos": 13,
+  "n_tasks": 26,
+  "provenance": {
+    "authored_by_model": "claude-fable-5 (session model at authoring)",
+    "note": "Authoring transcripts live outside the repo tree (~/.claude/.../subagents/workflows) and never inside any task dir or workdir; grading assets (hidden/, gold/, meta.json) are siblings of repo/ and never materialised into the agent workdir.",
+    "solving_agent_model": "claude-haiku-4-5-20251001"
+  }
+}

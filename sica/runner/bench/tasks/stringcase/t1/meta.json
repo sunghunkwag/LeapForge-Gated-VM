@@ -1,0 +1,19 @@
+{
+  "repo": "stringcase",
+  "task": "t1",
+  "issue": "truncate(text, length) is supposed to return the text unchanged whenever it already fits within `length` characters, cutting and adding the suffix only when the text is genuinely too long. Instead, a string whose length is exactly equal to `length` gets truncated: truncate(\"hello\", 5) returns \"he...\" instead of \"hello\". The off-by-one is at the length comparison boundary. Strings clearly shorter or clearly longer than the limit are handled correctly.",
+  "difficulty": "easy",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py",
+    "test_repro.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

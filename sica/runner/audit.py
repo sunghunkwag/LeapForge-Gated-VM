@@ -38,11 +38,21 @@ FORBIDDEN_CALLS = {
 }
 
 # Attribute access to any of these names (or any dunder) is refused.
+# Beyond the classic dunder gadgets, we also deny the names by which an allowed
+# stdlib module re-exports a dangerous module as a PLAIN attribute (e.g.
+# `dataclasses.builtins`, `typing.sys`, `<mod>.sys.modules['os']`). This is
+# defence-in-depth; the load-bearing containment is the mount namespace that
+# hides grading assets from the child even if it reaches os.
 FORBIDDEN_ATTRS = {
     "__class__", "__bases__", "__mro__", "__subclasses__", "__globals__",
     "__code__", "__builtins__", "__dict__", "__getattribute__", "__reduce__",
     "__reduce_ex__", "__import__", "__loader__", "__spec__", "func_globals",
     "gi_frame", "cr_frame", "f_globals", "f_builtins", "f_locals",
+    # module-bridge names
+    "sys", "os", "builtins", "modules", "subprocess", "importlib", "ctypes",
+    "socket", "posix", "nt", "inspect", "pty", "runpy", "pdb",
+    "system", "popen", "execv", "execve", "execvp", "spawn", "spawnv",
+    "fork", "fdopen",
 }
 
 

@@ -136,13 +136,21 @@ class Broker(object):
     def _serve(self, rf, wf, proc, res):
         fd = rf.fileno()
         while True:
-            timeout = max(1.0, self.meter.caps["wall_seconds"]
-                          - (self.meter.clock() - self.meter.t0))
+            # Absolute wall-clock deadline, enforced whether the child is idle
+            # OR actively spamming cheap requests. Without this an active
+            # busy-loop keeps select() ready forever and the cap is bypassed.
+            elapsed = self.meter.clock() - self.meter.t0
+            if elapsed >= self.meter.caps["wall_seconds"]:
+                res.status = "timeout"
+                res.error = ("wall-clock deadline (%.0fs) reached"
+                             % self.meter.caps["wall_seconds"])
+                return
+            timeout = max(0.5, self.meter.caps["wall_seconds"] - elapsed)
             ready, _, _ = select.select([fd], [], [], timeout)
             if not ready:
-                # wall-clock watchdog: child produced no request in time
+                # child produced no request within the remaining window
                 res.status = "timeout"
-                res.error = "wall-clock watchdog fired"
+                res.error = "wall-clock watchdog fired (idle child)"
                 return
             line = rf.readline()
             if not line:
@@ -165,33 +173,62 @@ class Broker(object):
 
     def _handle(self, op, req, wf, res):
         try:
+            # Every op honours the wall clock, even cheap ones (fixes the
+            # busy-loop bypass where a scaffold spins on ls/read forever).
+            self.meter.check_wall()
             if op == "log":
-                res.notes.append(str(req.get("msg", ""))[:500])
+                self.meter.check_io()
+                if len(res.notes) < 400:
+                    res.notes.append(str(req.get("msg", ""))[:500])
+                self.meter.record_io()
                 self._respond(wf, ok=True, result=None)
             elif op == "step":
                 self.meter.check_step()
                 self.meter.record_step()
                 self._respond(wf, ok=True, result=self.meter.steps)
             elif op == "model":
-                self.meter.check_model()
-                text, usage = self.model.complete(
-                    req.get("system", ""), req.get("prompt", ""),
-                    max_tokens=int(req.get("max_tokens", 2048)))
+                system = req.get("system", "") or ""
+                prompt = req.get("prompt", "") or ""
+                # charge the estimated input up front and clamp output so a
+                # single call cannot exceed the remaining token budget.
+                est_in = (len(system) + len(prompt)) // 4
+                self.meter.check_model(est_input_tokens=est_in)
+                remaining = self.meter.remaining_model_tokens()
+                hard = self.meter.caps.get("max_output_tokens_per_call", 8192)
+                out_cap = max(1, min(int(req.get("max_tokens", 2048)),
+                                     hard, remaining - est_in))
+                text, usage = self.model.complete(system, prompt,
+                                                  max_tokens=out_cap)
                 self.meter.record_model(usage["input_tokens"],
                                         usage["output_tokens"],
                                         usage["cost_usd"])
                 self._respond(wf, ok=True, result=text)
             elif op == "read":
-                self._respond(wf, ok=True, result=self._read(req["path"]))
+                self.meter.check_io()
+                r = self._read(req["path"])
+                self.meter.record_io()
+                self._respond(wf, ok=True, result=r)
             elif op == "write":
-                self._write(req["path"], req.get("content", ""))
+                self.meter.check_io()
+                content = req.get("content", "")
+                nbytes = len(content.encode("utf-8", "replace")) \
+                    if isinstance(content, str) else len(str(content))
+                self.meter.check_write(nbytes)
+                self._write(req["path"], content)
+                self.meter.record_write(nbytes)
+                self.meter.record_io()
                 self._respond(wf, ok=True, result=None)
             elif op == "ls":
-                self._respond(wf, ok=True, result=self._ls(req.get("path", ".")))
+                self.meter.check_io()
+                r = self._ls(req.get("path", "."))
+                self.meter.record_io()
+                self._respond(wf, ok=True, result=r)
             elif op == "grep":
-                self._respond(wf, ok=True, result=self._grep(
-                    req["pattern"], req.get("path", "."),
-                    int(req.get("max_hits", 200))))
+                self.meter.check_io()
+                r = self._grep(req["pattern"], req.get("path", "."),
+                               int(req.get("max_hits", 200)))
+                self.meter.record_io()
+                self._respond(wf, ok=True, result=r)
             elif op == "run_tests":
                 self.meter.check_tool()
                 out = self._run_tests(req.get("paths"),

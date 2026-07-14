@@ -1,0 +1,18 @@
+{
+  "repo": "rpncalc",
+  "task": "t1",
+  "issue": "evaluate() computes the wrong answer for subtraction and division: it returns the operands the wrong way round. For example \"5 3 -\" should be 5 - 3 == 2 but comes out as -2, and \"20 4 /\" should be 20 / 4 == 5 but comes out as 0. Addition and multiplication are unaffected because they are commutative. The operand that appears earlier in the expression must be the left-hand side of the operator; fix the order in which the two values are taken off the stack.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

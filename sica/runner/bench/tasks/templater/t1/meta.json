@@ -1,0 +1,18 @@
+{
+  "repo": "templater",
+  "task": "t1",
+  "issue": "render(tmpl, values) only replaces the FIRST occurrence of each {key}; repeated placeholders keep the later braces. All occurrences must be replaced.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

@@ -21,5 +21,7 @@ jobs:
         run: python -m pytest tests -q
       - name: benchmark integrity (fail->pass transition for every task)
         run: python3 sica.py validate-bench --profile smoke || true
+      - name: grading-asset containment (T1: reachability + hash-lock)
+        run: python3 sica.py leakscan
       - name: pins + isolation status
         run: python3 sica.py pin --profile smoke

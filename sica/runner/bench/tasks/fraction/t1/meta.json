@@ -1,0 +1,18 @@
+{
+  "repo": "fraction",
+  "task": "t1",
+  "issue": "The Fraction constructor is supposed to keep every value in a canonical form: reduced to lowest terms, with the sign carried by the numerator and the denominator always positive. So Fraction(1, -2) should end up as num=-1, den=2 and compare equal to Fraction(-1, 2). Instead, when a fraction is built with a negative denominator the negative sign is left on the denominator, so Fraction(1, -2) keeps den=-2, equality against the same value written with a positive denominator fails, and downstream add/compare results come out wrong. Fractions built with a positive denominator are handled correctly. Normalize the sign in the constructor so the denominator is always positive.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

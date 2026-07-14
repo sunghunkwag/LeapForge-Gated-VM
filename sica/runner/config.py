@@ -26,6 +26,9 @@ ARCHIVE_DIR = os.path.join(REPO_ROOT, "archive")
 LEDGER_DIR = os.path.join(REPO_ROOT, "ledger")
 RUNS_DIR = os.path.join(REPO_ROOT, "runs")
 
+# Committed hash-lock over the self-authored benchmark's grading assets (T1).
+GRADING_LOCK = os.path.join(RUNNER_DIR, "bench", "GRADING_ASSETS.lock.json")
+
 # --- per-task hard caps (G-budget) -------------------------------------------
 # A "tool call" is one brokered ctx.run (test execution). "steps" is one
 # plan->act->verify iteration of the agent loop. Model tokens are summed from
@@ -35,8 +38,11 @@ RUNS_DIR = os.path.join(REPO_ROOT, "runs")
 DEFAULT_TASK_BUDGET = {
     "max_model_calls": 40,
     "max_model_tokens": 120000,   # input+output summed across the task
+    "max_output_tokens_per_call": 8192,  # hard per-call output ceiling
     "max_tool_calls": 25,         # brokered test runs
     "max_steps": 12,              # agent loop iterations
+    "max_io_ops": 2000,           # read/write/ls/grep/log calls
+    "max_write_bytes": 8_000_000,  # cumulative bytes the agent may write
     "wall_seconds": 240,
 }
 

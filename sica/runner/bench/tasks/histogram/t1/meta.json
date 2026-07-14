@@ -1,0 +1,18 @@
+{
+  "repo": "histogram",
+  "task": "t1",
+  "issue": "mode(xs) returns the LEAST frequent element (it uses min where it should use max). It must return the most frequent, breaking ties toward the first-encountered value.",
+  "difficulty": "easy",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

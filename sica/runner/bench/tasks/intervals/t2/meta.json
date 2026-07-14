@@ -1,0 +1,18 @@
+{
+  "repo": "intervals",
+  "task": "t2",
+  "issue": "insert(intervals, new) inserts a closed interval into a sorted list of disjoint closed intervals, absorbing any existing intervals that overlap or touch it. When the inserted interval reaches further right than an interval it absorbs -- for example when it fully contains a shorter existing interval -- the combined interval's end is wrong: insert([[4, 6]], [2, 10]) returns [[2, 6]] instead of [[2, 10]]. The end of the merged interval is being set to the absorbed interval's end rather than keeping whichever end is larger. Cases where the absorbed interval already extends at least as far as the inserted one still come out correct.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

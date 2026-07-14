@@ -1,0 +1,18 @@
+{
+  "repo": "stringcase",
+  "task": "t2",
+  "issue": "title_case() should always capitalize the FIRST and the LAST word of a title, even when that word is a minor word (an article, conjunction or preposition); only interior minor words stay lowercase. Right now a title that ends in a minor word is left lowercased at the end, e.g. \"something to hold on to\" comes out as \"Something to Hold on to\" instead of \"Something to Hold on To\". The first-word exception is handled, but the matching last-word exception is not.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

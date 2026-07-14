@@ -83,6 +83,67 @@ def test_budget_cap_stops_overspend():
     assert rec["meter"]["model_calls"] == 1        # spend was actually capped
 
 
+def test_mount_ns_blocks_os_escape_read_of_grading_assets():
+    # Even if a scaffold escapes the Python restriction to `os` (via an allowed
+    # module's re-exported sys), the mount namespace hides the grading-asset
+    # tree, so it reads nothing. This is the load-bearing G-isolate control.
+    import os as _os
+    fixtures = _os.path.dirname(FIX) if False else FIX
+    task = _task("addlib")
+    src = (
+        "def solve(ctx, task):\n"
+        "    import dataclasses\n"
+        "    osmod = dataclasses.sys.modules['os']\n"
+        "    base = %r\n"
+        "    try:\n"
+        "        listing = osmod.listdir(base)\n"
+        "    except Exception as e:\n"
+        "        listing = 'ERR:' + type(e).__name__\n"
+        "    gold = osmod.path.join(base, 'addlib', 't1', 'gold', 'calc.py')\n"
+        "    ctx.log('ESCAPE listing=%%s exists=%%s'\n"
+        "            %% (listing, osmod.path.exists(gold)))\n"
+    ) % fixtures
+    model = ModelClient(backend="stub", stub_fn=stub_model)
+    rec = attempt_task(task, _sources(src), model, CAPS)
+    joined = " ".join(rec["notes"])
+    # tasks/fixtures tree is tmpfs-empty in the child: listing empty, gold gone
+    assert "exists=False" in joined
+    assert "calc.py" not in joined.split("listing=")[-1].split(" exists")[0]
+
+
+def test_io_write_flood_is_metered_and_bounded():
+    task = _task("addlib")
+    caps = dict(CAPS)
+    caps["max_write_bytes"] = 200000
+    caps["max_io_ops"] = 5000
+    src = ("def solve(ctx, task):\n"
+           "    blob = 'A' * 50000\n"
+           "    i = 0\n"
+           "    while True:\n"
+           "        ctx.write('junk_%d.txt' % i, blob)\n"
+           "        i += 1\n")
+    model = ModelClient(backend="stub", stub_fn=stub_model)
+    rec = attempt_task(task, _sources(src), model, caps)
+    assert rec["status"] == "budget"
+    assert rec["meter"]["bytes_written"] <= caps["max_write_bytes"]
+
+
+def test_single_model_call_cannot_exceed_token_budget():
+    task = _task("addlib")
+    caps = dict(CAPS)
+    caps["max_model_tokens"] = 120000
+    # a ~500k-char prompt is ~125k input tokens, already over the cap: the
+    # broker must refuse BEFORE the call, not book it after the fact.
+    src = ("def solve(ctx, task):\n"
+           "    huge = 'x ' * 250000\n"
+           "    ctx.model(huge, system='s', max_tokens=1000000)\n")
+    model = ModelClient(backend="stub", stub_fn=stub_model)
+    rec = attempt_task(task, _sources(src), model, caps)
+    assert rec["status"] == "budget"
+    assert rec["meter"]["model_calls"] == 0        # never spent
+    assert rec["meter"]["model_tokens"] == 0
+
+
 def test_grading_assets_absent_from_workdir():
     # The hidden grading test must never be materialised into the workdir.
     task = _task("addlib")

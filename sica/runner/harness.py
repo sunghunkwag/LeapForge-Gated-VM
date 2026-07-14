@@ -28,8 +28,19 @@ def attempt_task(task, scaffold_sources, model_client, caps, logger=None,
                         task.public_test_paths, logger=log)
         bres = broker.run(scaffold_sources)
 
+        # Non-editable, non-test files present in the repo -- factual context
+        # for the failure digest (what the agent COULD have read but a weak
+        # scaffold may not have). Not a hint at the fix; just the file list.
+        tests = set(task.public_test_paths)
+        editable = set(task.editable_files)
+        context_files = [f for f in task.repo_files()
+                         if f not in editable and f not in tests
+                         and not os.path.basename(f).startswith("test_")]
         record = {
             "task": task.id, "difficulty": task.difficulty,
+            "issue": task.issue,
+            "editable_files": list(task.editable_files),
+            "context_files": context_files,
             "status": bres.status, "error": bres.error,
             "violation": bres.violation,
             "meter": meter.snapshot(),
@@ -62,6 +73,13 @@ def failure_digest(records, limit=6):
         out.append({
             "task": r["task"],
             "difficulty": r.get("difficulty"),
+            # what the failing task actually ASKED (directive 1.1: the proposer
+            # reads its own failing transcripts) and what files were present --
+            # so a recurring "answer defined in another file the agent never
+            # read" mode is visible in the transcripts, not hidden.
+            "issue": (r.get("issue") or "")[:300],
+            "editable_files": r.get("editable_files", []),
+            "other_files_present": r.get("context_files", []),
             "status": r["status"],
             "error": (r.get("error") or "")[:300],
             "meter": {k: r["meter"].get(k) for k in

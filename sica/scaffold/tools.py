@@ -1,7 +1,3 @@
-# GEN0 tools, composed only from ctx primitives. New tools (symbol index,
-# focused test runner, diff minimiser) are meant to be added here by the
-# engine -- each is just a function over ctx.read/ls/grep/run_tests/model.
-
 import re
 
 _FILE_BLOCK = re.compile(
@@ -69,19 +65,47 @@ def tests_green(result):
 
 
 def gather_context(ctx, task):
-    """Optional: pull a little extra repo context by searching for the
-    editable files' base names. Cheap, best-effort, capped."""
+    """Pull repository context by finding function definitions and constants.
+    Extracts function names mentioned in the issue and searches the repo to show
+    where those functions are defined and where constant/mapping definitions are.
+    This helps the agent localize exactly which function is broken before editing."""
     if not GREP_CONTEXT:
         return ""
+    
+    issue_text = task.issue or ""
     seen = []
-    for path in task.editable_files:
-        stem = path.split("/")[-1].split(".")[0]
+    
+    # Extract function names mentioned in the issue (pattern: identifier followed by parentheses)
+    func_names = re.findall(r'\b([a-zA-Z_]\w*)\s*\(', issue_text)
+    func_names = list(dict.fromkeys(func_names))  # Deduplicate while preserving order
+    
+    # Search for definitions of these functions to show where the bug is located
+    for func_name in func_names[:4]:
+        if len(seen) >= 20:
+            break
         try:
-            hits = ctx.grep(r"\b%s\b" % re.escape(stem), ".", 20)
+            pattern = r'def\s+' + re.escape(func_name) + r'\s*\('
+            hits = ctx.grep(pattern, ".", 20)
+            for h in hits[:1]:  # Just first match per function
+                line = "%s:%s: %s" % (h.get("path"), h.get("line"), h.get("text"))
+                if line not in seen:
+                    seen.append(line)
         except Exception:
-            hits = []
-        for h in hits[:5]:
-            line = "%s:%s: %s" % (h.get("path"), h.get("line"), h.get("text"))
-            if line not in seen:
-                seen.append(line)
-    return "\n".join(seen[:40])
+            pass
+    
+    # Search for constant/mapping definitions (ALL_CAPS naming convention).
+    # These typically represent the 'correct values' or config referenced in the issue.
+    try:
+        hits = ctx.grep(r'\b[A-Z_]{2,}\s*=', ".", 30)
+        for h in hits[:15]:
+            text = (h.get("text") or "").strip()
+            if len(text) < 150:  # Skip very long lines
+                line = "%s:%s: %s" % (h.get("path"), h.get("line"), text)
+                if line not in seen:
+                    seen.append(line)
+                if len(seen) >= 25:
+                    break
+    except Exception:
+        pass
+    
+    return "\n".join(seen[:20])

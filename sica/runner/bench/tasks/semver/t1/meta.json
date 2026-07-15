@@ -1,0 +1,18 @@
+{
+  "repo": "semver",
+  "task": "t1",
+  "issue": "compare(a,b) compares version parts as strings, so '1.10.0' sorts before '1.9.0'. Parts must be compared numerically.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

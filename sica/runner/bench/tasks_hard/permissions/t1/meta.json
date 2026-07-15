@@ -1,0 +1,18 @@
+{
+  "repo": "permissions",
+  "task": "t1",
+  "issue": "can() uses made-up access levels. The project's real role levels are defined as a named mapping elsewhere in this project; use them.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

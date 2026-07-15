@@ -1,0 +1,18 @@
+{
+  "repo": "digits",
+  "task": "t2",
+  "issue": "nth_digit(n, k) returns the k-th decimal digit of a non-negative integer n counted from the right, where k=1 is the ones digit, k=2 the tens digit, and so on. It is off by one: it returns the digit one place too far to the left. nth_digit(123, 1) returns 2 but should return 3 (the ones digit), nth_digit(123, 2) returns 1 but should return 2, and nth_digit(5, 1) returns 0 but should return 5. The bug is entirely in main.py, in the exponent used when dividing n down to the requested place.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

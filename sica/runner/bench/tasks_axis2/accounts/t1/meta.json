@@ -1,0 +1,18 @@
+{
+  "repo": "accounts",
+  "task": "t1",
+  "issue": "run_ledger(transactions) ignores every transaction: no matter which deposits or withdrawals are passed in, it always returns the starting balance unchanged. A ledger of several deposits that should raise the balance comes back as if nothing happened. Each transaction is applied through a helper this module imports from another file (helpers.py); the loop over the transactions and the running balance live here in main.py.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

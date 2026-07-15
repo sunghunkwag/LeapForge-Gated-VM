@@ -1,0 +1,10 @@
+{
+  "repo": "stepper",
+  "task": "t2",
+  "issue": "steps_between(low, high) should return the number of integer step positions from low to high inclusive, counting both endpoints. It is off by one: it returns the plain distance between the endpoints and forgets to count one of them. For example, steps_between(0, 5) returns 5 but should return 6, and steps_between(2, 6) returns 4 but should return 5. The bug is entirely in main.py; fix it there so both endpoints are counted.",
+  "difficulty": "easy",
+  "editable_files": ["main.py"],
+  "public_test_paths": ["test_public.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

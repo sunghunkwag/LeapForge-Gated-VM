@@ -1,0 +1,18 @@
+{
+  "repo": "conversion",
+  "task": "t1",
+  "issue": "to_metres() uses approximate/wrong factors. The exact conversion factors are defined as a named mapping elsewhere in this project.",
+  "difficulty": "hard",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

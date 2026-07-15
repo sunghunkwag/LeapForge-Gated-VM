@@ -1,0 +1,18 @@
+{
+  "repo": "geometry",
+  "task": "t1",
+  "issue": "rotate_point(pt, degrees) returns the wrong point for every nonzero angle. A 90-degree turn of (1, 0) should land on (0, 1), but it comes back near (-0.45, 0.89); a 180-degree turn of (3, 4) should give (-3, -4) but does not. The distance from the origin is preserved, so the point is being rotated -- just by the wrong amount. main.py delegates the actual rotation to a helper it imports from another module and forwards the angle straight through.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

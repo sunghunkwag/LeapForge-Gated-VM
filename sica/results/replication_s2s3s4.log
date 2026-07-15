@@ -1,0 +1,37 @@
+GEN0 sha=beba47153812e099   adopted sha=ce08542ee4d5dfde
+
+=== seed s2 : held-out (10, repo-disjoint from train) ===
+  bonus/t1, bonus/t2, conversion/t1, conversion/t2, discount/t1, discount/t2, palette/t1, palette/t2, scoring/t1, scoring/t2
+  GEN0    held-out 5/10
+  ADOPTED held-out 10/10   (delta +5)
+  newly solved by adopted: ['bonus/t1', 'conversion/t1', 'discount/t1', 'palette/t1', 'scoring/t1']
+  regressed (GEN0 solved, adopted lost): -
+
+=== seed s3 : held-out (10, repo-disjoint from train) ===
+  palette/t1, palette/t2, permissions/t1, permissions/t2, pricing/t1, pricing/t2, ratelimit/t1, ratelimit/t2, shipping/t1, shipping/t2
+  GEN0    held-out 5/10
+  ADOPTED held-out 10/10   (delta +5)
+  newly solved by adopted: ['palette/t1', 'permissions/t1', 'pricing/t1', 'ratelimit/t1', 'shipping/t1']
+  regressed (GEN0 solved, adopted lost): -
+
+=== seed s4 : held-out (10, repo-disjoint from train) ===
+  conversion/t1, conversion/t2, fees/t1, fees/t2, grading/t1, grading/t2, pricing/t1, pricing/t2, ratelimit/t1, ratelimit/t2
+  GEN0    held-out 5/10
+  ADOPTED held-out 9/10   (delta +4)
+  newly solved by adopted: ['conversion/t1', 'fees/t1', 'pricing/t1', 'ratelimit/t1']
+  regressed (GEN0 solved, adopted lost): -
+
+============================================================
+REPLICATION SUMMARY (fixed scaffolds, fresh held-out splits)
+============================================================
+  seed   GEN0       ADOPTED      delta
+  s2     5/10       10/10         +5
+  s3     5/10       10/10         +5
+  s4     5/10       9/10         +4
+  ALL    15/30       29/30         +14
+
+  pooled GEN0    held-out: 15/30 = 50%
+  pooled ADOPTED held-out: 29/30 = 97%
+  seeds where adopted > GEN0: 3/3
+  session cost: $0.6986
+  -> /home/user/LeapForge-Gated-VM/sica/runs/replication.json

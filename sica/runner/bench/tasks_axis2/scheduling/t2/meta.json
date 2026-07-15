@@ -1,0 +1,18 @@
+{
+  "repo": "scheduling",
+  "task": "t2",
+  "issue": "overlaps(a, b) reports back-to-back meetings as overlapping. The intervals are half-open ranges [start, end): two that merely touch at an endpoint -- where one ends exactly when the next begins -- share no minute and should NOT count as overlapping, but the function returns True for them. For example, overlaps((0, 60), (60, 120)) returns True when it should return False, and overlaps((0, 30), (30, 60)) is likewise wrongly reported as overlapping. Genuinely overlapping intervals and clearly separated intervals are handled correctly; only the touching-endpoint boundary is wrong.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

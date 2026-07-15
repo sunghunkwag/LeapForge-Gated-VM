@@ -1,0 +1,18 @@
+{
+  "repo": "roller",
+  "task": "t2",
+  "issue": "window_sums(data, k) should return the sum of every contiguous window of length k in data, scanning left to right. For data = [1, 2, 3, 4] and k = 2 the result should be [3, 5, 7], and for k = 1 it should be [1, 2, 3, 4]. Instead the last window is always missing: window_sums([1, 2, 3, 4], 2) returns [3, 5] and window_sums([1, 2, 3, 4], 1) returns [1, 2, 3], one window short every time. When k equals len(data) it should return a single sum but returns an empty list instead. The loop that walks the windows stops one step too early (an off-by-one in its range). The bug is entirely in main.py; helpers.py is correct and must not change.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

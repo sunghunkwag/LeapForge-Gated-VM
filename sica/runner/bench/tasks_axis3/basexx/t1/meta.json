@@ -1,0 +1,18 @@
+{
+  "repo": "basexx",
+  "task": "t1",
+  "issue": "encode(n) turns a non-negative integer into a short code string, and decode(code) is meant to be the exact inverse, so that decode(encode(n)) == n for every non-negative integer n. It is not the exact inverse: numbers do not survive the round trip. decode(encode(4)) returns 0, decode(encode(5)) returns 1, decode(encode(6)) returns 10, and decode(encode(10)) returns 155 -- none of them come back as the number that went in, and larger numbers come back more badly wrong. encode is correct and must not change; the code string it produces is defined by a helper this module imports from helpers.py, and that helper is also correct and must not be edited. The bug is in main.py, in the way decode turns a code string back into a number -- fix it there so that decode(encode(n)) == n for every non-negative integer n.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

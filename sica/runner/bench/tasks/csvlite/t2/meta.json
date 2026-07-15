@@ -1,0 +1,18 @@
+{
+  "repo": "csvlite",
+  "task": "t2",
+  "issue": "parse_line() splits a CSV record into fields and supports fields wrapped in double quotes, where a comma inside a quoted field is literal. A double quote should only open a quoted field when it is the FIRST character of that field; a quote that appears after other characters is meant to be an ordinary literal character. Right now the parser treats every double quote as an opening quote, so a stray quote in the middle of a field wrongly switches on quoting and any following comma is absorbed into the field instead of separating it. For example parse_line('ab\"c,d') should give ['ab\"c', 'd'] but instead returns ['abc,d']. Well-formed records whose quotes sit at the start of a field are unaffected. Restrict opening quotes to the start of a field.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

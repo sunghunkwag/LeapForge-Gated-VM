@@ -1,0 +1,18 @@
+{
+  "repo": "wordcount",
+  "task": "t1",
+  "issue": "preview(text, max_chars) is supposed to return a short preview of text that is no longer than max_chars characters, but it does not cap the length correctly: the returned string routinely runs far past max_chars characters. For example, preview('the quick brown fox jumps', 3) is expected to be 'the' (three characters) but comes back much longer, and preview('abcdefgh', 4) returns the whole word instead of 'abcd'. main.py builds the preview by delegating to a helper it imports from another module (helpers.py); that helper is correct and must not be changed -- only main.py's use of it is wrong. The fix belongs entirely in main.py.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

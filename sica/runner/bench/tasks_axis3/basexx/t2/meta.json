@@ -1,0 +1,18 @@
+{
+  "repo": "basexx",
+  "task": "t2",
+  "issue": "from_digits(digits, b) should return the integer value of a list of base-b digits given most significant first, so from_digits([1, 2, 3], 10) is 123 and from_digits([1, 0, 1], 2) is 5. Instead it subtracts each digit from the running total instead of adding it, so it returns the wrong value: from_digits([1, 2, 3], 10) returns -123 and from_digits([9], 10) returns -9. The bug is a wrong operator in main.py; fix it there. helpers.py is correct and must not be edited.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

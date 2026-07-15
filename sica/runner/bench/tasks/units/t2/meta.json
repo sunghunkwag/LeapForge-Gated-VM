@@ -1,0 +1,18 @@
+{
+  "repo": "units",
+  "task": "t2",
+  "issue": "convert(x, frm, to) uses the wrong factor for kilometres: it treats 1 km as 100 m instead of 1000 m. Supported units: mm, m, km (metres as the base).",
+  "difficulty": "hard",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

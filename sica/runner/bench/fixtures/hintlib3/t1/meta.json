@@ -1,0 +1,16 @@
+{
+  "repo": "hintlib3",
+  "task": "t1",
+  "issue": "classify(n) returns 0 for the SPECIAL case; it should return n * n.",
+  "difficulty": "medium",
+  "editable_files": [
+    "calc.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": []
+}

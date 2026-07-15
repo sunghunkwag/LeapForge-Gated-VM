@@ -1,0 +1,113 @@
+{
+  "assets_per_task": {
+    "codeword/t1": {
+      "gold/main.py": "d6507314f6c4d05ecccbe1c50851f02cdb54bd65d6abda36a2cfc5a520f00504",
+      "hidden/test_hidden.py": "0960209c6b96d5fc03f829a377f318a4539f7e1e71ba4cfe9831d9d52ddd3b0f",
+      "meta.json": "e0d3087867ffc1c0c11a337bb0bd48dd88090dc8da6d79612ef32879d2060292"
+    },
+    "codeword/t2": {
+      "gold/main.py": "5fd603d2000303866bbf51e8743a29db70fbbb5c1e123c6e9a427bf88a2130aa",
+      "hidden/test_hidden.py": "2c965f49db1cf897b626a6e129d00acc1358b098516ab6260bc8e691547f7c04",
+      "meta.json": "81613d44810f12feb1622e4c696511063a83eee095ff2b76fc385e9b0a5ca592"
+    },
+    "delim/t1": {
+      "gold/main.py": "2898c5234061e028afbcc6f3d2bedc90a6f9744df9b399ca11113cd1cd1c896d",
+      "hidden/test_hidden.py": "1e52e51b0598f5fafd4aaed53682a00a9d882a653e92a989abbcfb432cc7a344",
+      "meta.json": "238eb13eca474e235a713c16d4187a2986ad691c02ca52ff1e35bbe51b0cfe8d"
+    },
+    "delim/t2": {
+      "gold/main.py": "c2522defefea23b89d56e45334a8be30adbaaae97b45e5c45f71d2343ef336a6",
+      "hidden/test_hidden.py": "c7a7971c2cbe05881a6d32050edb2875ba184341106c529599b1dafce12a9e94",
+      "meta.json": "5912d249555ea24ae6bccf5778aeb73db7b7b00ee235688fb22b0a6d31dd2ca4"
+    },
+    "feig/t1": {
+      "gold/main.py": "7fa1b850524417953ae5c1592fccef36c464af396264dbc41a66cacf7e911a21",
+      "hidden/test_hidden.py": "e832ab04d3135588d7262d9dfcbab3df438e13788c89b5ae28d70a2fa2d93aad",
+      "meta.json": "376367791b4ab80800eb908102e0dbffcbcefb8f944e0ebd9031c42e7f2a49d5"
+    },
+    "feig/t2": {
+      "gold/main.py": "17855fe5fdfa5217c651052a3e53e08e9f75c5c11aab15d19c7988683714a49a",
+      "hidden/test_hidden.py": "8459c17882f7fdb09cbc87d3cd4fbee2fa0d2f0f53a73ce39b925484011ee353",
+      "meta.json": "c66b4eedfaf3a0f3a0d0f8279cbdfd10cacee4f0abdab5d84a2b6ae23b02dcfc"
+    },
+    "header/t1": {
+      "gold/main.py": "b1eba16c4769ca791e491e41966080a4846fcc1adf25d9f8f6903e0b4364c21b",
+      "hidden/test_hidden.py": "61d34d9988225118e381ac1e1cc3935e7f807aabf986b4305be9b454265f02a6",
+      "meta.json": "d0961f4f7f2fc8719d4e28f8fcfbab8261f1478d64b4ec53f559ffbf1249fbbe"
+    },
+    "header/t2": {
+      "gold/main.py": "339cd19857f7ccc05136fd1cecf8ad6e2d231cd0d79d465e3a1df4262a8bca86",
+      "hidden/test_hidden.py": "e44bd772f2df126e8c6a683c2098b1827ef70dbd230dfe3a3e0b3788c4ff55bc",
+      "meta.json": "425b23b55cc802cc017fcdd2d60bb40ea75750be9f06184e172ae38808bb266e"
+    },
+    "precision/t1": {
+      "gold/main.py": "cf5fdd43431404a96ef096f68dbfe50269e80d68ca5ce452bb223c648c0110a3",
+      "hidden/test_hidden.py": "705eab650d14c2171f788bc27f1a66b06e7dcded38d7d5fbc8a00b592580a697",
+      "meta.json": "a84b3dadef02c706d9b780a33103f99afa9846a3074efef9e59732c5dafe3952"
+    },
+    "precision/t2": {
+      "gold/main.py": "4c3a0c3939762ed5f989630513ede03ee3f79190324ef647717db7f82f3830a4",
+      "hidden/test_hidden.py": "bd1f491e8928c768125aea7581ab2cc63a5a89a7a11c7ca78e9c52cfeda925b3",
+      "meta.json": "c6454d6df5b56997968141999ad29b0695ae0a8221f24d3c50ef74f1bfd5c695"
+    },
+    "retries/t1": {
+      "gold/main.py": "e8eecc5f3327cc786df03997425f72313d756315dfe3a376e05ba8c7e0eb0865",
+      "hidden/test_hidden.py": "5813b063fee052aa74f90eb469a3d12e6653b6351cf0279506e5af9b9f60c295",
+      "meta.json": "0dcded3e0a2ad07947e5912ee32222ba4502e5c7b8ebba918355963bad0ae992"
+    },
+    "retries/t2": {
+      "gold/main.py": "b2e48e98ff14f8f3e1fc160a636be4f8ebb9939c5f1e48fcc64a005a5313098b",
+      "hidden/test_hidden.py": "b831aa1c043e0eb52af001acf6bfad0bbb73fc9e51fe91ba2baae48785a0534b",
+      "meta.json": "bd150fb8a55e8f4f34368ca2b9ac1ad56035f2af07ce5d8ad64cafaec08373cd"
+    },
+    "seasonal/t1": {
+      "gold/main.py": "76f4aadf6aa0f63523f668edf14e80b013ff893e9b8a4f674f68e5775c2e233a",
+      "hidden/test_hidden.py": "463d7f20c34bcf5339ec6f2b56264d1581adac920aded5f65642a3c196aecb1e",
+      "meta.json": "c8485831baa99c2427c734d9308124dab2a4d19dfe0af1d4dc298a200e816f27"
+    },
+    "seasonal/t2": {
+      "gold/main.py": "80ccdff6924c5ec92318bbca2175b8a5c54c24e99fadf9c9ff9ab7261f72001c",
+      "hidden/test_hidden.py": "f3f47cac3b699b6dd12e6ba703e716b194ff598abbdac13c802043898d8189dc",
+      "meta.json": "e70039b138a5cf5ae52352c3273957f8ce13eace65d268e698509201aa6bd991"
+    },
+    "seedval/t1": {
+      "gold/main.py": "8dccfbb60fbbd2fdeed88cb6392c2e11c4dff96460740e57db4c807a9409aade",
+      "hidden/test_hidden.py": "7e9357e2bc097ccc6a292b9d7ff9a5d2c60161bdbbed69c166f0c5906549a0e1",
+      "meta.json": "ab3a08348d5013f2c6344353948ce8dbcedf187c6c1fc0b4441ef649126ae7f4"
+    },
+    "seedval/t2": {
+      "gold/main.py": "a2be3517f586e7b46f224b266ef9ae6c5e22aa70b6c661782aa85f7923493950",
+      "hidden/test_hidden.py": "a5e6ef7cf40a8b20b585ff62fde19cbba9b4a71959dd4bca0f1e9f334954461b",
+      "meta.json": "3b72773819cc3cebc46853e1043aae830bd60df3444c35c77de2afe38006dc73"
+    },
+    "token/t1": {
+      "gold/main.py": "7c215c9efc74874fc0e728725bd36f95c5db736dae4b0339cae9ba6be508328c",
+      "hidden/test_hidden.py": "fa53357afb86cb0340b63de9bbf246f653dfcf7d9a3847ab7e661050a9d57e8e",
+      "meta.json": "5b9f45feb4fafb71ca2f31d0f043fdb3997c64d22ddcd26936475652cd82f767"
+    },
+    "token/t2": {
+      "gold/main.py": "46c84af255d693abb75c9f94e66ce0a3987907e7012b024a03b4262594642d72",
+      "hidden/test_hidden.py": "5b6e43cbae27bcc8a0083e9c4ab9baa7aba1393416f8470e08a1c4291be46a44",
+      "meta.json": "936bf3a1384b477ad64ef470c4e4441b49293547c5a322add8490290ad355b49"
+    },
+    "tolerance/t1": {
+      "gold/main.py": "8904433fe6050d8b7008ea90681370c02c62e1650546ff84aef6d11f6b3742b5",
+      "hidden/test_hidden.py": "77afc1988e57a9683c7836f5b116802b2c3e2df66b5abcbce1efc6260aed6272",
+      "meta.json": "38ec24c2e561e853d1e8ccd228c5f8378e7a898a9a46b4c8a428e8efcd7fda86"
+    },
+    "tolerance/t2": {
+      "gold/main.py": "ba1a531f581d2e6094e978ed6f7aca7a8d92eeb62c6e7ad73ee692f7f18bc772",
+      "hidden/test_hidden.py": "a0dcafcac8911f58f50fd72295b87ec260ceb9c4dd24bf1db5c418b89d258ad4",
+      "meta.json": "884f83b982342d137de9d65419afc73786395cdd626923a66fbbe5aa86a33fe8"
+    }
+  },
+  "benchmark": "localsuite",
+  "combined_sha256": "2b37f5de47e7183703e8113ad9903dc6095702eac14ec2ca8602c9b3e70c9f51",
+  "n_repos": 10,
+  "n_tasks": 20,
+  "provenance": {
+    "authored_by_model": "claude-fable-5 (session model at authoring)",
+    "note": "Authoring transcripts live outside the repo tree (~/.claude/.../subagents/workflows) and never inside any task dir or workdir; grading assets (hidden/, gold/, meta.json) are siblings of repo/ and never materialised into the agent workdir.",
+    "solving_agent_model": "claude-haiku-4-5-20251001"
+  }
+}

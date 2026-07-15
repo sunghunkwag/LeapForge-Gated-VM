@@ -1,0 +1,18 @@
+{
+  "repo": "parsing2",
+  "task": "t1",
+  "issue": "lookup(pairs, wanted) crashes whenever the wanted key is actually present. Looking up a key that is missing correctly returns the default, but as soon as a pair with a matching key is found the call raises a KeyError instead of returning that pair's amount -- for example lookup(['a=1', 'b=2'], 'a') blows up rather than returning 1, and lookup(['score=42'], 'score') blows up rather than returning 42. Only the case where a match is found is broken; missing-key lookups and empty input still return the default fine. Each 'key=value' string is turned into a record by a helper this module imports from another file (helpers.py); the loop and the key matching live here in main.py.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

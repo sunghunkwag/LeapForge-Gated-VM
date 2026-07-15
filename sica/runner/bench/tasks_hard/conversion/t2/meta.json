@@ -1,0 +1,18 @@
+{
+  "repo": "conversion",
+  "task": "t2",
+  "issue": "celsius_to_k adds the wrong offset (uses 273 instead of 273.15).",
+  "difficulty": "easy",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

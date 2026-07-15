@@ -1,0 +1,18 @@
+{
+  "repo": "romans",
+  "task": "t1",
+  "issue": "to_roman(n) uses only additive symbols, so 4 becomes 'IIII' and 9 becomes 'VIIII'. It must use subtractive notation (IV, IX, XL, ...).",
+  "difficulty": "easy",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

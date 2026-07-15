@@ -1,0 +1,93 @@
+{
+  "assets_per_task": {
+    "basexx/t1": {
+      "gold/main.py": "43839db3a5d53335d3a741209c81bee43101f84993db65fd3ecca78b3d91a3f3",
+      "hidden/test_hidden.py": "9dd7161bd44faaf37d3dec1916b120a6a73b31de8840bfb01fbc5c26a35fbd63",
+      "meta.json": "b042415118e58963b8a9eeb020a5672c7ffca6f643ebca3b27ced2583d19145b"
+    },
+    "basexx/t2": {
+      "gold/main.py": "81480b0687d582113ae8ea024512aa7aede59804e747b8ce675fda1b941c0bf2",
+      "hidden/test_hidden.py": "ae6445dfc9a31e45d70b107e22d401b1cbdf2ef0e5023b38cfde0b6804906e17",
+      "meta.json": "5a8bc914682635c2e70e743baeb76bee00b9225f6649400263f069efd5c9b36a"
+    },
+    "cipher/t1": {
+      "gold/main.py": "173e8eed9a61be1c86f700b224a1f84fb325cb1989b356c60579943bcf71c7bc",
+      "hidden/test_hidden.py": "bb35f06445633651a40921b52b70b28bcf3b9eea7c7fec9fb24c114bb5a1e1ae",
+      "meta.json": "e84b8e275d519c2d927593d2a14ac10a918caec088f068285752d33cd3d2eb91"
+    },
+    "cipher/t2": {
+      "gold/main.py": "1eda94f5ef84a39f68d9a3b557dc0df24ae9cc190ace3253fbfd1b0210744615",
+      "hidden/test_hidden.py": "647bea0ef2eecd18fe68a95e37ab4ec56065711a492e1977920c4db490acf2e3",
+      "meta.json": "3b77ab98517c98255e81e533a71fb44d04aa372bef40b3dff4a957e4c6dac3f9"
+    },
+    "codec/t1": {
+      "gold/main.py": "2c632ccd71f6ee13bf737126a99e451268e925b0452b27ccddd3d84e2a24a78d",
+      "hidden/test_hidden.py": "a51199163627172fb597292d1339717a267f550ab49db24df812e80c5d9219e9",
+      "meta.json": "007405381bb31be589e34db418c6e5a2dbae138e05767a5998f8a745c2d2a95c"
+    },
+    "codec/t2": {
+      "gold/main.py": "68ff218960ebb60230aada2713a97a893c7b1259b8827aab3d3be5c6df4a07ff",
+      "hidden/test_hidden.py": "48bfc5d8474724db3b41ac41bc0b3ae1bef8caac79a4f19775806046bf1d3248",
+      "meta.json": "40ee5de54dc38715588b185cf56d8926f77054ec27a41cf3c75886a56fd2d3f2"
+    },
+    "digits/t1": {
+      "gold/main.py": "271e5c0c95634da8aa8a362bed4e8d54b727ada5f4f05e766284526b0d409aa8",
+      "hidden/test_hidden.py": "a5568ee7a7a4d3d6475980a4d8b934168c99b6ee6c21bca4a83a03fedfafc701",
+      "meta.json": "1e13248f25b45c681e5e263874644a4397cb3714d2bf9e2911aa95f409c0607f"
+    },
+    "digits/t2": {
+      "gold/main.py": "ffa65da10ca6e84488f386dff2ecb61fed9412375627db0d4a435131068f8ff3",
+      "hidden/test_hidden.py": "1d68b798da6e262e009e73a896b1e18ef650c9c16abe607ebcfa6c1fdf1b396b",
+      "meta.json": "b5d5a49cdcc3bb602a5d1ae7668aec0d6d4afa6632c388b00ae834876fbbce8d"
+    },
+    "roller/t1": {
+      "gold/main.py": "f4e5c383bd8f4710c6912d0f2b2679ecbdcb846218cdf2ad87b99bd3d3b1d7ec",
+      "hidden/test_hidden.py": "06e7b414fc3c6672dd4eaf8482089d3dfb3761cb851b41fc0a80e811a0b98f00",
+      "meta.json": "f5b65c219274d6e598990d712e29bb08e1672016a277e7f1d6eb51fdbd2ed457"
+    },
+    "roller/t2": {
+      "gold/main.py": "0b0b614b17b07218240d3283dadf01e6fb610f260a02efc7408dca833110c2e2",
+      "hidden/test_hidden.py": "c991586322ba9e8c42d3a8b617ea729accf3f911413977f5b13aa371e65dfd47",
+      "meta.json": "955e0060e4850dbc6351885a85c613ecc86b3a7572d2941cc95eda5a57585b2f"
+    },
+    "scaler/t1": {
+      "gold/main.py": "6f3118a34f3df3682c37eb2dab9c1ce566a0048c4f5be37aec99d14ff2c23aea",
+      "hidden/test_hidden.py": "031518f3f12686f84d09562b7a33da27a2b906ebbfca65ffdaa3a6ebcb288260",
+      "meta.json": "7d911bed2085c0d21ef8aeadcfd7dda0745d2800b3f6a37eeb26f6e3cb7d5a1d"
+    },
+    "scaler/t2": {
+      "gold/main.py": "811108a533299f73397356d52daf541021c5d088e5c0440442fdfeba3b481e44",
+      "hidden/test_hidden.py": "0312f9cbc357412c8a3ada17c9114adae05529b537f7802bb4c02fd7370ef3ee",
+      "meta.json": "0031d602c4c1b83215d82d868cd9b4b5c2ce73efa56f198a5a4c90105092b27b"
+    },
+    "stepper/t1": {
+      "gold/main.py": "f7f6a507512952db7de2e350c518396f9e58cd7ff5f0ce9d6d55af3e3ec798ac",
+      "hidden/test_hidden.py": "8fe50e10b09366a26df99966bdddae667146be0b26e22a08e127750d7e3b6e77",
+      "meta.json": "8cc724e1371e5e8433caf3a7ea57bc919309c7883ae76567709aa02b2e9ea576"
+    },
+    "stepper/t2": {
+      "gold/main.py": "c92fb375a8c223e65f5a890653593856ad059c3ad27f02334fc823ececdb7f77",
+      "hidden/test_hidden.py": "95755b60e1978bb756662288499ed42429b79a64c54773c1b18d61b04cd79d82",
+      "meta.json": "9f72c8d3878e8843f955ae5a22debfb4ab40e45262d2db39cb2f10e8fe4d62c8"
+    },
+    "weigher/t1": {
+      "gold/main.py": "649024687595347c908b46e95c7f772bb1dd29500e52193cdf6492c8ccef90df",
+      "hidden/test_hidden.py": "b4b0ebbe731816277cbce7402d50872c51b0dfa031c5740ff2be918d0f401648",
+      "meta.json": "29b75ea1776851793b1d25effc97ad46d503a0f8a86d370318be166f1cea060d"
+    },
+    "weigher/t2": {
+      "gold/main.py": "353e77fc9cd61d0d9c94e5e766d55e9552e529bec7ecfeab57079f324f0ad309",
+      "hidden/test_hidden.py": "3b773802b34782bb1e5ef14d1fae62d9f84873f4a70987a7c9247c7a24e8cce2",
+      "meta.json": "f5c461ecfeea0b483954f9ecc12aa9cd3a8ab47b8d053f788d2a3d6e46815db3"
+    }
+  },
+  "benchmark": "localsuite",
+  "combined_sha256": "f3bc9d9920e78394d5ee1656513f4c9657bf799454a04aec544dd1f40dacb2ff",
+  "n_repos": 8,
+  "n_tasks": 16,
+  "provenance": {
+    "authored_by_model": "claude-fable-5 (session model at authoring)",
+    "note": "Authoring transcripts live outside the repo tree (~/.claude/.../subagents/workflows) and never inside any task dir or workdir; grading assets (hidden/, gold/, meta.json) are siblings of repo/ and never materialised into the agent workdir.",
+    "solving_agent_model": "claude-haiku-4-5-20251001"
+  }
+}

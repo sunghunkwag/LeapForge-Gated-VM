@@ -1,0 +1,18 @@
+{
+  "repo": "header",
+  "task": "t2",
+  "issue": "doubled(x) returns x, not 2x.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

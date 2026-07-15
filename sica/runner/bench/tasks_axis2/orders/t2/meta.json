@@ -1,0 +1,18 @@
+{
+  "repo": "orders",
+  "task": "t2",
+  "issue": "bulk_discount(qty, unit_price) is supposed to give a 10% discount to any order of 10 or more units, but an order of exactly 10 units is charged the full price. Only orders of 11+ units currently get the discount; the 10-unit boundary is handled incorrectly.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "repo": "inventory2",
+  "task": "t2",
+  "issue": "needs_reorder() never flags an item whose stock has fallen exactly to the reorder point. An item at the threshold should be reordered (stock at or below the threshold means reorder), but it is only flagged when strictly below, so items sitting right on the threshold are skipped and to_reorder() omits them. Fix the boundary in main.py.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

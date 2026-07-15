@@ -1,0 +1,18 @@
+{
+  "repo": "validation2",
+  "task": "t1",
+  "issue": "keep_valid(values) is supposed to drop invalid configuration values and return only the acceptable ones, but it keeps every value it is handed. Blatantly invalid entries -- empty strings, values with non-digit characters, values with a leading zero -- all come back untouched instead of being filtered out. Each value is validated through a helper this module imports from another file (helpers.py); the filtering loop and the decision about whether to keep a value live here in main.py.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

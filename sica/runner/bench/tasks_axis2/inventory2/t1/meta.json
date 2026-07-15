@@ -1,0 +1,18 @@
+{
+  "repo": "inventory2",
+  "task": "t1",
+  "issue": "fulfill() misbehaves at the edges of available stock. When a customer orders exactly the number of units on hand, the order is reported as unfillable (None) even though it can be met; and when a customer orders more than is on hand, the call raises an unhandled exception instead of reporting that the order cannot be filled. Fix fulfill() in main.py so that it returns the units remaining after a fillable order (which may be 0) and None for an order that cannot be met. Only main.py may be changed.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "repo": "tax",
+  "task": "t1",
+  "issue": "taxed() applies one flat rate to every category. The correct per-category rates are defined as a named table elsewhere in this project; find and use them.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

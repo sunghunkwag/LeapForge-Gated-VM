@@ -1,0 +1,18 @@
+{
+  "repo": "tax",
+  "task": "t2",
+  "issue": "subtotal(items) forgets to include the last item (off-by-one in the range).",
+  "difficulty": "easy",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

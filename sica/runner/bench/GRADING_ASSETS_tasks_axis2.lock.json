@@ -1,0 +1,113 @@
+{
+  "assets_per_task": {
+    "accounts/t1": {
+      "gold/main.py": "f2b33b9c5720609ae7dad4dd905f8dd8a6a66519336408cda0799e4b539fa14b",
+      "hidden/test_hidden.py": "d970c8c3916477709015fa7e3cc153d1876976ba3007aa2bca49ab05ad933c45",
+      "meta.json": "1f90e0ae4861e38e36828d4c8582349c18596b47e3d03588fd34a79f74004a6a"
+    },
+    "accounts/t2": {
+      "gold/main.py": "7c8b3711fd85b64e8cbb3f228b2c64b0f02859d8a12be87214568dbaa19edfad",
+      "hidden/test_hidden.py": "5e65318d5589f1234ae0afe803ca611801d06baa64925f00436c5e875da11316",
+      "meta.json": "c57bd18ead22fe3913a3edd34a00c95953cc492b86cd85fcba54f989891d56dd"
+    },
+    "geometry/t1": {
+      "gold/main.py": "4a0c43fcb701648405172fdeeb7eb17123e18413aa5fe169551e11b26e542276",
+      "hidden/test_hidden.py": "9176f0bf75c8487a142db90147af1ad680544563aa813616991856f150ba0aa2",
+      "meta.json": "7d274809df8979157aac00f603921cfa2e4ed76612d7e53ba003f16f71f06b0e"
+    },
+    "geometry/t2": {
+      "gold/main.py": "7f2b682678bacc8e27d3045dc41378c8b2b9d0e6a50dedfe9f1f240ab6356ba3",
+      "hidden/test_hidden.py": "e8807eb46f82ab30a5a21a7e79173e33e5f316e2ad1f24471d28122308c18466",
+      "meta.json": "e949b5533b6d1100f810311d1a73522aab0449c04ac619108b9d839dc630df59"
+    },
+    "inventory2/t1": {
+      "gold/main.py": "0bc443b8cb20ab5df1ade6be45d14237002e99543059fbcd3093c5b33caf1cbc",
+      "hidden/test_hidden.py": "fe989d2b512cd0c90490750629ec8d33c5d8c697bccdfeaf4806b22ef52d22c0",
+      "meta.json": "54f32a199979ee1db1b90d1dc9a36e580acffbcb72097e6422d62457e71efbbc"
+    },
+    "inventory2/t2": {
+      "gold/main.py": "0d5048ed23c560d7844f7db3faf09663f7f87ecb7e962e3ddc69298395d6ef1a",
+      "hidden/test_hidden.py": "5f1040ffea341482aa978df6bc1029ff0e03b448ec9f00928938b3bb941f9eb9",
+      "meta.json": "acb0907f81b16bd8b9e50ea725780fc269d7388e387a19a73dc9e4c776b22800"
+    },
+    "orders/t1": {
+      "gold/main.py": "1bd96d0ae5a526eb294646d14712ce33639d6eb58b05285cb4fd7ddde57e127a",
+      "hidden/test_hidden.py": "00edc7cacefc5309982639dd1f3d045ce200405706eed9516db2783f577c83f7",
+      "meta.json": "4097d72c71baf7f74d244e6c3433379da6af1bf4130cd5d80d824ee41d9ef258"
+    },
+    "orders/t2": {
+      "gold/main.py": "0fe8513f8f02256ab23fc38bfa8a47ae7bf70fdbb8085426172e07c48f18974d",
+      "hidden/test_hidden.py": "dd359c86718e24c429023dcbe4ddb04fdd2bfa6be7f6faeb79f57c2213b72ab3",
+      "meta.json": "8d8ea9e106392617fbfea64ed29e4a760a21a4d6b23f9e595a1207f76e51b8e4"
+    },
+    "parsing2/t1": {
+      "gold/main.py": "0ca2f0f3c3d680a2bc3efd1681d8a5ea312c534eae7cf196a9135f7e13316f05",
+      "hidden/test_hidden.py": "b84dfbe1509b643d32757ce851cd6977463e178908a9692d5920796971165e92",
+      "meta.json": "d238f029a40f85355fc36d9c6315d1d659c9b56ac5c718a362695a075a8bb748"
+    },
+    "parsing2/t2": {
+      "gold/main.py": "346e76ff939f7eb1bca740fb0c656d97c4834270fca8f10566c4249759110c9c",
+      "hidden/test_hidden.py": "241c65e5308be14ce353dd7791909cdd086fd90b5681a459b9c46317db4856a5",
+      "meta.json": "0924ebf96c167d66329d91fc9be0eba188eb02113da6434a3fa39eeddbff3d92"
+    },
+    "scheduling/t1": {
+      "gold/main.py": "379a6d8fbca277e0f47deb1da82c6bb362b4a73cb0febf2f3910cd9908af15be",
+      "hidden/test_hidden.py": "dcea56f291cc448fd8eabce16291f865e394655f4b6f2ac54d97cb3ef8e3874e",
+      "meta.json": "f5341a4fff164e166598016fa8d4b1d2e4dcfab2c62b9766388e358a84a1fb29"
+    },
+    "scheduling/t2": {
+      "gold/main.py": "808e23f85cf7380994069291e0cd4d0b92a8934b8e2b8986e648eb493b7c75cf",
+      "hidden/test_hidden.py": "130bd143d49387730e3db4874254f48e6bb633ec61eac4dd4769c30a846053e2",
+      "meta.json": "26db645261c8fa45492299ed56b74a7c8ec8fe18142c45ba72a013c197e482ab"
+    },
+    "search2/t1": {
+      "gold/main.py": "1fd529d0389164784d0cee982d81869f65e1c8dbe7b871094b3423946e3491b8",
+      "hidden/test_hidden.py": "9fa1c39224305aea0af9bc3aa400d37814ffaf31e670bca312479c3a6ed6d79e",
+      "meta.json": "95396e35a30f400507e626f5fa68bcd810a2621bbe974ef7bf2d062df582465a"
+    },
+    "search2/t2": {
+      "gold/main.py": "7f93b29fdb0eb4213d1b57d59fb533bc2b824f5379ed3d2a9d00c11e14bcf54d",
+      "hidden/test_hidden.py": "bddd9eda1fb335890bbf35b0ba9cbe47950267fca9fad5e921b0d4c18ea59afe",
+      "meta.json": "4c3f8763968d9a62ed6dc877934a4d6d26056a33b59d5f2a7ed4b736a60c08e7"
+    },
+    "taxes/t1": {
+      "gold/main.py": "87fcfdc131ea89fdedabc52bf2e307c002bcef9ce88a417c2c302ecf2360a12e",
+      "hidden/test_hidden.py": "2c351f56f3412720013c3ac3552844974273e4453acf6cb8bb0bf9a01ecf1714",
+      "meta.json": "e6357d806a8281143490bb4d8d996fb9806d0f82814ec37c13b321a1279967db"
+    },
+    "taxes/t2": {
+      "gold/main.py": "23fb0e975fba732fd54d8d7ddb2153864f8b96a61cd9953d7f6b43c84020f070",
+      "hidden/test_hidden.py": "c4536751c9c66fc66c462371af1ec1cc7652f08b0898597ab60f48e6afa1d70d",
+      "meta.json": "d53197d3894510045fea551bb62eb64a04997136fd6e92b7dad1c821933fda5a"
+    },
+    "validation2/t1": {
+      "gold/main.py": "e438102ee27e8ca8c6cf4b2b708c627e7f6e3197e78aa65cb219c35b3d829e3f",
+      "hidden/test_hidden.py": "b34c8801b7f4bbd732a804080abe2ecbfc70c683dd99043e270578191b63a709",
+      "meta.json": "5182b12eb73acef067c23afad6a0850dfe5e3f6ea388d9e3284a17a888e0462d"
+    },
+    "validation2/t2": {
+      "gold/main.py": "1a0fb0818a94539e1cd060da486086259e9289ddbba2fe978c5b90ac964c7cad",
+      "hidden/test_hidden.py": "449ea1e9838b4f50316826a2bede8b427301405259cc13efb35035e7c207be76",
+      "meta.json": "39ddc6fabaabc02e7a4ed310fdc7d15ec083583649d88a15f7f6b64c534940b4"
+    },
+    "wordcount/t1": {
+      "gold/main.py": "eac687c5c7ecd8cb6c5c9107310874b0d730788e39e1d14fa9a69b5a0f4af404",
+      "hidden/test_hidden.py": "1a19bf16a5455d36a9de4c84ccb93d542cab9e7f5042b3f98a588a91a873fb23",
+      "meta.json": "33b59255ddb9c8384fb3265e277221da60a44081097d2ed26f373a31ea73eeb4"
+    },
+    "wordcount/t2": {
+      "gold/main.py": "b940e214247e53421ff21bad09dbbe1a16f25ea48b9003fdcf732ee94fb9351f",
+      "hidden/test_hidden.py": "6240a683b6c1dcea935da992be26c9401c90720257cae3a8b66ce59d588b7e1e",
+      "meta.json": "30212584479180fc2c157f26e2c5aaef33b26c44463727693203acd3581202fe"
+    }
+  },
+  "benchmark": "localsuite",
+  "combined_sha256": "8fef753e541cc04d17f6ea511426fa89717c9854be052af2043f6874caa03c3e",
+  "n_repos": 10,
+  "n_tasks": 20,
+  "provenance": {
+    "authored_by_model": "claude-fable-5 (session model at authoring)",
+    "note": "Authoring transcripts live outside the repo tree (~/.claude/.../subagents/workflows) and never inside any task dir or workdir; grading assets (hidden/, gold/, meta.json) are siblings of repo/ and never materialised into the agent workdir.",
+    "solving_agent_model": "claude-haiku-4-5-20251001"
+  }
+}

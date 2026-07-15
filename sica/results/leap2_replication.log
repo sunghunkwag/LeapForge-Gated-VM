@@ -1,0 +1,5 @@
+incumbent sha=ce08542ee4d5dfde  candidate sha=d4a387664cc4a408
+seed s1 heldout(8): INCUMBENT 4/8  CANDIDATE 8/8  (delta +4)  newly=['header/t1', 'retries/t1', 'token/t1', 'tolerance/t1']
+seed s2 heldout(8): INCUMBENT 4/8  CANDIDATE 8/8  (delta +4)  newly=['precision/t1', 'seasonal/t1', 'token/t1', 'tolerance/t1']
+seed s3 heldout(8): INCUMBENT 4/8  CANDIDATE 8/8  (delta +4)  newly=['codeword/t1', 'delim/t1', 'token/t1', 'tolerance/t1']
+POOLED: incumbent 12/24 (50%) vs candidate 24/24 (100%)  wins=3/3  cost=$0.4602

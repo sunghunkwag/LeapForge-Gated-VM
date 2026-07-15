@@ -1,0 +1,18 @@
+{
+  "repo": "units",
+  "task": "t1",
+  "issue": "c_to_f(c) is missing the +32 offset in the Celsius-to-Fahrenheit formula. (f_to_c is correct.)",
+  "difficulty": "easy",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

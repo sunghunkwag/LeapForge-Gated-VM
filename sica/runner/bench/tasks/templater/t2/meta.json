@@ -1,0 +1,18 @@
+{
+  "repo": "templater",
+  "task": "t2",
+  "issue": "render escaped braces incorrectly: '{{name}}' should render the literal '{name}' (not substitute name). Doubled braces are escapes.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

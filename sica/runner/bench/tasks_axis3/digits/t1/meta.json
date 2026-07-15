@@ -1,0 +1,18 @@
+{
+  "repo": "digits",
+  "task": "t1",
+  "issue": "encode(n) scrambles a non-negative integer into a stored code, and decode(code) is meant to be the exact inverse, so that decode(encode(n)) == n for every number n in range. It is not the exact inverse. The round-trip is correct for small numbers but returns the wrong value once the numbers get larger: decode(encode(500)) returns 166 instead of 500, and decode(encode(700)) returns 33 instead of 700; some inputs even come back negative. encode is correct and must not change, and the mixing step it relies on is defined in helpers.py, which is also correct and must not be edited. The bug is in main.py, in the way decode reverses what encode did -- fix it there so that decode(encode(n)) == n for every number n in range.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

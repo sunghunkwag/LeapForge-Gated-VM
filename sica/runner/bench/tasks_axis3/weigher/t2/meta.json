@@ -1,0 +1,10 @@
+{
+  "repo": "weigher",
+  "task": "t2",
+  "issue": "remaining_capacity(limit, loads) should return how much more weight can still be added to a scale: the limit minus the total weight already loaded. Instead it ADDS the total load to the limit -- the wrong operator -- so the reported capacity grows as weight is added rather than shrinking. For example, remaining_capacity(100, [30, 20]) returns 150 but should return 50, and remaining_capacity(200, [200]) returns 400 but should return 0. An empty scale already returns the full limit correctly. The bug is entirely in main.py; fix the operator so remaining capacity is the limit minus the total load.",
+  "difficulty": "easy",
+  "editable_files": ["main.py"],
+  "public_test_paths": ["test_public.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

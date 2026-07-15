@@ -1,0 +1,12 @@
+# Runtime artifacts — regenerated per run, not source of truth.
+# Keep the directory structure (.gitkeep) but ignore everything written there.
+ledger/*
+memory/*
+archive/*
+runs/*
+!ledger/.gitkeep
+!memory/.gitkeep
+!archive/.gitkeep
+!runs/.gitkeep
+__pycache__/
+*.pyc

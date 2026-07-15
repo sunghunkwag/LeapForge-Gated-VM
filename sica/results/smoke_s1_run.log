@@ -1,0 +1,233 @@
+====================================================================
+SICA SESSION APPROVAL BLOCK  (directive section 5)
+====================================================================
+  profile           : smoke
+  base model        : claude-haiku-4-5-20251001  (pinned, no mid-run swap)
+  temperature (req) : 0.0
+  benchmark         : localsuite
+  benchmark pin     : 26 tasks / 13 repos  sha=c4db3ec972e898d8
+  split             : 15 train / 10 heldout (repo-disjoint)
+  tournament K      : 2
+  max generations   : 3
+  per-task caps     : {'max_model_calls': 40, 'max_model_tokens': 120000, 'max_output_tokens_per_call': 8192, 'max_tool_calls': 25, 'max_steps': 12, 'max_io_ops': 2000, 'max_write_bytes': 8000000, 'wall_seconds': 240}
+  network isolation : OK (net+mount namespaces, tmpfs hiding OK)
+  guardrails        : G-isolate G-heldout G-sandbox G-budget
+  ---- estimated API cost (rough) ----
+  task attempts     : ~175
+  model calls       : ~525 agent + 6 proposer
+  cost estimate     : $1.38 expected  (band $0.69 - $2.77)
+  auto-halts        : budget exhaustion, >3x-baseline gen spend, 3-gen heldout regression, scope-escape
+====================================================================
+
+validating the 25 split tasks...
+all split tasks valid; session cost cap = $20.00
+
+T8 adoption policy: HALT for approval on any gate adoption
+
+split: 15 train (8 repos) / 10 heldout (5 repos), repo-disjoint
+T1 containment: reachability OK (26 tasks scanned); hash-lock verified
+
+=== GEN 0 (baseline) ===
+    [gen0-heldout] bank/t2                solved
+    [gen0-heldout] bank/t1                solved
+    [gen0-heldout] rpncalc/t2             solved
+    [gen0-heldout] listalgo/t1            solved
+    [gen0-heldout] listalgo/t2            solved
+    [gen0-heldout] csvlite/t1             solved
+    [gen0-heldout] stringcase/t1          solved
+    [gen0-heldout] csvlite/t2             solved
+    [gen0-heldout] rpncalc/t1             solved
+    [gen0-heldout] stringcase/t2          solved
+  HELD-OUT CURVE: g0:1.00
+
+=== GEN 1 ===
+    [gen1-incumbent] histogram/t1           solved
+    [gen1-incumbent] gridpath/t1            solved
+    [gen1-incumbent] fraction/t2            solved
+    [gen1-incumbent] histogram/t2           solved
+    [gen1-incumbent] fraction/t1            solved
+    [gen1-incumbent] intervals/t2           solved
+    [gen1-incumbent] romans/t1              solved
+    [gen1-incumbent] intervals/t1           solved
+    [gen1-incumbent] semver/t1              solved
+    [gen1-incumbent] templater/t1           solved
+    [gen1-incumbent] romans/t2              solved
+    [gen1-incumbent] units/t1               solved
+    [gen1-incumbent] templater/t2           solved
+    [gen1-incumbent] gridpath/t2            solved
+    [gen1-incumbent] semver/t2              solved
+  incumbent TRAIN solved 15/15
+  proposing K=2 candidates...
+    [gen1-cand:smart-prompt-truncation-on-retry] histogram/t1           solved
+    [gen1-cand:smart-prompt-truncation-on-retry] intervals/t1           solved
+    [gen1-cand:smart-prompt-truncation-on-retry] fraction/t1            solved
+    [gen1-cand:smart-prompt-truncation-on-retry] intervals/t2           solved
+    [gen1-cand:smart-prompt-truncation-on-retry] gridpath/t1            solved
+    [gen1-cand:smart-prompt-truncation-on-retry] romans/t1              solved
+    [gen1-cand:smart-prompt-truncation-on-retry] fraction/t2            solved
+    [gen1-cand:smart-prompt-truncation-on-retry] semver/t1              solved
+    [gen1-cand:smart-prompt-truncation-on-retry] templater/t1           solved
+    [gen1-cand:smart-prompt-truncation-on-retry] romans/t2              solved
+    [gen1-cand:smart-prompt-truncation-on-retry] units/t1               solved
+    [gen1-cand:smart-prompt-truncation-on-retry] histogram/t2           solved
+    [gen1-cand:smart-prompt-truncation-on-retry] semver/t2              solved
+    [gen1-cand:smart-prompt-truncation-on-retry] templater/t2           solved
+    [gen1-cand:smart-prompt-truncation-on-retry] gridpath/t2            solved
+    candidate smart-prompt-truncation-on-retry TRAIN solved 15/15
+    [gen1-cand:handle-crlf-line-endings] histogram/t1           solved
+    [gen1-cand:handle-crlf-line-endings] histogram/t2           solved
+    [gen1-cand:handle-crlf-line-endings] fraction/t1            solved
+    [gen1-cand:handle-crlf-line-endings] intervals/t1           solved
+    [gen1-cand:handle-crlf-line-endings] fraction/t2            solved
+    [gen1-cand:handle-crlf-line-endings] intervals/t2           solved
+    [gen1-cand:handle-crlf-line-endings] gridpath/t1            solved
+    [gen1-cand:handle-crlf-line-endings] templater/t1           solved
+    [gen1-cand:handle-crlf-line-endings] romans/t1              solved
+    [gen1-cand:handle-crlf-line-endings] semver/t1              solved
+    [gen1-cand:handle-crlf-line-endings] romans/t2              solved
+    [gen1-cand:handle-crlf-line-endings] units/t1               solved
+    [gen1-cand:handle-crlf-line-endings] semver/t2              solved
+    [gen1-cand:handle-crlf-line-endings] templater/t2           solved
+    [gen1-cand:handle-crlf-line-endings] gridpath/t2            solved
+    candidate handle-crlf-line-endings TRAIN solved 15/15
+  gate: 0/2 candidates beat incumbent -> keep incumbent
+    [gen1-heldout] bank/t1                solved
+    [gen1-heldout] bank/t2                solved
+    [gen1-heldout] listalgo/t1            solved
+    [gen1-heldout] listalgo/t2            solved
+    [gen1-heldout] rpncalc/t2             solved
+    [gen1-heldout] stringcase/t1          solved
+    [gen1-heldout] rpncalc/t1             solved
+    [gen1-heldout] csvlite/t1             solved
+    [gen1-heldout] stringcase/t2          solved
+    [gen1-heldout] csvlite/t2             solved
+  HELD-OUT CURVE: g0:1.00  g1:1.00
+
+=== GEN 2 ===
+    [gen2-incumbent] histogram/t2           solved
+    [gen2-incumbent] histogram/t1           solved
+    [gen2-incumbent] fraction/t1            solved
+    [gen2-incumbent] fraction/t2            solved
+    [gen2-incumbent] gridpath/t1            solved
+    [gen2-incumbent] intervals/t2           solved
+    [gen2-incumbent] intervals/t1           solved
+    [gen2-incumbent] romans/t1              solved
+    [gen2-incumbent] templater/t1           solved
+    [gen2-incumbent] romans/t2              solved
+    [gen2-incumbent] units/t1               solved
+    [gen2-incumbent] semver/t1              solved
+    [gen2-incumbent] semver/t2              solved
+    [gen2-incumbent] templater/t2           solved
+    [gen2-incumbent] gridpath/t2            solved
+  incumbent TRAIN solved 15/15
+  proposing K=2 candidates...
+    [gen2-cand:file-change-tracking-tool] histogram/t1           solved
+    [gen2-cand:file-change-tracking-tool] histogram/t2           solved
+    [gen2-cand:file-change-tracking-tool] fraction/t1            solved
+    [gen2-cand:file-change-tracking-tool] gridpath/t1            solved
+    [gen2-cand:file-change-tracking-tool] intervals/t2           solved
+    [gen2-cand:file-change-tracking-tool] intervals/t1           solved
+    [gen2-cand:file-change-tracking-tool] fraction/t2            solved
+    [gen2-cand:file-change-tracking-tool] romans/t1              solved
+    [gen2-cand:file-change-tracking-tool] romans/t2              solved
+    [gen2-cand:file-change-tracking-tool] units/t1               solved
+    [gen2-cand:file-change-tracking-tool] templater/t1           solved
+    [gen2-cand:file-change-tracking-tool] semver/t1              solved
+    [gen2-cand:file-change-tracking-tool] semver/t2              solved
+    [gen2-cand:file-change-tracking-tool] templater/t2           solved
+    [gen2-cand:file-change-tracking-tool] gridpath/t2            solved
+    candidate file-change-tracking-tool TRAIN solved 15/15
+    [gen2-cand:localize-failure-functions] histogram/t2           solved
+    [gen2-cand:localize-failure-functions] fraction/t1            solved
+    [gen2-cand:localize-failure-functions] fraction/t2            solved
+    [gen2-cand:localize-failure-functions] intervals/t1           solved
+    [gen2-cand:localize-failure-functions] histogram/t1           solved
+    [gen2-cand:localize-failure-functions] gridpath/t2            solved
+    [gen2-cand:localize-failure-functions] romans/t1              solved
+    [gen2-cand:localize-failure-functions] romans/t2              solved
+    [gen2-cand:localize-failure-functions] intervals/t2           solved
+    [gen2-cand:localize-failure-functions] semver/t1              solved
+    [gen2-cand:localize-failure-functions] units/t1               solved
+    [gen2-cand:localize-failure-functions] templater/t1           solved
+    [gen2-cand:localize-failure-functions] templater/t2           solved
+    [gen2-cand:localize-failure-functions] semver/t2              solved
+    [gen2-cand:localize-failure-functions] gridpath/t1            solved
+    candidate localize-failure-functions TRAIN solved 15/15
+  gate: 0/2 candidates beat incumbent -> keep incumbent
+    [gen2-heldout] bank/t2                solved
+    [gen2-heldout] bank/t1                solved
+    [gen2-heldout] rpncalc/t2             solved
+    [gen2-heldout] listalgo/t1            solved
+    [gen2-heldout] stringcase/t1          solved
+    [gen2-heldout] listalgo/t2            solved
+    [gen2-heldout] stringcase/t2          solved
+    [gen2-heldout] csvlite/t1             solved
+    [gen2-heldout] rpncalc/t1             solved
+    [gen2-heldout] csvlite/t2             solved
+  HELD-OUT CURVE: g0:1.00  g1:1.00  g2:1.00
+
+=== GEN 3 ===
+  QD escape: restart from beba47153812e099 (train_score=1.0)
+    [gen3-incumbent] histogram/t2           solved
+    [gen3-incumbent] intervals/t1           solved
+    [gen3-incumbent] histogram/t1           solved
+    [gen3-incumbent] fraction/t2            solved
+    [gen3-incumbent] fraction/t1            solved
+    [gen3-incumbent] intervals/t2           solved
+    [gen3-incumbent] romans/t1              solved
+    [gen3-incumbent] gridpath/t1            solved
+    [gen3-incumbent] romans/t2              solved
+    [gen3-incumbent] templater/t1           solved
+    [gen3-incumbent] units/t1               solved
+    [gen3-incumbent] semver/t2              solved
+    [gen3-incumbent] gridpath/t2            solved
+    [gen3-incumbent] templater/t2           solved
+    [gen3-incumbent] semver/t1              solved
+  incumbent TRAIN solved 15/15
+  proposing K=2 candidates...
+    [gen3-cand:include-test-source-in-prompt] histogram/t1           solved
+    [gen3-cand:include-test-source-in-prompt] histogram/t2           solved
+    [gen3-cand:include-test-source-in-prompt] fraction/t2            solved
+    [gen3-cand:include-test-source-in-prompt] romans/t2              solved
+    [gen3-cand:include-test-source-in-prompt] fraction/t1            solved
+    [gen3-cand:include-test-source-in-prompt] gridpath/t1            solved
+    [gen3-cand:include-test-source-in-prompt] romans/t1              solved
+    [gen3-cand:include-test-source-in-prompt] intervals/t2           solved
+    [gen3-cand:include-test-source-in-prompt] semver/t1              solved
+    [gen3-cand:include-test-source-in-prompt] semver/t2              solved
+    [gen3-cand:include-test-source-in-prompt] templater/t1           solved
+    [gen3-cand:include-test-source-in-prompt] intervals/t1           solved
+    [gen3-cand:include-test-source-in-prompt] units/t1               solved
+    [gen3-cand:include-test-source-in-prompt] gridpath/t2            solved
+    [gen3-cand:include-test-source-in-prompt] templater/t2           solved
+    candidate include-test-source-in-prompt TRAIN solved 15/15
+    [gen3-cand:enable-context-gathering-with-import-sea] intervals/t1           solved
+    [gen3-cand:enable-context-gathering-with-import-sea] histogram/t1           solved
+    [gen3-cand:enable-context-gathering-with-import-sea] gridpath/t1            solved
+    [gen3-cand:enable-context-gathering-with-import-sea] fraction/t1            solved
+    [gen3-cand:enable-context-gathering-with-import-sea] histogram/t2           solved
+    [gen3-cand:enable-context-gathering-with-import-sea] fraction/t2            solved
+    [gen3-cand:enable-context-gathering-with-import-sea] intervals/t2           solved
+    [gen3-cand:enable-context-gathering-with-import-sea] romans/t1              solved
+    [gen3-cand:enable-context-gathering-with-import-sea] romans/t2              solved
+    [gen3-cand:enable-context-gathering-with-import-sea] semver/t1              solved
+    [gen3-cand:enable-context-gathering-with-import-sea] templater/t1           solved
+    [gen3-cand:enable-context-gathering-with-import-sea] semver/t2              solved
+    [gen3-cand:enable-context-gathering-with-import-sea] units/t1               solved
+    [gen3-cand:enable-context-gathering-with-import-sea] gridpath/t2            solved
+    [gen3-cand:enable-context-gathering-with-import-sea] templater/t2           solved
+    candidate enable-context-gathering-with-import-sea TRAIN solved 15/15
+  gate: 0/2 candidates beat incumbent -> keep incumbent
+    [gen3-heldout] bank/t2                solved
+    [gen3-heldout] bank/t1                solved
+    [gen3-heldout] listalgo/t1            solved
+    [gen3-heldout] listalgo/t2            solved
+    [gen3-heldout] stringcase/t1          solved
+    [gen3-heldout] rpncalc/t1             solved
+    [gen3-heldout] rpncalc/t2             solved
+    [gen3-heldout] stringcase/t2          solved
+    [gen3-heldout] csvlite/t1             solved
+    [gen3-heldout] csvlite/t2             solved
+  HELD-OUT CURVE: g0:1.00  g1:1.00  g2:1.00  g3:1.00
+
+RUN SUMMARY (run_id=c6ed5e): {'curve': [1.0, 1.0, 1.0, 1.0], 'gen0_heldout': 1.0, 'best_heldout': 1.0, 'gen0_vs_best_delta': 0.0, 'generations_run': 3, 'halted': False, 'halt_reason': None, 'best_sha': 'beba47153812e099', 'session_totals': {'calls': 182, 'input_tokens': 136978, 'output_tokens': 446056, 'cost_usd': 2.575724}, 'config_sha': '52d5cd96c6bc'}

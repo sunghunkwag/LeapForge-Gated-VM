@@ -1,0 +1,18 @@
+{
+  "repo": "fees",
+  "task": "t1",
+  "issue": "fee() returns wrong amounts per payment method. The real wire fee, ACH fee, and card percentage are defined as named constants elsewhere in this project.",
+  "difficulty": "hard",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

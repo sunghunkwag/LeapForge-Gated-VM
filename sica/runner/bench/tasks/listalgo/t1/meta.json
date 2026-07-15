@@ -1,0 +1,10 @@
+{
+  "repo": "listalgo",
+  "task": "t1",
+  "issue": "chunk(items, size) is supposed to split a list into consecutive sublists of length `size`, with a shorter final chunk when the length is not an exact multiple of `size`. Instead, whenever the items do not divide evenly the trailing partial chunk is dropped entirely -- for example chunk([1, 2, 3, 4, 5], 2) returns [[1, 2], [3, 4]] and silently loses [5]. It also returns [] when `size` is larger than the whole list. Please fix chunk so that no elements are ever discarded.",
+  "difficulty": "easy",
+  "editable_files": ["core.py"],
+  "public_test_paths": ["test_public.py", "test_repro.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

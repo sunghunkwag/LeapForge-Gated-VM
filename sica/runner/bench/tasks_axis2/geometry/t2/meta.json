@@ -1,0 +1,18 @@
+{
+  "repo": "geometry",
+  "task": "t2",
+  "issue": "point_in_rect(px, py, x0, y0, x1, y1) wrongly reports points that lie exactly on the rectangle's right or top edge as being outside. The rectangle is meant to be inclusive of its boundary, so (10, 5) -- which sits on the right edge of the rectangle from (0, 0) to (10, 10) -- should count as inside, but the function returns False for it; likewise the top edge and the top-right corner. Strictly interior points and clearly-outside points are handled correctly.",
+  "difficulty": "easy",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

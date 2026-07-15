@@ -1,0 +1,83 @@
+# T8 PENDING ADOPTION — candidate 'enable-grep-localize-function' (gen1)
+# train: 15/15 vs incumbent 8/15 (+7 strict). Held-out NOT scored (T8, kept clean).
+# Change: gather_context now greps issue-named function defs + ALL_CAPS constants
+# from the repo's non-editable files into the prompt (the context-dependence fix).
+# --- diff (GEN0 -> adopted candidate) ---
+--- archive/a4d1fe5ee554_afa858/gen00_beba47153812e099/policy.py	2026-07-14 04:39:21.016549197 +0000
++++ archive/a4d1fe5ee554_afa858/gen01_038176393325be15/policy.py	2026-07-14 04:51:07.371133119 +0000
+@@ -5,5 +5,5 @@
+ MODEL_MAX_TOKENS = 4096     # per completion
+ SHOW_PUBLIC_TESTS = True    # run public tests to get a baseline before editing
+ INCLUDE_TEST_SOURCE = False # include the public test source in the prompt
+-GREP_CONTEXT = False        # gather extra context by searching the repo
++GREP_CONTEXT = True         # gather extra context by searching the repo
+ MAX_CONTEXT_CHARS = 12000   # cap on file text placed in a single prompt
+--- archive/a4d1fe5ee554_afa858/gen00_beba47153812e099/tools.py	2026-07-14 04:39:21.016598967 +0000
++++ archive/a4d1fe5ee554_afa858/gen01_038176393325be15/tools.py	2026-07-14 04:51:07.371191753 +0000
+@@ -1,7 +1,3 @@
+-# GEN0 tools, composed only from ctx primitives. New tools (symbol index,
+-# focused test runner, diff minimiser) are meant to be added here by the
+-# engine -- each is just a function over ctx.read/ls/grep/run_tests/model.
+-
+ import re
+ 
+ _FILE_BLOCK = re.compile(
+@@ -69,19 +65,47 @@
+ 
+ 
+ def gather_context(ctx, task):
+-    """Optional: pull a little extra repo context by searching for the
+-    editable files' base names. Cheap, best-effort, capped."""
++    """Pull repository context by finding function definitions and constants.
++    Extracts function names mentioned in the issue and searches the repo to show
++    where those functions are defined and where constant/mapping definitions are.
++    This helps the agent localize exactly which function is broken before editing."""
+     if not GREP_CONTEXT:
+         return ""
++    
++    issue_text = task.issue or ""
+     seen = []
+-    for path in task.editable_files:
+-        stem = path.split("/")[-1].split(".")[0]
++    
++    # Extract function names mentioned in the issue (pattern: identifier followed by parentheses)
++    func_names = re.findall(r'\b([a-zA-Z_]\w*)\s*\(', issue_text)
++    func_names = list(dict.fromkeys(func_names))  # Deduplicate while preserving order
++    
++    # Search for definitions of these functions to show where the bug is located
++    for func_name in func_names[:4]:
++        if len(seen) >= 20:
++            break
+         try:
+-            hits = ctx.grep(r"\b%s\b" % re.escape(stem), ".", 20)
++            pattern = r'def\s+' + re.escape(func_name) + r'\s*\('
++            hits = ctx.grep(pattern, ".", 20)
++            for h in hits[:1]:  # Just first match per function
++                line = "%s:%s: %s" % (h.get("path"), h.get("line"), h.get("text"))
++                if line not in seen:
++                    seen.append(line)
+         except Exception:
+-            hits = []
+-        for h in hits[:5]:
+-            line = "%s:%s: %s" % (h.get("path"), h.get("line"), h.get("text"))
+-            if line not in seen:
+-                seen.append(line)
+-    return "\n".join(seen[:40])
++            pass
++    
++    # Search for constant/mapping definitions (ALL_CAPS naming convention).
++    # These typically represent the 'correct values' or config referenced in the issue.
++    try:
++        hits = ctx.grep(r'\b[A-Z_]{2,}\s*=', ".", 30)
++        for h in hits[:15]:
++            text = (h.get("text") or "").strip()
++            if len(text) < 150:  # Skip very long lines
++                line = "%s:%s: %s" % (h.get("path"), h.get("line"), text)
++                if line not in seen:
++                    seen.append(line)
++                if len(seen) >= 25:
++                    break
++    except Exception:
++        pass
++    
++    return "\n".join(seen[:20])

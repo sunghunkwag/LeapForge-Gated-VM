@@ -1,0 +1,10 @@
+{
+  "repo": "listalgo",
+  "task": "t2",
+  "issue": "dedup(items) should remove duplicate values while preserving first-seen order, and every call must be independent of previous ones. In practice the results depend on earlier calls: the first call looks correct, but calling dedup again -- even on a brand new list -- drops values that were seen during an earlier call, and can even return an empty list. The de-duplication bookkeeping is being shared across invocations instead of starting fresh each time. Make each call self-contained so identical inputs always produce identical outputs.",
+  "difficulty": "medium",
+  "editable_files": ["core.py"],
+  "public_test_paths": ["test_public.py"],
+  "fail_to_pass": ["test_hidden.py"],
+  "pass_to_pass": ["test_public.py"]
+}

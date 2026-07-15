@@ -1,0 +1,18 @@
+{
+  "repo": "semver",
+  "task": "t2",
+  "issue": "is_valid(s) rejects any version that has a pre-release suffix (e.g. '1.0.0-rc.1'), but such versions are valid semver. It must accept X.Y.Z with an optional '-prerelease'.",
+  "difficulty": "medium",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

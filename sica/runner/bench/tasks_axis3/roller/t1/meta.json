@@ -1,0 +1,18 @@
+{
+  "repo": "roller",
+  "task": "t1",
+  "issue": "rebuild(data) takes a list of byte values (each an integer 0-255) and is supposed to reproduce the project's rolling combine over the whole list -- exactly the integer you get by feeding the bytes one at a time through the project's one-step rolling combine, starting from an accumulator of 0. It does not. For any input of two or more bytes the integer it returns is wrong, and for longer inputs it drifts further from the correct value and keeps growing without limit instead of staying inside the bounded range the real combine holds it to. The empty list and single-byte inputs happen to come out right, which hides the problem. The one-step rolling combine is defined by roll() in helpers.py; that helper is correct and must not be edited. Fix rebuild in main.py so that it reproduces the real rolling combine for every list of bytes.",
+  "difficulty": "hard",
+  "editable_files": [
+    "main.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

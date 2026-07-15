@@ -1,0 +1,18 @@
+{
+  "repo": "rpncalc",
+  "task": "t2",
+  "issue": "Division is meant to truncate toward zero, the way an integer calculator does, so that a division with a negative result drops its fractional part rather than rounding down. At the moment some negative quotients come out one too low: dividing when exactly one operand is negative rounds away from zero instead of toward it. Divisions that are exact, all-positive, or between two same-sign operands are fine. Make the division operator truncate toward zero.",
+  "difficulty": "hard",
+  "editable_files": [
+    "core.py"
+  ],
+  "public_test_paths": [
+    "test_public.py"
+  ],
+  "fail_to_pass": [
+    "test_hidden.py"
+  ],
+  "pass_to_pass": [
+    "test_public.py"
+  ]
+}

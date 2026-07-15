@@ -37,7 +37,7 @@ beat a null arm before it counts.
 
 ## 2. Expedition XIX — certified structural self-expansion
 
-![Structural self-expansion — the manifold grows a new operator](expansion.svg)
+![Structural self-expansion — the same task before and after the vocabulary grows](expansion.svg)
 
 The loop, per generation:
 

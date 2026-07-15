@@ -1,0 +1,165 @@
+<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+  <style>
+    @keyframes stamp    { 0%,2% {opacity:0; transform:scale(1.7) rotate(-14deg)} 6% {opacity:1; transform:scale(1) rotate(-8deg)} 96%,100% {opacity:1; transform:scale(1) rotate(-8deg)} }
+    @keyframes nd1      { 0%,12% {opacity:0} 15%,100% {opacity:1} }
+    @keyframes nd2      { 0%,17% {opacity:0} 20%,100% {opacity:1} }
+    @keyframes nd3      { 0%,22% {opacity:0} 25%,100% {opacity:1} }
+    @keyframes nd4      { 0%,27% {opacity:0} 30%,100% {opacity:1} }
+    @keyframes screenbx { 0%,33% {opacity:0} 37%,100% {opacity:1} }
+    @keyframes admflash { 0%,37% {fill:#fff8c5} 41% {fill:#ffd88a} 45%,100% {fill:#fff8c5} }
+    @keyframes admarrow { 0%,42% {opacity:0; stroke-dashoffset:260} 46% {opacity:1} 56% {stroke-dashoffset:0} 100% {opacity:1; stroke-dashoffset:0} }
+    @keyframes growband { 0%,50% {opacity:0; transform:scale(0.2)} 54% {opacity:1; transform:scale(1.12)} 58% {transform:scale(1)} 96%,100% {opacity:1; transform:scale(1)} }
+    @keyframes growlbl  { 0%,56% {opacity:0} 60%,96% {opacity:1} 100% {opacity:0} }
+    @keyframes leap1    { 0%,64% {opacity:0; transform:translateY(-9px)} 68%,97% {opacity:1; transform:translateY(0)} 100% {opacity:0} }
+    @keyframes leap2    { 0%,69% {opacity:0; transform:translateY(-9px)} 73%,97% {opacity:1; transform:translateY(0)} 100% {opacity:0} }
+    @keyframes leap3    { 0%,74% {opacity:0} 78%,97% {opacity:1} 100% {opacity:0} }
+    @keyframes leap4    { 0%,80% {opacity:0} 84%,97% {opacity:1} 100% {opacity:0} }
+    @keyframes ants     { to {stroke-dashoffset:-22} }
+    @keyframes floaty   { 0%,100% {transform:translateY(0)} 50% {transform:translateY(4px)} }
+    @keyframes edgedraw { 0%,12% {opacity:0} 15% {opacity:1} 100% {opacity:1} }
+    .stmp { animation: stamp 16s linear infinite; opacity:0; transform-box:fill-box; transform-origin:center; }
+    .n1   { animation: nd1 16s linear infinite; opacity:0; }
+    .n2   { animation: nd2 16s linear infinite; opacity:0; }
+    .n3   { animation: nd3 16s linear infinite; opacity:0; }
+    .n4   { animation: nd4 16s linear infinite; opacity:0; }
+    .scr  { animation: screenbx 16s linear infinite; opacity:0; }
+    .adm  { animation: admflash 16s linear infinite; }
+    .aar  { animation: admarrow 16s linear infinite, ants 1.1s linear infinite; opacity:0; stroke-dasharray:7 5; }
+    .grw  { animation: growband 16s linear infinite; opacity:0; transform-box:fill-box; transform-origin:left center; }
+    .glb  { animation: growlbl 16s linear infinite; opacity:0; }
+    .l1   { animation: leap1 16s linear infinite; opacity:0; }
+    .l2   { animation: leap2 16s linear infinite; opacity:0; }
+    .l3   { animation: leap3 16s linear infinite; opacity:0; }
+    .l4   { animation: leap4 16s linear infinite; opacity:0; }
+    .flo  { animation: floaty 7s ease-in-out infinite; }
+    .edg  { animation: edgedraw 16s linear infinite; opacity:0; }
+  </style>
+  <defs>
+    <marker id="xarr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#bc4c00"/>
+    </marker>
+  </defs>
+  <rect x="1" y="1" width="958" height="598" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="24" y="34" font-size="17" font-weight="600" fill="#24292f">Structural self-expansion &#8212; the manifold GROWS a new operator (16s loop)</text>
+  <text x="24" y="54" font-size="12" fill="#57606a">a task is PROVEN unsolvable &#8594; an operator is synthesized as data &#8594; admission grows every gate slice &#8594; the proven-impossible task is solved</text>
+
+  <!-- ============ left rail: the certified task ============ -->
+  <text x="30" y="92" font-size="12" font-weight="600" fill="#24292f">1 &#183; a frozen task, certified out of reach</text>
+  <rect x="30" y="100" width="300" height="46" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="44" y="120" font-size="12.5" fill="#24292f">task <tspan font-weight="700">f04</tspan> &#160;=&#160; pairmax &#183; pairmax</text>
+  <text x="44" y="137" font-size="11" fill="#57606a">hidden generator; engine sees only examples</text>
+  <g class="stmp">
+    <rect x="234" y="96" width="188" height="34" rx="6" fill="#ffebe9" stroke="#cf222e" stroke-width="2"/>
+    <text x="252" y="111" font-size="10.5" font-weight="700" fill="#cf222e">C1: CERTIFIED UNSOLVABLE</text>
+    <text x="252" y="124" font-size="9.5" fill="#cf222e">by all 54,005 seed behaviours, depth &#8804; 4</text>
+  </g>
+
+  <!-- ============ left rail: op-ir synthesis ============ -->
+  <text x="30" y="186" font-size="12" font-weight="600" fill="#24292f">2 &#183; "opgen" synthesizes an operator &#8212; as data</text>
+  <text x="30" y="202" font-size="11" fill="#57606a">a closed IR tree run by a total interpreter &#8212; no eval, no exec</text>
+  <g font-size="12">
+    <g class="n1">
+      <rect x="118" y="212" width="70" height="26" rx="6" fill="#ddf4ff" stroke="#1f6feb"/>
+      <text x="132" y="230" font-weight="700" fill="#0550ae">ZIP +1</text>
+    </g>
+    <line class="n2 edg" x1="143" y1="238" x2="105" y2="262" stroke="#57606a" stroke-width="1.4"/>
+    <g class="n2">
+      <rect x="64" y="264" width="60" height="26" rx="6" fill="#ddf4ff" stroke="#1f6feb"/>
+      <text x="80" y="282" font-weight="700" fill="#0550ae">MAX</text>
+    </g>
+    <line class="n3 edg" x1="80" y1="290" x2="62" y2="312" stroke="#57606a" stroke-width="1.4"/>
+    <g class="n3">
+      <rect x="40" y="314" width="40" height="26" rx="6" fill="#f6f8fa" stroke="#d0d7de"/>
+      <text x="54" y="332" font-weight="700" fill="#24292f">V</text>
+    </g>
+    <line class="n4 edg" x1="108" y1="290" x2="126" y2="312" stroke="#57606a" stroke-width="1.4"/>
+    <g class="n4">
+      <rect x="108" y="314" width="40" height="26" rx="6" fill="#f6f8fa" stroke="#d0d7de"/>
+      <text x="121" y="332" font-weight="700" fill="#24292f">A</text>
+    </g>
+    <text class="n4" x="170" y="292" font-size="11" fill="#57606a">pairs x[i] with x[i+1],</text>
+    <text class="n4" x="170" y="307" font-size="11" fill="#57606a">emits max(x[i], x[i+1])</text>
+  </g>
+
+  <!-- ============ left rail: admission ============ -->
+  <rect class="scr adm" x="30" y="366" width="300" height="60" rx="8" fill="#fff8c5" stroke="#d4a72c"/>
+  <g class="scr">
+    <text x="44" y="386" font-size="11.5" fill="#24292f">screen: total &#10003; &#160;novel behaviour &#10003;</text>
+    <text x="44" y="402" font-size="11.5" fill="#24292f">solves certified task d05 exactly (train + test) &#10003;</text>
+    <text x="44" y="419" font-size="12.5" font-weight="700" fill="#9a6700">&#8594; ADMITTED as token o01 &#183; lineage ledgered</text>
+  </g>
+  <path class="aar" d="M 336 396 C 420 396 430 360 470 330" fill="none" stroke="#bc4c00" stroke-width="2.4" marker-end="url(#xarr)"/>
+
+  <!-- ============ right: the 3D manifold stack (6 gate slices) ============ -->
+  <g class="flo">
+    <!-- g5 (top) -->
+    <g>
+      <path d="M 462 132 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+      <text x="436" y="140" font-size="12" fill="#57606a">g5</text>
+      <path class="grw" d="M 664.4 88 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+      <path class="grw" d="M 557.2 159.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    </g>
+    <!-- g4 -->
+    <g>
+      <path d="M 452 190 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+      <text x="426" y="198" font-size="12" fill="#57606a">g4</text>
+      <path class="grw" d="M 654.4 146 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+      <path class="grw" d="M 547.2 217.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    </g>
+    <!-- g3 -->
+    <g>
+      <path d="M 442 248 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+      <text x="416" y="256" font-size="12" fill="#57606a">g3</text>
+      <path class="grw" d="M 644.4 204 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+      <path class="grw" d="M 537.2 275.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    </g>
+    <!-- g2 -->
+    <g>
+      <path d="M 432 306 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+      <text x="406" y="314" font-size="12" fill="#57606a">g2</text>
+      <path class="grw" d="M 634.4 262 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+      <path class="grw" d="M 527.2 333.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    </g>
+    <!-- g1 -->
+    <g>
+      <path d="M 422 364 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+      <text x="396" y="372" font-size="12" fill="#57606a">g1</text>
+      <path class="grw" d="M 624.4 320 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+      <path class="grw" d="M 517.2 391.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    </g>
+    <!-- g0 (bottom) -->
+    <g>
+      <path d="M 412 422 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+      <text x="386" y="430" font-size="12" fill="#57606a">g0</text>
+      <path class="grw" d="M 614.4 378 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+      <path class="grw" d="M 507.2 449.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    </g>
+    <text x="736" y="474" font-size="11" fill="#8b949e">W[gate][prev][next] &#183; 6 gate slices</text>
+    <g class="glb">
+      <text x="804" y="110" font-size="11.5" font-weight="700" fill="#9a6700">new column: o01</text>
+      <text x="804" y="125" font-size="10.5" fill="#9a6700">every slice, floor 1.0 (G1)</text>
+      <text x="770" y="510" font-size="11.5" font-weight="700" fill="#9a6700">+ new row: o01 as "prev"</text>
+    </g>
+  </g>
+
+  <!-- ============ bottom: the leap ============ -->
+  <text x="30" y="472" font-size="12" font-weight="600" fill="#24292f">3 &#183; the leap &#8212; machine-verified, permanently witnessed</text>
+  <g font-size="12.5">
+    <g class="l1">
+      <rect x="30" y="484" width="52" height="28" rx="6" fill="#fff8c5" stroke="#d4a72c"/>
+      <text x="41" y="503" fill="#9a6700" font-weight="700">o01</text>
+    </g>
+    <line class="l2" x1="86" y1="498" x2="106" y2="498" stroke="#57606a" stroke-width="1.6"/>
+    <g class="l2">
+      <rect x="110" y="484" width="52" height="28" rx="6" fill="#fff8c5" stroke="#d4a72c"/>
+      <text x="121" y="503" fill="#9a6700" font-weight="700">o01</text>
+    </g>
+    <g class="l3">
+      <rect x="178" y="484" width="200" height="28" rx="14" fill="#dafbe1" stroke="#1a7f37"/>
+      <text x="192" y="503" font-size="12" font-weight="700" fill="#1a7f37">f04 SOLVED &#8212; exactly, train + test</text>
+    </g>
+  </g>
+  <text class="l4" x="30" y="537" font-size="12.5" font-weight="700" fill="#1a7f37">LEAP COUNT (cumulative, witness-verified): 1 &#8212; a task PROVEN out of reach is now inside it</text>
+  <text class="l4" x="30" y="556" font-size="11.5" fill="#57606a">the witness {task, program, vocab sha} is ledgered and re-executed at report time from ledgered IR alone</text>
+  <text x="30" y="580" font-size="11.5" fill="#8b949e">null twin OPEN_OFF (admission disabled, same budgets): 0 certified solves in every generation &#8212; the floor the C1 proof guarantees</text>
+</svg>

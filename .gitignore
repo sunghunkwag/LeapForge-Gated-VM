@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+# run artifacts (ledgers); completed evidence ledgers are committed
+# deliberately with git add -f
+runs/
+runs_open/

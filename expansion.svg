@@ -1,165 +1,233 @@
-<svg viewBox="0 0 960 600" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
+<svg viewBox="0 0 960 580" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Helvetica, Arial, sans-serif">
   <style>
-    @keyframes stamp    { 0%,2% {opacity:0; transform:scale(1.7) rotate(-14deg)} 6% {opacity:1; transform:scale(1) rotate(-8deg)} 96%,100% {opacity:1; transform:scale(1) rotate(-8deg)} }
-    @keyframes nd1      { 0%,12% {opacity:0} 15%,100% {opacity:1} }
-    @keyframes nd2      { 0%,17% {opacity:0} 20%,100% {opacity:1} }
-    @keyframes nd3      { 0%,22% {opacity:0} 25%,100% {opacity:1} }
-    @keyframes nd4      { 0%,27% {opacity:0} 30%,100% {opacity:1} }
-    @keyframes screenbx { 0%,33% {opacity:0} 37%,100% {opacity:1} }
-    @keyframes admflash { 0%,37% {fill:#fff8c5} 41% {fill:#ffd88a} 45%,100% {fill:#fff8c5} }
-    @keyframes admarrow { 0%,42% {opacity:0; stroke-dashoffset:260} 46% {opacity:1} 56% {stroke-dashoffset:0} 100% {opacity:1; stroke-dashoffset:0} }
-    @keyframes growband { 0%,50% {opacity:0; transform:scale(0.2)} 54% {opacity:1; transform:scale(1.12)} 58% {transform:scale(1)} 96%,100% {opacity:1; transform:scale(1)} }
-    @keyframes growlbl  { 0%,56% {opacity:0} 60%,96% {opacity:1} 100% {opacity:0} }
-    @keyframes leap1    { 0%,64% {opacity:0; transform:translateY(-9px)} 68%,97% {opacity:1; transform:translateY(0)} 100% {opacity:0} }
-    @keyframes leap2    { 0%,69% {opacity:0; transform:translateY(-9px)} 73%,97% {opacity:1; transform:translateY(0)} 100% {opacity:0} }
-    @keyframes leap3    { 0%,74% {opacity:0} 78%,97% {opacity:1} 100% {opacity:0} }
-    @keyframes leap4    { 0%,80% {opacity:0} 84%,97% {opacity:1} 100% {opacity:0} }
-    @keyframes ants     { to {stroke-dashoffset:-22} }
-    @keyframes floaty   { 0%,100% {transform:translateY(0)} 50% {transform:translateY(4px)} }
-    @keyframes edgedraw { 0%,12% {opacity:0} 15% {opacity:1} 100% {opacity:1} }
-    .stmp { animation: stamp 16s linear infinite; opacity:0; transform-box:fill-box; transform-origin:center; }
-    .n1   { animation: nd1 16s linear infinite; opacity:0; }
-    .n2   { animation: nd2 16s linear infinite; opacity:0; }
-    .n3   { animation: nd3 16s linear infinite; opacity:0; }
-    .n4   { animation: nd4 16s linear infinite; opacity:0; }
-    .scr  { animation: screenbx 16s linear infinite; opacity:0; }
-    .adm  { animation: admflash 16s linear infinite; }
-    .aar  { animation: admarrow 16s linear infinite, ants 1.1s linear infinite; opacity:0; stroke-dasharray:7 5; }
-    .grw  { animation: growband 16s linear infinite; opacity:0; transform-box:fill-box; transform-origin:left center; }
-    .glb  { animation: growlbl 16s linear infinite; opacity:0; }
-    .l1   { animation: leap1 16s linear infinite; opacity:0; }
-    .l2   { animation: leap2 16s linear infinite; opacity:0; }
-    .l3   { animation: leap3 16s linear infinite; opacity:0; }
-    .l4   { animation: leap4 16s linear infinite; opacity:0; }
-    .flo  { animation: floaty 7s ease-in-out infinite; }
-    .edg  { animation: edgedraw 16s linear infinite; opacity:0; }
+    @keyframes phA   { 0%,46% {opacity:1} 50%,96% {opacity:0} 100% {opacity:1} }
+    @keyframes phB   { 0%,46% {opacity:0} 50%,96% {opacity:1} 100% {opacity:0} }
+    @keyframes at1   { 0%,2% {opacity:0} 5%,12% {opacity:1} 15%,100% {opacity:0} }
+    @keyframes at2   { 0%,13% {opacity:0} 16%,23% {opacity:1} 26%,100% {opacity:0} }
+    @keyframes at3   { 0%,24% {opacity:0} 27%,34% {opacity:1} 37%,100% {opacity:0} }
+    @keyframes stmp  { 0%,36% {opacity:0; transform:scale(1.5) rotate(-9deg)} 40% {opacity:1; transform:scale(1) rotate(-3deg)} 46% {opacity:1; transform:scale(1) rotate(-3deg)} 50%,100% {opacity:0; transform:scale(1) rotate(-3deg)} }
+    @keyframes slotB { 0%,49% {opacity:0; transform:scale(1.6)} 52% {opacity:1; transform:scale(1)} 96% {opacity:1} 100% {opacity:0} }
+    @keyframes grw   { 0%,52% {opacity:0; transform:scale(0.2)} 56% {opacity:1; transform:scale(1.1)} 59% {transform:scale(1)} 96% {opacity:1; transform:scale(1)} 100% {opacity:0} }
+    @keyframes glb   { 0%,56% {opacity:0} 60%,94% {opacity:1} 98%,100% {opacity:0} }
+    @keyframes aar   { 0%,50% {opacity:0; stroke-dashoffset:300} 53% {opacity:1} 61% {stroke-dashoffset:0} 92% {opacity:1; stroke-dashoffset:0} 96%,100% {opacity:0; stroke-dashoffset:0} }
+    @keyframes run1  { 0%,58% {opacity:0; transform:translateY(-8px)} 62% {opacity:1; transform:translateY(0)} 96% {opacity:1} 100% {opacity:0} }
+    @keyframes run2  { 0%,66% {opacity:0; transform:translateY(-8px)} 70% {opacity:1; transform:translateY(0)} 96% {opacity:1} 100% {opacity:0} }
+    @keyframes runok { 0%,73% {opacity:0} 77%,96% {opacity:1} 100% {opacity:0} }
+    @keyframes wit   { 0%,80% {opacity:0} 84%,96% {opacity:1} 100% {opacity:0} }
+    @keyframes ants  { to {stroke-dashoffset:-22} }
+    @keyframes floaty{ 0%,100% {transform:translateY(0)} 50% {transform:translateY(4px)} }
+    .phA { animation: phA 16s linear infinite; }
+    .phB { animation: phB 16s linear infinite; opacity:0; }
+    .a1  { animation: at1 16s linear infinite; opacity:0; }
+    .a2  { animation: at2 16s linear infinite; opacity:0; }
+    .a3  { animation: at3 16s linear infinite; opacity:0; }
+    .stm { animation: stmp 16s linear infinite; opacity:0; transform-box:fill-box; transform-origin:center; }
+    .sb  { animation: slotB 16s linear infinite; opacity:0; transform-box:fill-box; transform-origin:center; }
+    .grw { animation: grw 16s linear infinite; opacity:0; transform-box:fill-box; transform-origin:left center; }
+    .glb { animation: glb 16s linear infinite; opacity:0; }
+    .aar { animation: aar 16s linear infinite, ants 1.1s linear infinite; opacity:0; stroke-dasharray:7 5; }
+    .r1  { animation: run1 16s linear infinite; opacity:0; }
+    .r2  { animation: run2 16s linear infinite; opacity:0; }
+    .rok { animation: runok 16s linear infinite; opacity:0; }
+    .wit { animation: wit 16s linear infinite; opacity:0; }
+    .flo { animation: floaty 7s ease-in-out infinite; }
   </style>
   <defs>
-    <marker id="xarr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
+    </marker>
+    <marker id="agold" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#bc4c00"/>
     </marker>
   </defs>
-  <rect x="1" y="1" width="958" height="598" rx="10" fill="#ffffff" stroke="#d0d7de"/>
-  <text x="24" y="34" font-size="17" font-weight="600" fill="#24292f">Structural self-expansion &#8212; the manifold GROWS a new operator (16s loop)</text>
-  <text x="24" y="54" font-size="12" fill="#57606a">a task is PROVEN unsolvable &#8594; an operator is synthesized as data &#8594; admission grows every gate slice &#8594; the proven-impossible task is solved</text>
-
-  <!-- ============ left rail: the certified task ============ -->
-  <text x="30" y="92" font-size="12" font-weight="600" fill="#24292f">1 &#183; a frozen task, certified out of reach</text>
-  <rect x="30" y="100" width="300" height="46" rx="8" fill="#f6f8fa" stroke="#d0d7de"/>
-  <text x="44" y="120" font-size="12.5" fill="#24292f">task <tspan font-weight="700">f04</tspan> &#160;=&#160; pairmax &#183; pairmax</text>
-  <text x="44" y="137" font-size="11" fill="#57606a">hidden generator; engine sees only examples</text>
-  <g class="stmp">
-    <rect x="234" y="96" width="188" height="34" rx="6" fill="#ffebe9" stroke="#cf222e" stroke-width="2"/>
-    <text x="252" y="111" font-size="10.5" font-weight="700" fill="#cf222e">C1: CERTIFIED UNSOLVABLE</text>
-    <text x="252" y="124" font-size="9.5" fill="#cf222e">by all 54,005 seed behaviours, depth &#8804; 4</text>
+  <rect x="1" y="1" width="958" height="578" rx="10" fill="#ffffff" stroke="#d0d7de"/>
+  <text x="24" y="32" font-size="17" font-weight="600" fill="#24292f">Structural self-expansion &#8212; the same task, before and after the vocabulary grows</text>
+  <text x="24" y="52" font-size="12" fill="#57606a">a real train example from the run ledger &#183; first every seed program provably fails, then one admitted operator makes it compute (16s loop)</text>
+  <text x="30" y="90" font-size="12" font-weight="600" fill="#24292f">frozen task f04 &#8212; reproduce EXACTLY:</text>
+  <rect x="30" y="100" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="48" y="117" font-size="11" fill="#24292f" text-anchor="middle">119</text>
+  <rect x="70" y="100" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="88" y="117" font-size="11" fill="#24292f" text-anchor="middle">204</text>
+  <rect x="110" y="100" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="128" y="117" font-size="11" fill="#24292f" text-anchor="middle">129</text>
+  <rect x="150" y="100" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="168" y="117" font-size="11" fill="#24292f" text-anchor="middle">138</text>
+  <rect x="190" y="100" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="208" y="117" font-size="11" fill="#24292f" text-anchor="middle">144</text>
+  <rect x="230" y="100" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="248" y="117" font-size="11" fill="#24292f" text-anchor="middle">195</text>
+  <line x1="278" y1="112" x2="304" y2="112" stroke="#57606a" stroke-width="1.8" marker-end="url(#ag)"/>
+  <rect x="312" y="100" width="36" height="24" rx="5" fill="#dafbe1" stroke="#4ac26b"/>
+  <text x="330" y="117" font-size="11" fill="#1a7f37" text-anchor="middle">204</text>
+  <rect x="352" y="100" width="36" height="24" rx="5" fill="#dafbe1" stroke="#4ac26b"/>
+  <text x="370" y="117" font-size="11" fill="#1a7f37" text-anchor="middle">204</text>
+  <rect x="392" y="100" width="36" height="24" rx="5" fill="#dafbe1" stroke="#4ac26b"/>
+  <text x="410" y="117" font-size="11" fill="#1a7f37" text-anchor="middle">144</text>
+  <rect x="432" y="100" width="36" height="24" rx="5" fill="#dafbe1" stroke="#4ac26b"/>
+  <text x="450" y="117" font-size="11" fill="#1a7f37" text-anchor="middle">195</text>
+  <text x="482" y="116" font-size="10.5" fill="#8b949e">target</text>
+  <text x="30" y="142" font-size="10.5" fill="#8b949e">one of 4 train examples &#8212; 3 more, plus 4 longer held-out inputs, must all match exactly</text>
+  <text x="30" y="172" font-size="12" font-weight="600" fill="#24292f">the vocabulary <tspan font-weight="400" fill="#8b949e">&#8212; 20 seed tokens, frozen since Expedition XIV</tspan></text>
+  <rect x="30" y="182" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="62" y="196" font-size="9.5" fill="#57606a" text-anchor="middle">add5</text>
+  <rect x="98" y="182" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="130" y="196" font-size="9.5" fill="#57606a" text-anchor="middle">big</text>
+  <rect x="166" y="182" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="198" y="196" font-size="9.5" fill="#57606a" text-anchor="middle">cummax</text>
+  <rect x="234" y="182" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="266" y="196" font-size="9.5" fill="#57606a" text-anchor="middle">cumsum</text>
+  <rect x="302" y="182" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="334" y="196" font-size="9.5" fill="#57606a" text-anchor="middle">dec</text>
+  <rect x="30" y="207" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="62" y="221" font-size="9.5" fill="#57606a" text-anchor="middle">dedupe</text>
+  <rect x="98" y="207" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="130" y="221" font-size="9.5" fill="#57606a" text-anchor="middle">diff</text>
+  <rect x="166" y="207" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="198" y="221" font-size="9.5" fill="#57606a" text-anchor="middle">double</text>
+  <rect x="234" y="207" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="266" y="221" font-size="9.5" fill="#57606a" text-anchor="middle">dup</text>
+  <rect x="302" y="207" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="334" y="221" font-size="9.5" fill="#57606a" text-anchor="middle">evens</text>
+  <rect x="30" y="232" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="62" y="246" font-size="9.5" fill="#57606a" text-anchor="middle">half</text>
+  <rect x="98" y="232" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="130" y="246" font-size="9.5" fill="#57606a" text-anchor="middle">inc</text>
+  <rect x="166" y="232" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="198" y="246" font-size="9.5" fill="#57606a" text-anchor="middle">init</text>
+  <rect x="234" y="232" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="266" y="246" font-size="9.5" fill="#57606a" text-anchor="middle">mod10</text>
+  <rect x="302" y="232" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="334" y="246" font-size="9.5" fill="#57606a" text-anchor="middle">neg</text>
+  <rect x="30" y="257" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="62" y="271" font-size="9.5" fill="#57606a" text-anchor="middle">pairsum</text>
+  <rect x="98" y="257" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="130" y="271" font-size="9.5" fill="#57606a" text-anchor="middle">reverse</text>
+  <rect x="166" y="257" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="198" y="271" font-size="9.5" fill="#57606a" text-anchor="middle">rotate</text>
+  <rect x="234" y="257" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="266" y="271" font-size="9.5" fill="#57606a" text-anchor="middle">sort</text>
+  <rect x="302" y="257" width="64" height="20" rx="4" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text x="334" y="271" font-size="9.5" fill="#57606a" text-anchor="middle">tail</text>
+  <rect x="30" y="284" width="64" height="20" rx="4" fill="none" stroke="#d4a72c" stroke-dasharray="4 3"/>
+  <text class="phA" x="104" y="298" font-size="10.5" fill="#8b949e" font-style="italic">open slot &#8212; nothing may enter without a certified leap</text>
+  <g class="sb">
+    <rect x="30" y="284" width="64" height="20" rx="4" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.6"/>
+    <text x="62" y="298" font-size="10.5" font-weight="700" fill="#9a6700" text-anchor="middle">o01</text>
   </g>
-
-  <!-- ============ left rail: op-ir synthesis ============ -->
-  <text x="30" y="186" font-size="12" font-weight="600" fill="#24292f">2 &#183; "opgen" synthesizes an operator &#8212; as data</text>
-  <text x="30" y="202" font-size="11" fill="#57606a">a closed IR tree run by a total interpreter &#8212; no eval, no exec</text>
-  <g font-size="12">
-    <g class="n1">
-      <rect x="118" y="212" width="70" height="26" rx="6" fill="#ddf4ff" stroke="#1f6feb"/>
-      <text x="132" y="230" font-weight="700" fill="#0550ae">ZIP +1</text>
-    </g>
-    <line class="n2 edg" x1="143" y1="238" x2="105" y2="262" stroke="#57606a" stroke-width="1.4"/>
-    <g class="n2">
-      <rect x="64" y="264" width="60" height="26" rx="6" fill="#ddf4ff" stroke="#1f6feb"/>
-      <text x="80" y="282" font-weight="700" fill="#0550ae">MAX</text>
-    </g>
-    <line class="n3 edg" x1="80" y1="290" x2="62" y2="312" stroke="#57606a" stroke-width="1.4"/>
-    <g class="n3">
-      <rect x="40" y="314" width="40" height="26" rx="6" fill="#f6f8fa" stroke="#d0d7de"/>
-      <text x="54" y="332" font-weight="700" fill="#24292f">V</text>
-    </g>
-    <line class="n4 edg" x1="108" y1="290" x2="126" y2="312" stroke="#57606a" stroke-width="1.4"/>
-    <g class="n4">
-      <rect x="108" y="314" width="40" height="26" rx="6" fill="#f6f8fa" stroke="#d0d7de"/>
-      <text x="121" y="332" font-weight="700" fill="#24292f">A</text>
-    </g>
-    <text class="n4" x="170" y="292" font-size="11" fill="#57606a">pairs x[i] with x[i+1],</text>
-    <text class="n4" x="170" y="307" font-size="11" fill="#57606a">emits max(x[i], x[i+1])</text>
+  <text class="phB" x="104" y="298" font-size="10.5"><tspan font-weight="600" fill="#9a6700">o01 = max of each adjacent pair</tspan><tspan fill="#8b949e" font-size="9.5"> &#183; built by search as an IR tree &#183; admitted only for a certified solve</tspan></text>
+  <text class="phA" x="30" y="336" font-size="12" font-weight="600" fill="#cf222e">the engine searches &#8212; every attempt fails</text>
+  <text class="phB" x="30" y="336" font-size="12" font-weight="600" fill="#1a7f37">after admission &#8212; the same task computes: apply o01 twice</text>
+  <rect class="a1" x="30" y="348" width="40" height="20" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+  <text class="a1" x="50" y="362" font-size="10" fill="#0550ae" text-anchor="middle">big</text>
+  <rect class="a1" x="30" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a1" x="48" y="399" font-size="11" fill="#24292f" text-anchor="middle">204</text>
+  <rect class="a1" x="70" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a1" x="88" y="399" font-size="11" fill="#24292f" text-anchor="middle">129</text>
+  <rect class="a1" x="110" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a1" x="128" y="399" font-size="11" fill="#24292f" text-anchor="middle">138</text>
+  <rect class="a1" x="150" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a1" x="168" y="399" font-size="11" fill="#24292f" text-anchor="middle">144</text>
+  <rect class="a1" x="190" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a1" x="208" y="399" font-size="11" fill="#24292f" text-anchor="middle">195</text>
+  <text class="a1" x="240" y="401" font-size="17" font-weight="700" fill="#cf222e">&#10007;</text>
+  <text class="a1" x="260" y="400" font-size="10.5" fill="#cf222e">5 values &#8212; wrong shape</text>
+  <rect class="a2" x="30" y="348" width="40" height="20" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+  <text class="a2" x="50" y="362" font-size="10" fill="#0550ae" text-anchor="middle">sort</text>
+  <rect class="a2" x="78" y="348" width="58" height="20" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+  <text class="a2" x="107" y="362" font-size="10" fill="#0550ae" text-anchor="middle">reverse</text>
+  <rect class="a2" x="144" y="348" width="40" height="20" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+  <text class="a2" x="164" y="362" font-size="10" fill="#0550ae" text-anchor="middle">init</text>
+  <rect class="a2" x="192" y="348" width="40" height="20" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+  <text class="a2" x="212" y="362" font-size="10" fill="#0550ae" text-anchor="middle">init</text>
+  <rect class="a2" x="30" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a2" x="48" y="399" font-size="11" fill="#24292f" text-anchor="middle">204</text>
+  <rect class="a2" x="70" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a2" x="88" y="399" font-size="11" fill="#24292f" text-anchor="middle">195</text>
+  <rect class="a2" x="110" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a2" x="128" y="399" font-size="11" fill="#24292f" text-anchor="middle">144</text>
+  <rect class="a2" x="150" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a2" x="168" y="399" font-size="11" fill="#24292f" text-anchor="middle">138</text>
+  <text class="a2" x="200" y="401" font-size="17" font-weight="700" fill="#cf222e">&#10007;</text>
+  <text class="a2" x="220" y="400" font-size="10.5" fill="#cf222e">close &#8212; two positions wrong</text>
+  <rect class="a3" x="30" y="348" width="51" height="20" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+  <text class="a3" x="55" y="362" font-size="10" fill="#0550ae" text-anchor="middle">cummax</text>
+  <rect class="a3" x="89" y="348" width="40" height="20" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+  <text class="a3" x="109" y="362" font-size="10" fill="#0550ae" text-anchor="middle">tail</text>
+  <rect class="a3" x="137" y="348" width="40" height="20" rx="4" fill="#ddf4ff" stroke="#54aeff"/>
+  <text class="a3" x="157" y="362" font-size="10" fill="#0550ae" text-anchor="middle">tail</text>
+  <rect class="a3" x="30" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a3" x="48" y="399" font-size="11" fill="#24292f" text-anchor="middle">204</text>
+  <rect class="a3" x="70" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a3" x="88" y="399" font-size="11" fill="#24292f" text-anchor="middle">204</text>
+  <rect class="a3" x="110" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a3" x="128" y="399" font-size="11" fill="#24292f" text-anchor="middle">204</text>
+  <rect class="a3" x="150" y="382" width="36" height="24" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="a3" x="168" y="399" font-size="11" fill="#24292f" text-anchor="middle">204</text>
+  <text class="a3" x="200" y="401" font-size="17" font-weight="700" fill="#cf222e">&#10007;</text>
+  <text class="a3" x="220" y="400" font-size="10.5" fill="#cf222e">the tail collapses</text>
+  <g class="stm">
+    <rect x="30" y="344" width="472" height="72" rx="8" fill="#ffebe9" stroke="#cf222e" stroke-width="2"/>
+    <text x="48" y="368" font-size="12.5" font-weight="700" fill="#cf222e">C1 &#8212; PROVEN, not merely unsolved:</text>
+    <text x="48" y="386" font-size="11" fill="#cf222e">every seed program to depth 4 was enumerated &#8212; 58,023 distinct</text>
+    <text x="48" y="401" font-size="11" fill="#cf222e">behaviours &#8212; and none reproduces this task. Certificate ledgered.</text>
   </g>
-
-  <!-- ============ left rail: admission ============ -->
-  <rect class="scr adm" x="30" y="366" width="300" height="60" rx="8" fill="#fff8c5" stroke="#d4a72c"/>
-  <g class="scr">
-    <text x="44" y="386" font-size="11.5" fill="#24292f">screen: total &#10003; &#160;novel behaviour &#10003;</text>
-    <text x="44" y="402" font-size="11.5" fill="#24292f">solves certified task d05 exactly (train + test) &#10003;</text>
-    <text x="44" y="419" font-size="12.5" font-weight="700" fill="#9a6700">&#8594; ADMITTED as token o01 &#183; lineage ledgered</text>
+  <g class="r1">
+    <rect x="30" y="348" width="48" height="22" rx="5" fill="#fff8c5" stroke="#d4a72c"/>
+    <text x="54" y="363" font-size="11" font-weight="700" fill="#9a6700" text-anchor="middle">o01</text>
+    <line x1="84" y1="359" x2="108" y2="359" stroke="#57606a" stroke-width="1.6" marker-end="url(#ag)"/>
   </g>
-  <path class="aar" d="M 336 396 C 420 396 430 360 470 330" fill="none" stroke="#bc4c00" stroke-width="2.4" marker-end="url(#xarr)"/>
-
-  <!-- ============ right: the 3D manifold stack (6 gate slices) ============ -->
+  <rect class="r1" x="114" y="348" width="36" height="22" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="r1" x="132" y="363" font-size="11" fill="#24292f" text-anchor="middle">204</text>
+  <rect class="r1" x="154" y="348" width="36" height="22" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="r1" x="172" y="363" font-size="11" fill="#24292f" text-anchor="middle">204</text>
+  <rect class="r1" x="194" y="348" width="36" height="22" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="r1" x="212" y="363" font-size="11" fill="#24292f" text-anchor="middle">138</text>
+  <rect class="r1" x="234" y="348" width="36" height="22" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="r1" x="252" y="363" font-size="11" fill="#24292f" text-anchor="middle">144</text>
+  <rect class="r1" x="274" y="348" width="36" height="22" rx="5" fill="#f6f8fa" stroke="#d0d7de"/>
+  <text class="r1" x="292" y="363" font-size="11" fill="#24292f" text-anchor="middle">195</text>
+  <g class="r2">
+    <rect x="30" y="384" width="48" height="22" rx="5" fill="#fff8c5" stroke="#d4a72c"/>
+    <text x="54" y="399" font-size="11" font-weight="700" fill="#9a6700" text-anchor="middle">o01</text>
+    <line x1="84" y1="395" x2="108" y2="395" stroke="#57606a" stroke-width="1.6" marker-end="url(#ag)"/>
+  </g>
+  <rect class="r2" x="114" y="384" width="36" height="22" rx="5" fill="#dafbe1" stroke="#4ac26b"/>
+  <text class="r2" x="132" y="399" font-size="11" fill="#1a7f37" text-anchor="middle">204</text>
+  <rect class="r2" x="154" y="384" width="36" height="22" rx="5" fill="#dafbe1" stroke="#4ac26b"/>
+  <text class="r2" x="172" y="399" font-size="11" fill="#1a7f37" text-anchor="middle">204</text>
+  <rect class="r2" x="194" y="384" width="36" height="22" rx="5" fill="#dafbe1" stroke="#4ac26b"/>
+  <text class="r2" x="212" y="399" font-size="11" fill="#1a7f37" text-anchor="middle">144</text>
+  <rect class="r2" x="234" y="384" width="36" height="22" rx="5" fill="#dafbe1" stroke="#4ac26b"/>
+  <text class="r2" x="252" y="399" font-size="11" fill="#1a7f37" text-anchor="middle">195</text>
+  <text class="rok" x="284" y="401" font-size="15" font-weight="700" fill="#1a7f37">&#10003;</text>
+  <text class="rok" x="302" y="400" font-size="10.5" fill="#1a7f37">exact &#8212; and the held-out tests match too</text>
+  <text class="wit" x="30" y="432" font-size="10.5" fill="#57606a">witness [o01, o01] ledgered at generation 1 &#183; solved again in 20 of 30 generations &#183; re-executable forever</text>
+  <text x="618" y="150" font-size="12" font-weight="600" fill="#24292f">the 3D gated manifold</text>
+  <text x="618" y="165" font-size="10.5" fill="#8b949e">W[gate][prev][next] &#8212; six slices, one per data shape</text>
   <g class="flo">
-    <!-- g5 (top) -->
-    <g>
-      <path d="M 462 132 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
-      <text x="436" y="140" font-size="12" fill="#57606a">g5</text>
-      <path class="grw" d="M 664.4 88 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-      <path class="grw" d="M 557.2 159.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-    </g>
-    <!-- g4 -->
-    <g>
-      <path d="M 452 190 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
-      <text x="426" y="198" font-size="12" fill="#57606a">g4</text>
-      <path class="grw" d="M 654.4 146 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-      <path class="grw" d="M 547.2 217.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-    </g>
-    <!-- g3 -->
-    <g>
-      <path d="M 442 248 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
-      <text x="416" y="256" font-size="12" fill="#57606a">g3</text>
-      <path class="grw" d="M 644.4 204 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-      <path class="grw" d="M 537.2 275.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-    </g>
-    <!-- g2 -->
-    <g>
-      <path d="M 432 306 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
-      <text x="406" y="314" font-size="12" fill="#57606a">g2</text>
-      <path class="grw" d="M 634.4 262 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-      <path class="grw" d="M 527.2 333.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-    </g>
-    <!-- g1 -->
-    <g>
-      <path d="M 422 364 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
-      <text x="396" y="372" font-size="12" fill="#57606a">g1</text>
-      <path class="grw" d="M 624.4 320 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-      <path class="grw" d="M 517.2 391.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-    </g>
-    <!-- g0 (bottom) -->
-    <g>
-      <path d="M 412 422 l 230 -50 l 112 32 l -230 50 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
-      <text x="386" y="430" font-size="12" fill="#57606a">g0</text>
-      <path class="grw" d="M 614.4 378 l 27.6 -6 l 112 32 l -27.6 6 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-      <path class="grw" d="M 507.2 449.2 l 230 -50 l 16.8 4.8 l -230 50 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
-    </g>
-    <text x="736" y="474" font-size="11" fill="#8b949e">W[gate][prev][next] &#183; 6 gate slices</text>
-    <g class="glb">
-      <text x="804" y="110" font-size="11.5" font-weight="700" fill="#9a6700">new column: o01</text>
-      <text x="804" y="125" font-size="10.5" fill="#9a6700">every slice, floor 1.0 (G1)</text>
-      <text x="770" y="510" font-size="11.5" font-weight="700" fill="#9a6700">+ new row: o01 as "prev"</text>
-    </g>
+    <path d="M 615 205 l 185 -40 l 90 26 l -185 40 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <text x="593" y="211" font-size="11.5" fill="#57606a">g5</text>
+    <path class="grw" d="M 776.0 170.2 l 24 -5.2 l 90 26 l -24 5.2 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    <path d="M 606 251 l 185 -40 l 90 26 l -185 40 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <text x="584" y="257" font-size="11.5" fill="#57606a">g4</text>
+    <path class="grw" d="M 767.0 216.2 l 24 -5.2 l 90 26 l -24 5.2 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    <path d="M 597 297 l 185 -40 l 90 26 l -185 40 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <text x="575" y="303" font-size="11.5" fill="#57606a">g3</text>
+    <path class="grw" d="M 758.0 262.2 l 24 -5.2 l 90 26 l -24 5.2 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    <path d="M 588 343 l 185 -40 l 90 26 l -185 40 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <text x="566" y="349" font-size="11.5" fill="#57606a">g2</text>
+    <path class="grw" d="M 749.0 308.2 l 24 -5.2 l 90 26 l -24 5.2 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    <path d="M 579 389 l 185 -40 l 90 26 l -185 40 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <text x="557" y="395" font-size="11.5" fill="#57606a">g1</text>
+    <path class="grw" d="M 740.0 354.2 l 24 -5.2 l 90 26 l -24 5.2 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    <path d="M 570 435 l 185 -40 l 90 26 l -185 40 z" fill="#f6f8fa" stroke="#d0d7de" stroke-width="1.4"/>
+    <text x="548" y="441" font-size="11.5" fill="#57606a">g0</text>
+    <path class="grw" d="M 731.0 400.2 l 24 -5.2 l 90 26 l -24 5.2 z" fill="#fff8c5" stroke="#d4a72c" stroke-width="1.3"/>
+    <text class="glb" x="640" y="486" font-size="11" font-weight="700" fill="#9a6700">+ o01 column &amp; row in every slice &#8212; floor 1.0 (G1)</text>
   </g>
-
-  <!-- ============ bottom: the leap ============ -->
-  <text x="30" y="472" font-size="12" font-weight="600" fill="#24292f">3 &#183; the leap &#8212; machine-verified, permanently witnessed</text>
-  <g font-size="12.5">
-    <g class="l1">
-      <rect x="30" y="484" width="52" height="28" rx="6" fill="#fff8c5" stroke="#d4a72c"/>
-      <text x="41" y="503" fill="#9a6700" font-weight="700">o01</text>
-    </g>
-    <line class="l2" x1="86" y1="498" x2="106" y2="498" stroke="#57606a" stroke-width="1.6"/>
-    <g class="l2">
-      <rect x="110" y="484" width="52" height="28" rx="6" fill="#fff8c5" stroke="#d4a72c"/>
-      <text x="121" y="503" fill="#9a6700" font-weight="700">o01</text>
-    </g>
-    <g class="l3">
-      <rect x="178" y="484" width="200" height="28" rx="14" fill="#dafbe1" stroke="#1a7f37"/>
-      <text x="192" y="503" font-size="12" font-weight="700" fill="#1a7f37">f04 SOLVED &#8212; exactly, train + test</text>
-    </g>
-  </g>
-  <text class="l4" x="30" y="537" font-size="12.5" font-weight="700" fill="#1a7f37">LEAP COUNT (cumulative, witness-verified): 1 &#8212; a task PROVEN out of reach is now inside it</text>
-  <text class="l4" x="30" y="556" font-size="11.5" fill="#57606a">the witness {task, program, vocab sha} is ledgered and re-executed at report time from ledgered IR alone</text>
-  <text x="30" y="580" font-size="11.5" fill="#8b949e">null twin OPEN_OFF (admission disabled, same budgets): 0 certified solves in every generation &#8212; the floor the C1 proof guarantees</text>
+  <path class="aar" d="M 96 302 C 260 326 450 326 584 316" fill="none" stroke="#bc4c00" stroke-width="2.2" marker-end="url(#agold)"/>
+  <text class="phA" x="30" y="505" font-size="12.5" font-weight="600" fill="#cf222e">no seed program can do this &#8212; at ANY budget: all programs to depth 4 are enumerated, none reproduces the task (certificate C1)</text>
+  <text class="phB" x="30" y="505" font-size="12.5" font-weight="600" fill="#1a7f37">search built the missing operator as data, admission grew every gate slice &#8212; and the proven-impossible task computes, exactly</text>
+  <text x="30" y="528" font-size="11" fill="#57606a">the twin engine without admission (OPEN_OFF) stays at 0 forever &#8212; the floor the proof guarantees</text>
+  <text x="30" y="546" font-size="11" fill="#8b949e">every leap is a ledgered witness {task, program, vocab sha}, re-executed from ledgered IR at report time &#8212; never taken on faith</text>
 </svg>

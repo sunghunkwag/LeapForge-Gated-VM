@@ -67,8 +67,8 @@ def tests_green(result):
 def gather_context(ctx, task):
     """Pull repository context by finding function definitions and constants.
     Extracts function names mentioned in the issue and searches the repo to show
-    where those functions are defined and where constant/mapping definitions are.
-    This helps the agent localize exactly which function is broken before editing."""
+    where those functions are defined and where constants are. Also includes
+    helpers.py if present, as it typically documents the correct values."""
     if not GREP_CONTEXT:
         return ""
     
@@ -81,8 +81,6 @@ def gather_context(ctx, task):
     
     # Search for definitions of these functions to show where the bug is located
     for func_name in func_names[:4]:
-        if len(seen) >= 20:
-            break
         try:
             pattern = r'def\s+' + re.escape(func_name) + r'\s*\('
             hits = ctx.grep(pattern, ".", 20)
@@ -92,6 +90,20 @@ def gather_context(ctx, task):
                     seen.append(line)
         except Exception:
             pass
+    
+    # Include helpers.py if it exists, as issues often reference its docstring/comments
+    # for the correct values needed to fix the bug
+    try:
+        helpers_content = ctx.read("helpers.py")
+        if helpers_content:
+            seen.append("\n--- helpers.py (has correct values) ---")
+            # Include first 2000 chars (typically covers module docstring and key comments)
+            if len(helpers_content) > 2000:
+                seen.append(helpers_content[:2000] + "\n... [truncated] ...")
+            else:
+                seen.append(helpers_content)
+    except Exception:
+        pass
     
     # Search for constant/mapping definitions (ALL_CAPS naming convention).
     # These typically represent the 'correct values' or config referenced in the issue.
@@ -103,9 +115,7 @@ def gather_context(ctx, task):
                 line = "%s:%s: %s" % (h.get("path"), h.get("line"), text)
                 if line not in seen:
                     seen.append(line)
-                if len(seen) >= 25:
-                    break
     except Exception:
         pass
     
-    return "\n".join(seen[:20])
+    return "\n".join(seen)

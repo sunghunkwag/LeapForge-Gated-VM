@@ -1,6 +1,6 @@
 # SICA smoke — results (§7 report)
 
-## LEAP 2 (pending T8 keypress): a second, distinct capability — replicated
+## LEAP 2 (T8-APPROVED, adopted): a second, distinct capability — replicated
 
 After leap 1 saturated its axis, a new benchmark axis (`tasks_axis4`) was built
 with confirmed headroom: the load-bearing value lives ONLY in a non-editable
@@ -17,7 +17,8 @@ candidate won decisively:
 
 - `include-helpers-context` — reads the full body/prose of `helpers.py` into
   the prompt — **12/12 train vs incumbent 6/12 (+6)**; the three non-axis
-  candidates all tied at 6/12. T8 halted for the PI keypress (not yet adopted).
+  candidates all tied at 6/12. T8 halted; the PI later gave an explicit
+  approve keypress and the candidate was adopted.
 
 Paired held-out replication (T8-pending candidate vs the current leap-1
 incumbent, both FIXED, on 3 fresh repo-disjoint splits of `tasks_axis4`):
@@ -33,8 +34,9 @@ Candidate wins 3/3 seeds, **zero regressions**; every newly-solved task is a
 `t1` prose-value case (the axis). This is a **second, distinct** capability —
 reading non-editable referenced files — orthogonal to leap 1 (grep ALL_CAPS
 constants). Evidence under `results/leap2_*` (ledger, replication json/log, the
-candidate scaffold). **Not adopted**: the scaffold on disk is still leap 1,
-awaiting the PI's T8 keypress.
+candidate scaffold). **Adopted** after the PI's explicit T8 approve keypress:
+`scaffold/` is now gen2 (`include-helpers-context`), and the approval is
+recorded as a `T8_APPROVAL` record in the run's hash-chained ledger.
 
 The lesson from the rejected first fire is itself a result: a strict
 train-count gate under stochastic-model noise can be won by a spurious

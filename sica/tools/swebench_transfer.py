@@ -37,6 +37,21 @@ REPO_URL = {"psf/requests": "https://github.com/psf/requests.git",
             "pallets/flask": "https://github.com/pallets/flask.git",
             "pylint-dev/pylint": "https://github.com/pylint-dev/pylint.git",
             "pytest-dev/pytest": "https://github.com/pytest-dev/pytest.git"}
+# Option 3: the target repo is NEVER `pip install -e .`'d (that would run its
+# setup.py unsandboxed). Instead the repo is made importable via PYTHONPATH
+# (import root below), its third-party deps are installed as trusted PyPI
+# WHEELS (no arbitrary code at install), and its own code executes ONLY inside
+# the net-namespaced run_test_command sandbox.
+IMPORT_ROOT = {"psf/requests": "", "pallets/flask": "src",
+               "pylint-dev/pylint": "", "pytest-dev/pytest": "src"}
+DEPS = {
+    "psf/requests": ["pytest", "urllib3", "idna", "certifi",
+                     "charset-normalizer", "chardet"],
+    "pallets/flask": ["pytest", "werkzeug", "jinja2", "click", "itsdangerous",
+                      "markupsafe", "blinker"],
+    "pylint-dev/pylint": ["pytest", "astroid", "isort", "mccabe",
+                          "platformdirs", "tomlkit", "dill"],
+}
 
 
 def _run(cmd, cwd=None, timeout=600, env=None):
@@ -65,26 +80,29 @@ def editable_files(patch):
 
 
 def prepare(inst):
-    """Clone at base_commit + pip install deps (cached per instance)."""
+    """Clone at base_commit (fetch only) + install trusted PyPI dep WHEELS.
+    The target repo's own setup.py is never run on the host."""
     iid = inst["instance_id"]
     base = os.path.join(CACHE, iid)
-    if os.path.isdir(os.path.join(base, ".git")):
-        return base
-    if not os.path.isdir(CACHE):
-        os.makedirs(CACHE)
-    url = REPO_URL[inst["repo"]]
-    r = _run(["git", "clone", "--quiet", url, base], timeout=600)
-    if r.returncode != 0:
-        raise RuntimeError("clone failed: %s" % r.stdout[-400:])
-    _run(["git", "checkout", "-q", inst["base_commit"]], cwd=base)
-    # install deps (editable). Pure-Python light repos install in seconds.
-    r = _run([sys.executable, "-m", "pip", "install", "-q", "-e", "."],
-             cwd=base, timeout=900)
-    if r.returncode != 0:
-        # deps may still be importable; record but continue
-        sys.stderr.write("pip install rc=%d for %s\n%s\n"
-                         % (r.returncode, iid, r.stdout[-500:].decode("utf-8", "replace")))
+    if not os.path.isdir(os.path.join(base, ".git")):
+        if not os.path.isdir(CACHE):
+            os.makedirs(CACHE)
+        url = REPO_URL[inst["repo"]]
+        r = _run(["git", "clone", "--quiet", url, base], timeout=600)
+        if r.returncode != 0:
+            raise RuntimeError("clone failed: %s"
+                               % r.stdout[-400:].decode("utf-8", "replace"))
+        _run(["git", "checkout", "-q", inst["base_commit"]], cwd=base)
+    # third-party deps as WHEELS only (no source builds -> no arbitrary code).
+    deps = DEPS.get(inst["repo"], ["pytest"])
+    _run([sys.executable, "-m", "pip", "install", "-q", "--only-binary=:all:"]
+         + deps, timeout=900)
     return base
+
+
+def _import_root(base, repo):
+    sub = IMPORT_ROOT.get(repo, "")
+    return os.path.join(base, sub) if sub else base
 
 
 def _copytree(src, dst, with_git=False):
@@ -93,13 +111,15 @@ def _copytree(src, dst, with_git=False):
     shutil.copytree(src, dst, ignore=ig, symlinks=True)
 
 
-def _pytest_nodes(evaldir, nodes, timeout=300):
+def _pytest_nodes(evaldir, nodes, pythonpath, timeout=300):
     if not nodes:
         return {"ok": True, "rc": 0, "empty": True}
     argv = [sys.executable, "-m", "pytest", "-p", "no:cacheprovider",
             "-q", "--no-header", "-o", "addopts="] + list(nodes)
-    r = sandbox.run_test_command(argv, evaldir, timeout=timeout)
-    # all passed iff rc==0 (pytest returns 0 only when every selected test passes)
+    # external repo code executes ONLY here: net-namespaced sandbox, with the
+    # eval copy on PYTHONPATH so `import <pkg>` resolves to the code under test.
+    r = sandbox.run_test_command(argv, evaldir, timeout=timeout,
+                                 env_extra={"PYTHONPATH": pythonpath})
     return {"ok": r.code == 0, "rc": r.code, "empty": False,
             "tail": (r.stdout or "")[-1200:]}
 
@@ -110,6 +130,7 @@ def grade(base, inst, agent_workdir=None, p2p_cap=15, timeout=400):
     evaldir = os.path.join(tmp, "eval")
     try:
         _copytree(base, evaldir, with_git=True)
+        pp = _import_root(evaldir, inst["repo"])
         # apply the hidden test patch
         pf = os.path.join(tmp, "test.patch")
         with open(pf, "w", encoding="utf-8") as f:
@@ -132,8 +153,8 @@ def grade(base, inst, agent_workdir=None, p2p_cap=15, timeout=400):
             inst["FAIL_TO_PASS"], str) else inst["FAIL_TO_PASS"]
         p2p = json.loads(inst["PASS_TO_PASS"]) if isinstance(
             inst["PASS_TO_PASS"], str) else inst["PASS_TO_PASS"]
-        r_f2p = _pytest_nodes(evaldir, f2p, timeout)
-        r_p2p = _pytest_nodes(evaldir, p2p[:p2p_cap], timeout)
+        r_f2p = _pytest_nodes(evaldir, f2p, pp, timeout)
+        r_p2p = _pytest_nodes(evaldir, p2p[:p2p_cap], pp, timeout)
         return {"f2p_ok": r_f2p["ok"], "p2p_ok": r_p2p["ok"],
                 "f2p_rc": r_f2p.get("rc"), "p2p_rc": r_p2p.get("rc"),
                 "solved": bool(r_f2p["ok"] and r_p2p["ok"]),
@@ -166,6 +187,7 @@ def run_agent(scaffold, inst, base, model, caps):
 
 def main(argv):
     if len(argv) >= 3 and argv[1] == "selftest":
+        sandbox.require_isolation()
         inst = load_instances([argv[2]])[0]
         print("prepare", inst["instance_id"], inst["repo"], "...")
         base = prepare(inst)

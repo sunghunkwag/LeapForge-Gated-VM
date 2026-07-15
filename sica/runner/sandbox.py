@@ -139,8 +139,11 @@ class SandboxResult(object):
                 "duration": round(self.duration, 3)}
 
 
-def run_test_command(argv, cwd, timeout=60, clock=None):
-    """Run an allowlisted test command under network isolation, cwd-confined."""
+def run_test_command(argv, cwd, timeout=60, clock=None, env_extra=None):
+    """Run an allowlisted test command under network isolation, cwd-confined.
+    env_extra lets a caller add a few safe vars (e.g. PYTHONPATH to make an
+    external repo importable) -- the child is still net-namespaced and its
+    external code executes ONLY inside this sandbox, never on the bare host."""
     import time
     clock = clock or time.time
     if not argv:
@@ -155,7 +158,7 @@ def run_test_command(argv, cwd, timeout=60, clock=None):
     t0 = clock()
     try:
         proc = subprocess.run(
-            full, cwd=real_cwd, env=_safe_env(),
+            full, cwd=real_cwd, env=_safe_env(env_extra),
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=timeout,
         )
     except subprocess.TimeoutExpired as e:

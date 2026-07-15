@@ -95,6 +95,26 @@ ENGINEERING CHOICES STATED PLAINLY
   - At the vocabulary cap admission halts (no eviction in XIX);
     refusals are ledgered.
 
+LEAP COUNT (cumulative, witness-based -- the XIX.1 metric patch)
+-----------------------------------------------------------------
+The original XIX headline sampled frozen solves AT THE FINAL GENERATION
+only; a stochastic re-search can read 0 for a task the engine provably
+solved twenty times. Solvability, once witnessed, is permanent, so the
+headline is now: the number of FROZEN tasks for which the ledger holds
+>= 1 witness record {task_id, program tokens, vocab sha at solve time}
+AND that witness re-executes exactly (all train + test examples)
+through the interpreter at report time, with the operator registry
+reconstructed from the ledgered ADMISSION IR -- never from live
+in-memory state. A witness that fails re-execution aborts the report
+as a WITNESS FAULT (it would indicate ledger corruption). The
+final-generation sample is retained as one secondary legacy line.
+Ledgers written before this patch lack witness programs in their GEN
+records; the report derives a witness for each ledgered frozen solve
+by exhaustive breadth-first enumeration over the reconstructed
+vocabulary at solve time (depth <= MAX_DEPTH, deterministic order) --
+the run is never re-executed. The engine itself -- search, admission,
+certification, streams -- is untouched by this patch.
+
 USAGE
 -----
     python3 leapforge_open.py --selftest
@@ -102,6 +122,7 @@ USAGE
     python3 leapforge_open.py --profile smoke [--seed 1]
     python3 leapforge_open.py --profile full  [--seed 1]
     python3 leapforge_open.py --replay <ledger.jsonl>
+    python3 leapforge_open.py --report <ledger.jsonl>
 
 HARD RULES
 ----------
@@ -1759,8 +1780,11 @@ def run_arm(tasks_d, tasks_f, gens, admission_on, arm, seed, led,
         # fit_manifold convention; floor 1.0 everywhere -- G1)
         W = fit_manifold_open(pool, ops, gtree)
 
-        # (5) FROZEN evaluation -- curve only, never fed back
+        # (5) FROZEN evaluation -- curve only, never fed back. Each
+        # solve is ledgered as a permanent witness {task, program,
+        # vocab sha at solve time} for the cumulative LEAP COUNT.
         frozen_ids = []
+        frozen_witnesses = []
         for fi, t in enumerate(tasks_f):
             prng = XorShift64Star("frozen:g%d:t%d|%s|%s"
                                   % (g, fi, arm, seed))
@@ -1768,6 +1792,8 @@ def run_arm(tasks_d, tasks_f, gens, admission_on, arm, seed, led,
             gen_evals += ev_
             if prog is not None and solves_open(prog, ops, t):
                 frozen_ids.append(t["id"])
+                frozen_witnesses.append([t["id"], list(prog),
+                                         vocab_sha(ops)])
         frozen_curve.append(len(frozen_ids))
 
         # (6) ledger the generation
@@ -1785,6 +1811,7 @@ def run_arm(tasks_d, tasks_f, gens, admission_on, arm, seed, led,
             "n_refusals": len(refusals_gen),
             "frozen_solved": len(frozen_ids),
             "frozen_ids": sorted(frozen_ids),
+            "frozen_witnesses": sorted(frozen_witnesses),
             "vocab_sha": vocab_sha(ops),
             "vocab_size": len(ops),
             "gate_sha": gate_sha(gtree),
@@ -1863,6 +1890,212 @@ def efficiency_probe(res_on, seed):
 
 
 # ---------------------------------------------------------------------------
+# LEAP COUNT (cumulative, witness-based) -- derived from the LEDGER
+# ONLY: the operator registry is reconstructed from ADMISSION IR, tasks
+# from TASK records, witnesses from GEN records; nothing is read from
+# live engine state and the run is never re-executed.
+# ---------------------------------------------------------------------------
+
+def tasks_from_ledger(led):
+    out = {}
+    for rec in led.find("TASK"):
+        b = rec["body"]
+        out[b["id"]] = {
+            "id": b["id"], "split": b["split"], "pipe": list(b["pipe"]),
+            "level": b["level"],
+            "train": [(list(x), list(y)) for x, y in b["train"]],
+            "test": [(list(x), list(y)) for x, y in b["test"]],
+        }
+    return out
+
+
+def ops_from_ledger(led, arm="OPEN", up_to_gen=None):
+    """Reconstruct the operator registry from ledgered ADMISSION IR;
+    every entry is re-keyed and verified against T4 (op_sha =
+    sha256(canon(IR)))."""
+    ops = {}
+    for rec in led.find("ADMISSION", arm=arm):
+        b = rec["body"]
+        if up_to_gen is not None and b["gen"] > up_to_gen:
+            continue
+        if op_sha(b["ir"]) != b["op_sha"]:
+            sys.exit("WITNESS FAULT: ADMISSION %s IR does not hash to "
+                     "its ledgered op_sha -- ledger corruption" % b["op"])
+        ops[b["op"]] = {"ir": _copy_ir(b["ir"]), "sha": b["op_sha"]}
+    return ops
+
+
+def derive_witness_bfs(task, ops):
+    """Legacy-ledger fallback: derive a witness program for a ledgered
+    frozen solve by exhaustive breadth-first enumeration over the
+    reconstructed vocabulary (depth <= MAX_DEPTH, deterministic order,
+    dedup by full output vector over the task's train+test inputs --
+    sound and complete, as in the C1 certifier). Returns the first
+    exactly-solving pipeline, or None."""
+    inputs = [x for x, _y in task["train"] + task["test"]]
+    target = tuple(tuple(y) for _x, y in task["train"] + task["test"])
+    toks = token_space_open(ops)
+    base = tuple(tuple(_c(list(x))) for x in inputs)
+    if base == target:
+        return []
+    seen = {base}
+    frontier = [(base, [])]
+    for _d in range(1, MAX_DEPTH + 1):
+        nxt = []
+        for outs, pipe in frontier:
+            for tok in toks:
+                cand = tuple(tuple(apply_token_open(list(o), tok, ops))
+                             for o in outs)
+                if cand in seen:
+                    continue
+                q = pipe + [tok]
+                if cand == target:
+                    return q
+                seen.add(cand)
+                nxt.append((cand, q))
+        frontier = nxt
+    return None
+
+
+def derive_leaps(led, arm="OPEN"):
+    """The XIX.1 headline: frozen tasks with >= 1 ledgered witness that
+    re-executes exactly through the interpreter, registry rebuilt from
+    ledgered IR. A witness that fails re-execution ABORTS (ledger
+    corruption). Returns (leaps, legacy_final, n_frozen) where each
+    leap is {task, first_gen, n_solve_gens, witness, op_shas}."""
+    tasks = tasks_from_ledger(led)
+    frozen_ids_all = sorted(t for t in tasks
+                            if tasks[t]["split"] == "frozen")
+    events = {}
+    solve_gens = {}
+    legacy_final = 0
+    for rec in led.find("GEN", arm=arm):
+        b = rec["body"]
+        legacy_final = b["frozen_solved"]
+        for tid in b["frozen_ids"]:
+            solve_gens.setdefault(tid, []).append(b["gen"])
+        if "frozen_witnesses" in b:
+            for tid, prog, vsha in b["frozen_witnesses"]:
+                events.setdefault(tid, []).append(
+                    (b["gen"], list(prog), vsha))
+        else:
+            for tid in b["frozen_ids"]:
+                events.setdefault(tid, []).append(
+                    (b["gen"], None, b["vocab_sha"]))
+    leaps = []
+    for tid in sorted(events):
+        evs = sorted(events[tid], key=lambda e: e[0])
+        first_gen, prog, vsha = evs[0]
+        task = tasks[tid]
+        ops_at = ops_from_ledger(led, arm=arm, up_to_gen=first_gen)
+        if prog is None:
+            prog = derive_witness_bfs(task, ops_at)
+            if prog is None:
+                sys.exit("WITNESS FAULT: ledger records a frozen solve "
+                         "of %s at gen %d but no witness exists at "
+                         "depth <= %d over the vocabulary of that "
+                         "generation -- ledger corruption"
+                         % (tid, first_gen, MAX_DEPTH))
+        full_ops = ops_from_ledger(led, arm=arm)
+        for x, y in task["train"] + task["test"]:
+            if run_tokens_open(prog, full_ops, x) != y:
+                sys.exit("WITNESS FAULT: witness %s for frozen task %s "
+                         "(gen %d) fails re-execution -- ledger "
+                         "corruption; report aborted" % (prog, tid,
+                                                         first_gen))
+        used_shas = sorted({full_ops[tok]["sha"] for tok in prog
+                            if tok in full_ops})
+        leaps.append({"task": tid, "first_gen": first_gen,
+                      "n_solve_gens": len(solve_gens.get(tid, [])),
+                      "witness": list(prog), "vocab_sha": vsha,
+                      "op_shas": used_shas})
+    return leaps, legacy_final, len(frozen_ids_all)
+
+
+def print_report_from_ledger(led):
+    """The XIX.1 report, derived from ledger records only."""
+    g = led.records[0]["body"]
+    cfg = g["config"]
+    csha = hashlib.sha256(canon(cfg).encode()).hexdigest()[:10]
+    n_gens_off = len(led.find("GEN", arm="OPEN_OFF"))
+    leaps, legacy_final, n_frozen = derive_leaps(led, arm="OPEN")
+    off_gens = [r["body"]["frozen_solved"]
+                for r in led.find("GEN", arm="OPEN_OFF")]
+    off_cum = sum(off_gens)
+    off_disc = 0
+    for r in led.find("GEN", arm="OPEN_OFF"):
+        off_disc = r["body"]["solved_discovery"]
+    curve_on = [r["body"]["frozen_solved"]
+                for r in led.find("GEN", arm="OPEN")]
+    print("")
+    print("=" * 72)
+    print("LEAPFORGE-OPEN -- Expedition XIX report  (config %s, seed %s)"
+          % (csha, g["seed"]))
+    print("=" * 72)
+    print("LEAP COUNT (cumulative, witness-verified): %d / %d"
+          % (len(leaps), n_frozen))
+    print("  A leap = a FROZEN task (all carry C1 inexpressibility")
+    print("  certificates) with a ledgered witness program that")
+    print("  re-executes exactly, registry rebuilt from ledgered IR.")
+    print("  Zero is a publishable number.")
+    for lp in leaps:
+        print("  %s  first solve gen %2d   solved in %d/%d gens   "
+              "witness %s" % (lp["task"], lp["first_gen"],
+                              lp["n_solve_gens"], len(curve_on),
+                              lp["witness"]))
+        for sha in lp["op_shas"]:
+            print("        admitting op sha %s" % sha[:16])
+    print("final-generation sample (legacy XIX metric): %d / %d"
+          % (legacy_final, n_frozen))
+    print("frozen curve (OPEN):     %s" % curve_on)
+    print("frozen curve (OPEN_OFF): %s" % off_gens)
+    admissions = led.find("ADMISSION", arm="OPEN")
+    print("")
+    print("ADMISSION LINEAGE (%d admissions):" % len(admissions))
+    for rec in admissions:
+        b = rec["body"]
+        print("  gen %2d  task %s (C1 %s...)" % (b["gen"],
+              b["solved_task_id"], b["certificate_sha"][:12]))
+        print("          -> %s = %s" % (b["op"], canon(b["ir"])))
+        print("          vocab %s -> %s   program %s"
+              % (b["parent_vocab_sha"], b["new_vocab_sha"],
+                 b["program"]))
+    if not admissions:
+        print("  (none -- reported plainly, not softened)")
+    print("")
+    print("NULL DISCIPLINE: OPEN_OFF (admission disabled, same budgets, "
+          "%d generations)" % n_gens_off)
+    print("  certified frozen solves: cumulative %d, max/gen %d; "
+          "certified discovery solves %d  (structural floor; must be "
+          "0 by C1)" % (off_cum, max(off_gens) if off_gens else 0,
+                        off_disc))
+    if off_cum != 0 or off_disc != 0:
+        sys.exit("CERTIFICATE BUG: OPEN_OFF shows certified solves in "
+                 "the ledger; C1 forbids this. Abort.")
+    for rec in led.find("EFFICIENCY"):
+        e = rec["body"]
+        print("")
+        print("efficiency (not evidence): seed-solvable probes: open "
+              "vocab %d/%d solved in %d evals vs seed-only %d/%d in %d "
+              "evals" % (e["open_solved"], e["n_tasks"],
+                         e["open_evals"], e["seed_solved"],
+                         e["n_tasks"], e["seed_evals"]))
+    for rec in led.find("REPORT"):
+        b = rec["body"]
+        print("")
+        print("discovery solved (OPEN): %d/%d   admissions: %d   "
+              "stop: %s" % (b["discovery_solved_open"],
+                            b["n_discovery"], b["n_admissions"],
+                            b["stop_open"]))
+        print("evals: OPEN %d   OPEN_OFF %d  (budget-identical arms; "
+              "actual usage reported)" % (b["evals_open"],
+                                          b["evals_off"]))
+        print("final vocab sha %s   gate sha %s"
+              % (b["vocab_sha_final"], b["gate_sha_final"]))
+    return leaps
+
+
+# ---------------------------------------------------------------------------
 # EXPEDITION -- ledger plumbing, the two arms, the report.
 # ---------------------------------------------------------------------------
 
@@ -1924,8 +2157,11 @@ def expedition_core(seed, led, quiet=False):
     off_any_frozen = max(res_off["frozen_curve"]) \
         if res_off["frozen_curve"] else 0
     off_disc = len(res_off["solved"])
+    leaps, _legacy, _nf = derive_leaps(led, arm="OPEN")
     report_body = {
         "seed": str(seed),
+        "leap_count_cumulative": len(leaps),
+        "leaps": leaps,
         "leap_count": res_on["frozen_curve"][-1]
         if res_on["frozen_curve"] else 0,
         "n_frozen": len(tasks_f),
@@ -1955,55 +2191,6 @@ def expedition_core(seed, led, quiet=False):
     return report_body, res_on, res_off, tasks_d, tasks_f
 
 
-def print_report(rep, res_on, led):
-    print("")
-    print("=" * 72)
-    print("LEAPFORGE-OPEN -- Expedition XIX report  (config %s, seed %s)"
-          % (cfg_sha(), rep["seed"]))
-    print("=" * 72)
-    print("LEAP COUNT: %d of %d FROZEN tasks solved at final generation."
-          % (rep["leap_count"], rep["n_frozen"]))
-    print("  Every frozen task carries a valid C1 inexpressibility")
-    print("  certificate; each solve is a machine-verified instance of")
-    print("  solvable-set expansion. Zero is a publishable number.")
-    print("frozen curve (OPEN):     %s" % rep["frozen_curve_open"])
-    print("frozen curve (OPEN_OFF): %s" % rep["frozen_curve_off"])
-    print("")
-    print("ADMISSION LINEAGE (%d admissions):" % rep["n_admissions"])
-    for rec in led.find("ADMISSION", arm="OPEN"):
-        b = rec["body"]
-        print("  gen %2d  task %s (C1 %s...)" % (b["gen"],
-              b["solved_task_id"], b["certificate_sha"][:12]))
-        print("          -> %s = %s" % (b["op"], canon(b["ir"])))
-        print("          vocab %s -> %s   program %s"
-              % (b["parent_vocab_sha"], b["new_vocab_sha"],
-                 b["program"]))
-    if rep["n_admissions"] == 0:
-        print("  (none -- reported plainly, not softened)")
-    print("")
-    print("NULL DISCIPLINE: OPEN_OFF (admission disabled, same budgets, "
-          "%d generations)" % len(rep["frozen_curve_off"]))
-    print("  certified frozen solves = %d (max over ALL generations "
-          "%d); certified discovery solves = %d  (structural floor; "
-          "must be 0 by C1)"
-          % (rep["off_frozen_final"], rep.get("off_frozen_max", 0),
-             rep["off_discovery_solved"]))
-    print("")
-    e = rep["efficiency"]
-    print("efficiency (not evidence): seed-solvable probes: open vocab "
-          "%d/%d solved in %d evals vs seed-only %d/%d in %d evals"
-          % (e["open_solved"], e["n_tasks"], e["open_evals"],
-             e["seed_solved"], e["n_tasks"], e["seed_evals"]))
-    print("")
-    print("discovery solved (OPEN): %d/%d   admissions: %d   stop: %s"
-          % (rep["discovery_solved_open"], rep["n_discovery"],
-             rep["n_admissions"], rep["stop_open"]))
-    print("evals: OPEN %d   OPEN_OFF %d  (budget-identical arms; actual "
-          "usage reported)" % (rep["evals_open"], rep["evals_off"]))
-    print("final vocab sha %s   gate sha %s"
-          % (rep["vocab_sha_final"], rep["gate_sha_final"]))
-
-
 def expedition(seed):
     audit_sources(quiet=True)
     if not os.path.isdir(CONFIG["outdir"]):
@@ -2013,8 +2200,8 @@ def expedition(seed):
         sys.exit("ledger %s already exists -- one unit per (config, "
                  "seed); use --replay or remove it first" % path)
     led = Ledger(path)
-    rep, res_on, _res_off, _td, _tf = expedition_core(seed, led)
-    print_report(rep, res_on, led)
+    expedition_core(seed, led)
+    print_report_from_ledger(led)
     led.verify()
     print("\nledger verified -> %s" % path)
     print("replay: python3 %s --replay %s"
@@ -2448,6 +2635,89 @@ def selftest():
         assert gate_sha(g0) == gate_sha(gen0_gate_tree())
     ok.append(_t("gate mutations stay valid, total, in-range", t17))
 
+    def t18():
+        # cumulative witness-based LEAP COUNT (the XIX.1 metric)
+        prng = XorShift64Star("t18")
+        tsq = None
+        while tsq is None:
+            tsq = make_task_open(["square"], prng)
+        ttr = None
+        while ttr is None:
+            ttr = make_task_open(["triple"], prng)
+        sq = ["MAP", ["MUL", ["V"], ["V"]]]
+        tr3 = ["MAP", ["MUL", ["V"], ["C", 3]]]
+
+        def task_rec(tid, t):
+            return {"id": tid, "split": "frozen", "pipe": t["pipe"],
+                    "level": t["level"],
+                    "train": [[list(x), list(y)] for x, y in t["train"]],
+                    "test": [[list(x), list(y)] for x, y in t["test"]]}
+
+        def adm_rec(name, ir, gen):
+            return {"arm": "OPEN", "gen": gen, "op": name,
+                    "op_sha": op_sha(ir), "ir": ir,
+                    "solved_task_id": "dSY", "certificate_sha": "c",
+                    "parent_vocab_sha": "p", "new_vocab_sha": "n",
+                    "program": [name]}
+
+        def gen_rec(gen, wits, ids):
+            return {"arm": "OPEN", "gen": gen, "solved_discovery": 0,
+                    "frozen_solved": len(ids), "frozen_ids": ids,
+                    "frozen_witnesses": wits, "vocab_sha": "v"}
+
+        # (a) one valid witness -> LEAP COUNT 1
+        led = Ledger(None)
+        led.append("TASK", task_rec("fS0", tsq))
+        led.append("ADMISSION", adm_rec("o01", sq, 1))
+        led.append("GEN", gen_rec(1, [["fS0", ["o01"], "v"]], ["fS0"]))
+        leaps, legacy, nf = derive_leaps(led)
+        assert len(leaps) == 1 and nf == 1 and legacy == 1
+        assert leaps[0]["task"] == "fS0" and leaps[0]["witness"] == \
+            ["o01"] and leaps[0]["first_gen"] == 1
+        # (b) corrupted witness program -> WITNESS FAULT abort
+        led_b = Ledger(None)
+        led_b.append("TASK", task_rec("fS0", tsq))
+        led_b.append("ADMISSION", adm_rec("o01", sq, 1))
+        led_b.append("GEN", gen_rec(1, [["fS0", ["o01", "inc"], "v"]],
+                                    ["fS0"]))
+        aborted = False
+        try:
+            derive_leaps(led_b)
+        except SystemExit:
+            aborted = True
+        assert aborted, "corrupted witness did not abort the report"
+        # (c) cumulative semantics: an early-only solve and a
+        # final-only solve each count exactly once; a task solved in
+        # several generations still counts once
+        led_c = Ledger(None)
+        led_c.append("TASK", task_rec("fS0", tsq))
+        led_c.append("TASK", task_rec("fS1", ttr))
+        led_c.append("ADMISSION", adm_rec("o01", sq, 1))
+        led_c.append("ADMISSION", adm_rec("o02", tr3, 1))
+        led_c.append("GEN", gen_rec(1, [["fS0", ["o01"], "v"]], ["fS0"]))
+        led_c.append("GEN", gen_rec(2, [["fS0", ["o01"], "v"]], ["fS0"]))
+        led_c.append("GEN", gen_rec(3, [["fS1", ["o02"], "v"]], ["fS1"]))
+        leaps_c, legacy_c, nf_c = derive_leaps(led_c)
+        assert len(leaps_c) == 2 and nf_c == 2
+        by = {lp["task"]: lp for lp in leaps_c}
+        assert by["fS0"]["n_solve_gens"] == 2
+        assert by["fS0"]["first_gen"] == 1
+        assert by["fS1"]["n_solve_gens"] == 1
+        assert legacy_c == 1, "legacy metric must be the final sample"
+        # legacy-format ledger (no frozen_witnesses field): the witness
+        # is derived by exhaustive BFS over the ledgered vocabulary
+        led_d = Ledger(None)
+        led_d.append("TASK", task_rec("fS0", tsq))
+        led_d.append("ADMISSION", adm_rec("o01", sq, 1))
+        led_d.append("GEN", {"arm": "OPEN", "gen": 1,
+                             "solved_discovery": 0, "frozen_solved": 1,
+                             "frozen_ids": ["fS0"], "vocab_sha": "v"})
+        leaps_d, _lg, _nf = derive_leaps(led_d)
+        assert len(leaps_d) == 1 and leaps_d[0]["witness"] == ["o01"], \
+            "legacy BFS derivation failed: %s" % leaps_d
+    ok.append(_t("leap count: cumulative witness semantics + faults",
+                 t18))
+
     CONFIG.clear()
     CONFIG.update(cfg_backup)
     n_pass = sum(1 for x in ok if x)
@@ -2487,6 +2757,14 @@ def main():
         path = argv[argv.index("--replay") + 1]
         replay(path)
         return
+    if "--report" in argv:
+        path = argv[argv.index("--report") + 1]
+        led = Ledger(path)
+        if not led.records:
+            sys.exit("no ledger at %s" % path)
+        led.verify()
+        print_report_from_ledger(led)
+        return
     if "--profile" in argv:
         name = argv[argv.index("--profile") + 1]
         if name == "smoke":
@@ -2503,7 +2781,8 @@ def main():
         expedition(seed)
         return
     sys.exit("unknown arguments: %s (try --selftest, --audit, "
-             "--profile smoke|full, --replay <ledger>)" % argv)
+             "--profile smoke|full, --replay <ledger>, "
+             "--report <ledger>)" % argv)
 
 
 if __name__ == "__main__":
